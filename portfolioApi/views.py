@@ -1,8 +1,8 @@
 from django.http import JsonResponse
 from rest_framework import generics
 from rest_framework.response import Response
-from .models import SocialPlatformsModel, UserProfileModel, ProfileImageModel
-from .serializers import SocialPlatformSerializer, UserProfileSerializer, UserProfileImageSerializer
+from .models import SocialPlatformsModel, UserProfileModel, ProfileImageModel, ResumeUploadModel
+from .serializers import SocialPlatformSerializer, UserProfileSerializer, UserProfileImageSerializer, ResumeUploadSerializer
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework import viewsets, status
 
@@ -72,6 +72,27 @@ class UserProfileImageViewSet(viewsets.ModelViewSet):
         # If a UserProfile instance already exists, disallow the creation (POST) action
         if user_profile_pic_exists:
             return Response({'detail': 'You already have a profile picture. Updating existing profile picture is allowed.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Otherwise, proceed with the normal creation (POST) action
+        return super().create(request, *args, **kwargs)
+
+class ResumeUploadViewSet(viewsets.ModelViewSet):
+    serializer_class = ResumeUploadSerializer
+    queryset = ResumeUploadModel.objects.all()
+
+    def get_permissions(self):
+        permission_classes = []
+        if self.request.method != 'GET':
+                permission_classes = [IsAuthenticated, IsAdminUser]
+        return [permission() for permission in permission_classes]
+
+    def create(self, request, *args, **kwargs):
+        # Check if a UserProfile instance already exists for the user
+        user_profile_pic_exists = self.get_queryset().exists()
+
+        # If a UserProfile instance already exists, disallow the creation (POST) action
+        if user_profile_pic_exists:
+            return Response({'detail': 'You already have a profile resume. Updating existing profile resume is allowed.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Otherwise, proceed with the normal creation (POST) action
         return super().create(request, *args, **kwargs)

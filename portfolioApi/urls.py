@@ -4,8 +4,9 @@ from rest_framework.routers import DefaultRouter
 
 
 router = DefaultRouter()
-router.register(r'info', views.UserProfileViewSet, basename='userprofile')
+router.register(r'info', views.UserProfileViewSet, basename='userprofileInfo')
 router.register(r'image', views.UserProfileImageViewSet, basename='userprofileImage')
+router.register(r'resume', views.ResumeUploadViewSet, basename='userprofileResume')
 
 urlpatterns = [
     path('profile/', include(router.urls)),

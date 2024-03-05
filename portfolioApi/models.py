@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class SocialPlatformsModel(models.Model):
     platformName = models.CharField(max_length = 255)
-    platformIcon = models.ImageField(upload_to='social_profiles/')
+    platformIcon = models.ImageField(upload_to = 'social_profiles/')
     profileUrl = models.URLField()
     featured = models.BooleanField(db_index = True, default = True)
 
@@ -33,7 +33,14 @@ class UserProfileModel(models.Model):
 
 class ProfileImageModel(models.Model):
     user_profile = models.OneToOneField(UserProfileModel, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='profile_images/')
+    image = models.ImageField(upload_to = 'profile_images/')
 
     def __str__(self):
         return f"{self.user_profile.user.username}'s Profile Image"
+
+class ResumeUploadModel(models.Model):
+    user_profile = models.OneToOneField(UserProfileModel, on_delete=models.CASCADE)
+    resume = models.FileField(upload_to='resume/')
+
+    def __str__(self):
+        return f"{self.user_profile.user.username}'s Profile Resume"
