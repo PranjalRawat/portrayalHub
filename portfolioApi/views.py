@@ -97,7 +97,7 @@ class ResumeUploadViewSet(viewsets.ModelViewSet):
         # Otherwise, proceed with the normal creation (POST) action
         return super().create(request, *args, **kwargs)
 
-class EducationInfoView(generics.ListCreateAPIView):
+class EducationInfoViewSet(viewsets.ModelViewSet):
     queryset = EducationInfoModel.objects.all()
     serializer_class = EducationInfoSerializer
     search_fields = ['degree', 'university']
@@ -108,19 +108,3 @@ class EducationInfoView(generics.ListCreateAPIView):
         if self.request.method != 'GET':
                 permission_classes = [IsAuthenticated, IsAdminUser]
         return [permission() for permission in permission_classes]
-
-class EducationInfoDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = EducationInfoModel.objects.all()
-    serializer_class = EducationInfoSerializer
-
-    def get_permissions(self):
-        permission_classes = []
-        if self.request.method != 'GET':
-                permission_classes = [IsAuthenticated, IsAdminUser]
-        return [permission() for permission in permission_classes]
-
-    def patch(self, request, *args, **kwargs):
-        queryset = EducationInfoModel.objects.get(pk=self.kwargs['pk'])
-        queryset.featured = not queryset.featured
-        queryset.save()
-        return JsonResponse(status=200, data={'message':'Featured status of {} changed to {}'.format(str(queryset.title), str(queryset.featured))})
