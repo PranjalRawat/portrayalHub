@@ -1,6 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.forms import ValidationError
+from rest_framework import status
+from rest_framework.response import Response
+
 
 # Create your models here.
 
@@ -65,3 +69,17 @@ class EducationInfoModel(models.Model):
 
     def __str__(self):
         return f"{self.university} - {self.degree} | {self.cgpa}"
+
+class ExperienceInfoModel(models.Model):
+    designation = models.CharField(max_length = 255)
+    company_name = models.CharField(max_length = 255)
+    start_date = models.DateField()
+    end_date = models.DateField(null = True, blank = True)
+    currently_working = models.BooleanField(db_index = True)
+    company_logo = models.ImageField(upload_to = 'company_logo/', blank = True)
+    company_website = models.URLField(blank = True)
+    featured = models.BooleanField(db_index = True, default = True)
+    description = models.TextField()
+
+    def __str__(self):
+        return f"{self.company_name} - {self.designation}"

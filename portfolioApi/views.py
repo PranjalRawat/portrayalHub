@@ -1,8 +1,8 @@
 from django.http import JsonResponse
 from rest_framework import generics
 from rest_framework.response import Response
-from .models import SocialPlatformsModel, UserProfileModel, ProfileImageModel, ResumeUploadModel, EducationInfoModel
-from .serializers import SocialPlatformSerializer, UserProfileSerializer, UserProfileImageSerializer, ResumeUploadSerializer, EducationInfoSerializer
+from .models import SocialPlatformsModel, UserProfileModel, ProfileImageModel, ResumeUploadModel, EducationInfoModel, ExperienceInfoModel
+from .serializers import SocialPlatformSerializer, UserProfileSerializer, UserProfileImageSerializer, ResumeUploadSerializer, EducationInfoSerializer, ExperienceInfoSerializer
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework import viewsets, status
 
@@ -108,3 +108,42 @@ class EducationInfoViewSet(viewsets.ModelViewSet):
         if self.request.method != 'GET':
                 permission_classes = [IsAuthenticated, IsAdminUser]
         return [permission() for permission in permission_classes]
+
+class ExperienceInfoViewSet(viewsets.ModelViewSet):
+    queryset = ExperienceInfoModel.objects.all()
+    serializer_class = ExperienceInfoSerializer
+    search_fields = ['company_name', 'designation']
+    ordering_fields = ['end_date']
+
+    def get_permissions(self):
+        permission_classes = []
+        if self.request.method != 'GET':
+                permission_classes = [IsAuthenticated, IsAdminUser]
+        return [permission() for permission in permission_classes]
+
+    def create(self, request, *args, **kwargs):
+        instance = self.get_object()
+        currently_working = self.request.data.get('currently_working', False)
+
+        if currently_working and ExperienceInfoModel.objects.filter(currently_working=True).exists():
+            return Response({'detail': 'Only one instance can have currently_working as True.'}, status=400)
+
+        if currently_working:
+            instance.end_date = None
+            instance.save()
+
+
+        return super().create(request, *args, **kwargs)
+
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        currently_working = self.request.data.get('currently_working', False)
+
+        if currently_working and ExperienceInfoModel.objects.filter(currently_working=True).exclude(pk=instance.pk).exists():
+            return Response({'detail': 'Only one instance can have currently_working as True.'}, status=400)
+
+        if currently_working:
+            instance.end_date = None
+            instance.save()
+
+        return super().update(request, *args, **kwargs)

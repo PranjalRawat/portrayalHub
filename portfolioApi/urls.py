@@ -11,9 +11,13 @@ profile.register(r'resume', views.ResumeUploadViewSet, basename='userprofileResu
 education = DefaultRouter()
 education.register(r'info', views.EducationInfoViewSet, basename='educationInfo')
 
+experience = DefaultRouter()
+experience.register(r'info', views.ExperienceInfoViewSet, basename='experienceInfo')
+
 urlpatterns = [
     path('profile/', include(profile.urls)),
     path('education/', include(education.urls)),
+    path('experience/', include(experience.urls)),
     path('social-profiles/', views.SocialPlatformView.as_view()),
     path('social-profiles/<int:pk>', views.SocialPlatformDetailView.as_view()),
 ]
