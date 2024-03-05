@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 
@@ -44,3 +45,23 @@ class ResumeUploadModel(models.Model):
 
     def __str__(self):
         return f"{self.user_profile.user.username}'s Profile Resume"
+
+class EducationInfoModel(models.Model):
+    degree = models.CharField(max_length = 255)
+    university = models.CharField(max_length = 255)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    university_logo = models.ImageField(upload_to = 'university_logo/', blank=True)
+    cgpa = models.DecimalField(
+        max_digits=3,
+        decimal_places=2,
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(10.00)
+        ],
+        blank=True
+    )
+    featured = models.BooleanField(db_index = True, default = True)
+
+    def __str__(self):
+        return f"{self.university} - {self.degree} | {self.cgpa}"

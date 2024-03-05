@@ -1,8 +1,8 @@
 from django.http import JsonResponse
 from rest_framework import generics
 from rest_framework.response import Response
-from .models import SocialPlatformsModel, UserProfileModel, ProfileImageModel, ResumeUploadModel
-from .serializers import SocialPlatformSerializer, UserProfileSerializer, UserProfileImageSerializer, ResumeUploadSerializer
+from .models import SocialPlatformsModel, UserProfileModel, ProfileImageModel, ResumeUploadModel, EducationInfoModel
+from .serializers import SocialPlatformSerializer, UserProfileSerializer, UserProfileImageSerializer, ResumeUploadSerializer, EducationInfoSerializer
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework import viewsets, status
 
@@ -96,3 +96,31 @@ class ResumeUploadViewSet(viewsets.ModelViewSet):
 
         # Otherwise, proceed with the normal creation (POST) action
         return super().create(request, *args, **kwargs)
+
+class EducationInfoView(generics.ListCreateAPIView):
+    queryset = EducationInfoModel.objects.all()
+    serializer_class = EducationInfoSerializer
+    search_fields = ['degree', 'university']
+    ordering_fields = ['cgpa', 'end_date']
+
+    def get_permissions(self):
+        permission_classes = []
+        if self.request.method != 'GET':
+                permission_classes = [IsAuthenticated, IsAdminUser]
+        return [permission() for permission in permission_classes]
+
+class EducationInfoDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = EducationInfoModel.objects.all()
+    serializer_class = EducationInfoSerializer
+
+    def get_permissions(self):
+        permission_classes = []
+        if self.request.method != 'GET':
+                permission_classes = [IsAuthenticated, IsAdminUser]
+        return [permission() for permission in permission_classes]
+
+    def patch(self, request, *args, **kwargs):
+        queryset = EducationInfoModel.objects.get(pk=self.kwargs['pk'])
+        queryset.featured = not queryset.featured
+        queryset.save()
+        return JsonResponse(status=200, data={'message':'Featured status of {} changed to {}'.format(str(queryset.title), str(queryset.featured))})

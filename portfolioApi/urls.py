@@ -12,4 +12,6 @@ urlpatterns = [
     path('profile/', include(router.urls)),
     path('social-profiles/', views.SocialPlatformView.as_view()),
     path('social-profiles/<int:pk>', views.SocialPlatformDetailView.as_view()),
+    path('education-info/', views.EducationInfoView.as_view()),
+    path('education-info/<int:pk>', views.EducationInfoDetailView.as_view()),
 ]
