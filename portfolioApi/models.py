@@ -104,3 +104,17 @@ class SkillsInfoModel(models.Model):
 
     def __str__(self):
         return f"{self.skill} - {self.years_of_exp}"
+
+class MajorProjectsInfoModel(models.Model):
+    project_name = models.CharField(max_length = 255)
+    company_name = models.CharField(max_length = 255, blank = True)
+    description = models.TextField()
+    start_date = models.DateField()
+    end_date = models.DateField(null = True, blank = True)
+    currently_working = models.BooleanField(db_index = True)
+    project_url = models.URLField(blank = True)
+    project_logo = models.ImageField(upload_to = 'projects_logo/', blank = True)
+    featured = models.BooleanField(db_index = True, default = True)
+
+    def __str__(self):
+        return f"{self.project_name} - {self.start_date}"

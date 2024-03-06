@@ -14,18 +14,22 @@ education.register(r'info', views.EducationInfoViewSet, basename='educationInfo'
 experience = DefaultRouter()
 experience.register(r'info', views.ExperienceInfoViewSet, basename='experienceInfo')
 
-certificate = DefaultRouter()
-certificate.register(r'info', views.CertificateInfoViewSet, basename='certificateInfo')
+certificates = DefaultRouter()
+certificates.register(r'info', views.CertificateInfoViewSet, basename='certificatesInfo')
 
-skill = DefaultRouter()
-skill.register(r'info', views.SkillsInfoViewSet, basename='skillInfo')
+skills = DefaultRouter()
+skills.register(r'info', views.SkillsInfoViewSet, basename='skillsInfo')
+
+projects = DefaultRouter()
+projects.register(r'info', views.MajorProjectsInfoViewSet, basename='projectsInfo')
 
 urlpatterns = [
     path('profile/', include(profile.urls)),
     path('education/', include(education.urls)),
     path('experience/', include(experience.urls)),
-    path('certificate/', include(certificate.urls)),
-    path('skill/', include(skill.urls)),
+    path('certificates/', include(certificates.urls)),
+    path('skills/', include(skills.urls)),
+    path('projects/', include(projects.urls)),
     path('social-profiles/', views.SocialPlatformView.as_view()),
     path('social-profiles/<int:pk>', views.SocialPlatformDetailView.as_view()),
 ]
