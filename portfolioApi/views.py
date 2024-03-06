@@ -1,8 +1,8 @@
 from django.http import JsonResponse
 from rest_framework import generics
 from rest_framework.response import Response
-from .models import SocialPlatformsModel, UserProfileModel, ProfileImageModel, ResumeUploadModel, EducationInfoModel, ExperienceInfoModel
-from .serializers import SocialPlatformSerializer, UserProfileSerializer, UserProfileImageSerializer, ResumeUploadSerializer, EducationInfoSerializer, ExperienceInfoSerializer
+from .models import SocialPlatformsModel, UserProfileModel, ProfileImageModel, ResumeUploadModel, EducationInfoModel, ExperienceInfoModel, CertificateInfoModel
+from .serializers import SocialPlatformSerializer, UserProfileSerializer, UserProfileImageSerializer, ResumeUploadSerializer, EducationInfoSerializer, ExperienceInfoSerializer, CertificateInfoSerializer
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework import viewsets, status
 
@@ -147,3 +147,13 @@ class ExperienceInfoViewSet(viewsets.ModelViewSet):
             instance.save()
 
         return super().update(request, *args, **kwargs)
+
+class CertificateInfoViewSet(viewsets.ModelViewSet):
+    queryset = CertificateInfoModel.objects.all()
+    serializer_class = CertificateInfoSerializer
+
+    def get_permissions(self):
+        permission_classes = []
+        if self.request.method != 'GET':
+                permission_classes = [IsAuthenticated, IsAdminUser]
+        return [permission() for permission in permission_classes]

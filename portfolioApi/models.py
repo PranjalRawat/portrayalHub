@@ -83,3 +83,15 @@ class ExperienceInfoModel(models.Model):
 
     def __str__(self):
         return f"{self.company_name} - {self.designation}"
+
+class CertificateInfoModel(models.Model):
+    course_name = models.CharField(max_length = 255)
+    issuing_organization = models.CharField(max_length = 255)
+    issue_date = models.DateField()
+    expiration_date = models.DateField(null = True, blank = True, default = None)
+    credential_url = models.URLField(blank = True)
+    course_badge = models.ImageField(upload_to = 'certificate_badge/', blank = True)
+    featured = models.BooleanField(db_index = True, default = True)
+
+    def __str__(self):
+        return f"{self.course_name} - {self.issuing_organization}"
