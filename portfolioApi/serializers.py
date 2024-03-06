@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import SocialPlatformsModel, UserProfileModel, ProfileImageModel, ResumeUploadModel, EducationInfoModel, ExperienceInfoModel, CertificateInfoModel
+from .models import SocialPlatformsModel, UserProfileModel, ProfileImageModel, ResumeUploadModel, EducationInfoModel, ExperienceInfoModel, CertificateInfoModel, SkillsInfoModel
 
 class SocialPlatformSerializer(serializers.ModelSerializer):
     class Meta:
@@ -34,4 +34,9 @@ class ExperienceInfoSerializer(serializers.ModelSerializer):
 class CertificateInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = CertificateInfoModel
+        fields = '__all__'
+
+class SkillsInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SkillsInfoModel
         fields = '__all__'
