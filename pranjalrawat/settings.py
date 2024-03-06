@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'portfolioApi',
     'portfolio',
+    'drf_spectacular',
+    'drf_spectacular_sidecar',
 ]
 
 MIDDLEWARE = [
@@ -158,4 +160,12 @@ REST_FRAMEWORK = {
     #     'anon': '200/minute',
     #     'user': '100/minute',
     # },
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Pranjal Rawat Portfolio',
+    'DESCRIPTION': 'Portfolio website',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
 }

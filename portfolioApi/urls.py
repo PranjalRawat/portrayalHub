@@ -1,35 +1,24 @@
 from django.urls import path, include
 from . import views
 from rest_framework.routers import DefaultRouter
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
+router = DefaultRouter()
+router.register(r'profile/info', views.UserProfileViewSet, basename='userprofileInfo')
+router.register(r'profile/image', views.UserProfileImageViewSet, basename='userprofileImage')
+router.register(r'profile/resume', views.ResumeUploadViewSet, basename='userprofileResume')
 
-profile = DefaultRouter()
-profile.register(r'info', views.UserProfileViewSet, basename='userprofileInfo')
-profile.register(r'image', views.UserProfileImageViewSet, basename='userprofileImage')
-profile.register(r'resume', views.ResumeUploadViewSet, basename='userprofileResume')
-
-education = DefaultRouter()
-education.register(r'info', views.EducationInfoViewSet, basename='educationInfo')
-
-experience = DefaultRouter()
-experience.register(r'info', views.ExperienceInfoViewSet, basename='experienceInfo')
-
-certificates = DefaultRouter()
-certificates.register(r'info', views.CertificateInfoViewSet, basename='certificatesInfo')
-
-skills = DefaultRouter()
-skills.register(r'info', views.SkillsInfoViewSet, basename='skillsInfo')
-
-projects = DefaultRouter()
-projects.register(r'info', views.MajorProjectsInfoViewSet, basename='projectsInfo')
+router.register(r'education', views.EducationInfoViewSet, basename='educationInfo')
+router.register(r'experience', views.ExperienceInfoViewSet, basename='experienceInfo')
+router.register(r'certificates', views.CertificateInfoViewSet, basename='certificatesInfo')
+router.register(r'skills', views.SkillsInfoViewSet, basename='skillsInfo')
+router.register(r'projects', views.MajorProjectsInfoViewSet, basename='projectsInfo')
 
 urlpatterns = [
-    path('profile/', include(profile.urls)),
-    path('education/', include(education.urls)),
-    path('experience/', include(experience.urls)),
-    path('certificates/', include(certificates.urls)),
-    path('skills/', include(skills.urls)),
-    path('projects/', include(projects.urls)),
+    path('', include(router.urls)),
     path('social-profiles/', views.SocialPlatformView.as_view()),
     path('social-profiles/<int:pk>', views.SocialPlatformDetailView.as_view()),
+
+    path("schema/", SpectacularAPIView.as_view(), name="schema"),
+    path("docs/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
 ]

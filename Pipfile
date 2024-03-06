@@ -8,6 +8,8 @@ django = "*"
 djangorestframework = "*"
 pillow = "*"
 django-filter = "*"
+drf-spectacular = "*"
+drf-spectacular-sidecar = "*"
 
 [dev-packages]
 
