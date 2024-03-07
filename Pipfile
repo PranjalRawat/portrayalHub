@@ -10,6 +10,7 @@ pillow = "*"
 django-filter = "*"
 drf-spectacular = "*"
 drf-spectacular-sidecar = "*"
+faker = "*"
 
 [dev-packages]
 
