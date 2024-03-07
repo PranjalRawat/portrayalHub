@@ -45,7 +45,8 @@ class ProfileImageModel(models.Model):
 
 class ResumeUploadModel(models.Model):
     user_profile = models.OneToOneField(UserProfileModel, on_delete=models.CASCADE)
-    resume = models.FileField(upload_to='resume/')
+    resume = models.FileField(upload_to = 'resume/', blank = True)
+    video_resume = models.FileField(upload_to = 'resume/video_cv/', blank = True)
 
     def __str__(self):
         return f"{self.user_profile.user.username}'s Profile Resume"
