@@ -96,3 +96,18 @@ class UserProfileModelTest(TestCase):
         user.delete()
         with self.assertRaises(UserProfileModel.DoesNotExist):
             UserProfileModel.objects.get(user=user)
+
+    def test_user_single_user_profile_instance(self):
+        with self.assertRaises(Exception) as context:
+            # Attempt to create another user profile for the same user
+            UserProfileModel.objects.create(
+                user = self.user,
+                first_name = fake.first_name(),
+                last_name = fake.last_name(),
+                date_of_birth = fake.date_of_birth(),
+                gender = fake.random_element(elements=('M', 'F', 'O')),
+                address = fake.address(),
+                email = fake.email(),
+                phone_number = fake.phone_number(),
+            )
+            self.assertTrue('unique constraint' in str(context.exception))
