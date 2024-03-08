@@ -9,9 +9,7 @@ fake = Faker()
 class ProfileImageModelTest(TestCase):
 
     @classmethod
-    def setUpClass(self):
-        super().setUpClass()
-
+    def setUpTestData(self):
         self.user_data = {
             'username': fake.user_name(),
             'email': fake.email(),
