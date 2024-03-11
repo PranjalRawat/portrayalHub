@@ -52,6 +52,7 @@ class SocialPlatformsModel(models.Model):
         return self.platformName + ' : ' + self.profileUrl
 
 class EducationInfoModel(models.Model):
+    user_profile = models.ForeignKey(UserProfileModel, on_delete=models.CASCADE)
     degree = models.CharField(max_length = 255)
     university = models.CharField(max_length = 255)
     start_date = models.DateField()
@@ -72,6 +73,7 @@ class EducationInfoModel(models.Model):
         return f"{self.university} - {self.degree} | {self.cgpa}"
 
 class ExperienceInfoModel(models.Model):
+    user_profile = models.ForeignKey(UserProfileModel, on_delete=models.CASCADE)
     designation = models.CharField(max_length = 255)
     company_name = models.CharField(max_length = 255)
     start_date = models.DateField()
@@ -86,6 +88,7 @@ class ExperienceInfoModel(models.Model):
         return f"{self.company_name} - {self.designation}"
 
 class CertificateInfoModel(models.Model):
+    user_profile = models.ForeignKey(UserProfileModel, on_delete=models.CASCADE)
     course_name = models.CharField(max_length = 255)
     issuing_organization = models.CharField(max_length = 255)
     issue_date = models.DateField()
@@ -98,6 +101,7 @@ class CertificateInfoModel(models.Model):
         return f"{self.course_name} - {self.issuing_organization}"
 
 class SkillsInfoModel(models.Model):
+    user_profile = models.ForeignKey(UserProfileModel, on_delete=models.CASCADE)
     skill = models.CharField(max_length = 100)
     years_of_exp = models.IntegerField(default = 0)
     skill_badge = models.ImageField(upload_to = 'skills_badge/', blank = True)
@@ -107,6 +111,7 @@ class SkillsInfoModel(models.Model):
         return f"{self.skill} - {self.years_of_exp}"
 
 class MajorProjectsInfoModel(models.Model):
+    user_profile = models.ForeignKey(UserProfileModel, on_delete=models.CASCADE)
     project_name = models.CharField(max_length = 255)
     company_name = models.CharField(max_length = 255, blank = True)
     description = models.TextField()
