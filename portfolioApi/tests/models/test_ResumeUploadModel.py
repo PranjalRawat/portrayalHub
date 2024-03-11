@@ -39,7 +39,7 @@ class ResumeUploadModelTest(TestCase):
 
     def test_user_resume_str_method(self):
         user_profile_resume = ResumeUploadModel.objects.get(id=1)
-        self.assertEqual(str(user_profile_resume), f"{user_profile_resume.user_profile.user.username}'s Profile Resume")
+        self.assertEqual(str(user_profile_resume), f"{self.userProfileInstance.user.username}'s Profile Resume")
 
     def test_user_single_profile_resume_instance(self):
         with self.assertRaises(Exception) as context:
@@ -52,16 +52,15 @@ class ResumeUploadModelTest(TestCase):
             self.assertTrue('unique constraint' in str(context.exception))
 
     def test_user_profile_resume_deletion_with_user(self):
-        user_profile_resume = ResumeUploadModel.objects.get(id=1)
-        self.assertTrue(ResumeUploadModel.objects.filter(user_profile=user_profile_resume.user_profile).exists())
-        user_profile_resume.user_profile.user.delete()
-        self.assertFalse(ResumeUploadModel.objects.filter(user_profile=user_profile_resume.user_profile).exists())
+        self.assertTrue(ResumeUploadModel.objects.filter(user_profile=self.userProfileInstance).exists())
+        self.userProfileInstance.user.delete()
+        self.assertFalse(ResumeUploadModel.objects.filter(user_profile=self.userProfileInstance).exists())
 
     def test_user_profile_resume_deletion_with_direct_delete(self):
         user_profile_resume = ResumeUploadModel.objects.get(id=1)
-        self.assertTrue(ResumeUploadModel.objects.filter(user_profile=user_profile_resume.user_profile).exists())
+        self.assertTrue(ResumeUploadModel.objects.filter(user_profile=self.userProfileInstance).exists())
         user_profile_resume.delete()
-        self.assertFalse(ResumeUploadModel.objects.filter(user_profile=user_profile_resume.user_profile).exists())
+        self.assertFalse(ResumeUploadModel.objects.filter(user_profile=self.userProfileInstance).exists())
 
     def test_user_profile_resume_document_resume_validity(self):
         user_profile_resume = ResumeUploadModel.objects.get(id=1)

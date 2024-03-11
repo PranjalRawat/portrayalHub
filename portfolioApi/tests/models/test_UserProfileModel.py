@@ -91,10 +91,9 @@ class UserProfileModelTest(TestCase):
 
     def test_user_profile_deletion_cascade(self):
         user_profile = UserProfileModel.objects.get(id=1)
-        user = user_profile.user
-        user.delete()
+        user_profile.user.delete()
         with self.assertRaises(UserProfileModel.DoesNotExist):
-            UserProfileModel.objects.get(user=user)
+            UserProfileModel.objects.get(user=self.user)
 
     def test_user_single_user_profile_instance(self):
         with self.assertRaises(Exception) as context:

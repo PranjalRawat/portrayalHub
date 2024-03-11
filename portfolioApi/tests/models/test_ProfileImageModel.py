@@ -37,7 +37,7 @@ class ProfileImageModelTest(TestCase):
 
     def test_profile_image_str_method(self):
         user_profile_image = ProfileImageModel.objects.get(id=1)
-        self.assertEqual(str(user_profile_image), f"{user_profile_image.user_profile.user.username}'s Profile Image")
+        self.assertEqual(str(user_profile_image), f"{self.userProfileInstance.user.username}'s Profile Image")
 
     def test_user_single_profile_image_instance(self):
         with self.assertRaises(Exception) as context:
@@ -49,16 +49,15 @@ class ProfileImageModelTest(TestCase):
             self.assertTrue('unique constraint' in str(context.exception))
 
     def test_user_profile_image_deletion_with_user(self):
-        user_profile_image = ProfileImageModel.objects.get(id=1)
-        self.assertTrue(ProfileImageModel.objects.filter(user_profile=user_profile_image.user_profile).exists())
-        user_profile_image.user_profile.user.delete()
-        self.assertFalse(ProfileImageModel.objects.filter(user_profile=user_profile_image.user_profile).exists())
+        self.assertTrue(ProfileImageModel.objects.filter(user_profile=self.userProfileInstance).exists())
+        self.userProfileInstance.user.delete()
+        self.assertFalse(ProfileImageModel.objects.filter(user_profile=self.userProfileInstance).exists())
 
     def test_user_profile_image_deletion_with_direct_delete(self):
         user_profile_image = ProfileImageModel.objects.get(id=1)
-        self.assertTrue(ProfileImageModel.objects.filter(user_profile=user_profile_image.user_profile).exists())
+        self.assertTrue(ProfileImageModel.objects.filter(user_profile=self.userProfileInstance).exists())
         user_profile_image.delete()
-        self.assertFalse(ProfileImageModel.objects.filter(user_profile=user_profile_image.user_profile).exists())
+        self.assertFalse(ProfileImageModel.objects.filter(user_profile=self.userProfileInstance).exists())
 
     def test_user_profile_image_update(self):
         user_profile_image = ProfileImageModel.objects.get(id=1)
