@@ -8,6 +8,7 @@ router.register(r'profile/info', views.UserProfileViewSet, basename='userprofile
 router.register(r'profile/image', views.UserProfileImageViewSet, basename='userprofileImage')
 router.register(r'profile/resume', views.ResumeUploadViewSet, basename='userprofileResume')
 
+router.register(r'social_platforms', views.SocialPlatformViewSet, basename='socialPlatforms')
 router.register(r'education', views.EducationInfoViewSet, basename='educationInfo')
 router.register(r'experience', views.ExperienceInfoViewSet, basename='experienceInfo')
 router.register(r'certificates', views.CertificateInfoViewSet, basename='certificatesInfo')
@@ -16,9 +17,6 @@ router.register(r'projects', views.MajorProjectsInfoViewSet, basename='projectsI
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('social-profiles/', views.SocialPlatformView.as_view()),
-    path('social-profiles/<int:pk>', views.SocialPlatformDetailView.as_view()),
-
     path("schema/", SpectacularAPIView.as_view(), name="schema"),
     path("docs/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
 ]

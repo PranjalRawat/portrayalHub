@@ -6,7 +6,7 @@ from .serializers import SocialPlatformSerializer, UserProfileSerializer, UserPr
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework import viewsets, status
 
-class SocialPlatformView(generics.ListCreateAPIView):
+class SocialPlatformViewSet(viewsets.ModelViewSet):
     queryset = SocialPlatformsModel.objects.all()
     serializer_class = SocialPlatformSerializer
     search_fields = ['platformName']
@@ -17,22 +17,6 @@ class SocialPlatformView(generics.ListCreateAPIView):
         if self.request.method != 'GET':
                 permission_classes = [IsAuthenticated, IsAdminUser]
         return [permission() for permission in permission_classes]
-
-class SocialPlatformDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = SocialPlatformsModel.objects.all()
-    serializer_class = SocialPlatformSerializer
-
-    def get_permissions(self):
-        permission_classes = []
-        if self.request.method != 'GET':
-            permission_classes = [IsAuthenticated, IsAdminUser]
-        return [permission() for permission in permission_classes]
-
-    def patch(self, request, *args, **kwargs):
-        queryset = SocialPlatformsModel.objects.get(pk=self.kwargs['pk'])
-        queryset.featured = not queryset.featured
-        queryset.save()
-        return JsonResponse(status=200, data={'message':'Featured status of {} changed to {}'.format(str(queryset.title), str(queryset.featured))})
 
 class UserProfileViewSet(viewsets.ModelViewSet):
     serializer_class = UserProfileSerializer
