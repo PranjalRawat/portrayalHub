@@ -7,16 +7,6 @@ from rest_framework.response import Response
 
 
 # Create your models here.
-
-class SocialPlatformsModel(models.Model):
-    platformName = models.CharField(max_length = 255)
-    platformIcon = models.ImageField(upload_to = 'social_profiles/')
-    profileUrl = models.URLField()
-    featured = models.BooleanField(db_index = True, default = True)
-
-    def __str__(self):
-        return self.platformName + ' : ' + self.profileUrl
-
 class UserProfileModel(models.Model):
     GENDER_CHOICES = [
         ('M', 'Male'),
@@ -50,6 +40,16 @@ class ResumeUploadModel(models.Model):
 
     def __str__(self):
         return f"{self.user_profile.user.username}'s Profile Resume"
+
+class SocialPlatformsModel(models.Model):
+    user_profile = models.ForeignKey(UserProfileModel, on_delete=models.CASCADE)
+    platformName = models.CharField(max_length = 255)
+    platformIcon = models.ImageField(upload_to = 'social_profiles/')
+    profileUrl = models.URLField()
+    featured = models.BooleanField(db_index = True, default = True)
+
+    def __str__(self):
+        return self.platformName + ' : ' + self.profileUrl
 
 class EducationInfoModel(models.Model):
     degree = models.CharField(max_length = 255)
