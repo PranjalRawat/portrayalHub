@@ -83,7 +83,7 @@ class UserProfileViewSetTest(APITestCase):
             'phone_number': fake.phone_number(),
         }
 
-        response = self.client.patch(self.detail_url, user_profile)
+        response = self.client.put(self.detail_url, user_profile)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_authorized_user_can_put_data(self):
@@ -98,12 +98,12 @@ class UserProfileViewSetTest(APITestCase):
             'email': fake.email(),
         }
 
-        response_list_data_before_patch = self.client.get(self.detail_url).data
-        response = self.client.patch(self.detail_url, user_profile)
-        response_list_data_after_patch = self.client.get(self.detail_url).data
+        response_list_data_before_put = self.client.get(self.detail_url).data
+        response = self.client.put(self.detail_url, user_profile)
+        response_list_data_after_put = self.client.get(self.detail_url).data
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertNotEqual(response_list_data_before_patch, response_list_data_after_patch)
+        self.assertNotEqual(response_list_data_before_put, response_list_data_after_put)
 
     def test_unauthorized_user_cannot_patch_data(self):
         self.client.logout()

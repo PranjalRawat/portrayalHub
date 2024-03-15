@@ -93,7 +93,7 @@ class ProfileImageViewSetTest(APITestCase):
             else:
                 self.assertEqual(serialized_data[key], view_data[key])
 
-    def test_user_profile_can_have_only_one_instance(self):
+    def test_user_profile_image_can_have_only_one_instance(self):
         self.client.login(**self.user_data)
         profile_image = {
             'user_profile': self.userProfileInstance.pk,
@@ -109,7 +109,7 @@ class ProfileImageViewSetTest(APITestCase):
             'image': self.image_file,
         }
 
-        response = self.client.patch(self.detail_url, profile_image)
+        response = self.client.put(self.detail_url, profile_image)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_authorized_user_can_put_data(self):
@@ -119,12 +119,12 @@ class ProfileImageViewSetTest(APITestCase):
             'image': self.image_file,
         }
 
-        response_list_data_before_patch = self.client.get(self.detail_url).data
-        response = self.client.patch(self.detail_url, profile_image)
-        response_list_data_after_patch = self.client.get(self.detail_url).data
+        response_list_data_before_put = self.client.get(self.detail_url).data
+        response = self.client.put(self.detail_url, profile_image)
+        response_list_data_after_put = self.client.get(self.detail_url).data
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertNotEqual(response_list_data_before_patch, response_list_data_after_patch)
+        self.assertNotEqual(response_list_data_before_put, response_list_data_after_put)
 
     def test_unauthorized_user_cannot_patch_data(self):
         self.client.logout()
