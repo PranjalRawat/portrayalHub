@@ -74,7 +74,7 @@ class ExperienceInfoViewSetTest(APITestCase):
         if os.path.exists(image_file_path):
             os.remove(image_file_path)
 
-    def test_user_education_info_list_view(self):
+    def test_user_experience_info_list_view(self):
         response = self.client.get(self.list_url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -93,7 +93,7 @@ class ExperienceInfoViewSetTest(APITestCase):
                 else:
                     self.assertEqual(serialized_data_item[key], view_data_item[key])
 
-    def test_user_education_info_detail_view(self):
+    def test_user_experience_info_detail_view(self):
         response = self.client.get(self.detail_url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
