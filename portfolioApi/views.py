@@ -106,16 +106,10 @@ class ExperienceInfoViewSet(viewsets.ModelViewSet):
         return [permission() for permission in permission_classes]
 
     def create(self, request, *args, **kwargs):
-        instance = self.get_object()
         currently_working = self.request.data.get('currently_working', False)
 
         if currently_working and ExperienceInfoModel.objects.filter(currently_working=True).exists():
             return Response({'detail': 'Only one instance can have currently_working as True.'}, status=400)
-
-        if currently_working:
-            instance.end_date = None
-            instance.save()
-
 
         return super().create(request, *args, **kwargs)
 
