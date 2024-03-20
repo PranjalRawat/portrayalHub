@@ -1,0 +1,38 @@
+:root {
+    --mainbg: #1f2833;
+    --clr-text: #fff;
+    --clr-main-1: rgb(119, 211, 80);
+    --clr-main-2: #45a29e;
+    --clr-hex: #294950;
+    --nav-bg-clr: #294950;
+    --nav-clr: rgb(255, 255, 255);
+    --nav-clr-hvr: var(--clr-main-1);
+    --nav-clr-shadow: #294950;
+    --invert: invert(100%);
+}
+
+.light-theme {
+    --mainbg: #fbe8a6;
+    --clr-text: #000;
+    --clr-main-1: #574e24;
+    --clr-main-2: #f4976c;
+    --clr-hex: #e4c580;
+    --nav-bg-clr: #e4c580;
+    --nav-clr: rgb(0, 0, 0);
+    --nav-clr-hvr: var(--clr-main-1);
+    --nav-clr-shadow: #e4c580;
+    --invert: invert(0%);
+}
+
+.dark-theme {
+    --mainbg: #1f2833;
+    --clr-text: #fff;
+    --clr-main-1: rgb(119, 211, 80);
+    --clr-main-2: #45a29e;
+    --clr-hex: #294950;
+    --nav-bg-clr: #294950;
+    --nav-clr: rgb(255, 255, 255);
+    --nav-clr-hvr: var(--clr-main-1);
+    --nav-clr-shadow: #294950;
+    --invert: invert(100%);
+}
