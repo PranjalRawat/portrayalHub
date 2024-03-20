@@ -1,10 +1,9 @@
-name: Django CI
+name: PortfolioApi Test Views
 
 on:
     push:
-        branches: ['main']
-    pull_request:
-        branches: ['main']
+        branches-ignore:
+            - none # This line ensures it runs on all branches
 
 jobs:
     build:
@@ -24,6 +23,6 @@ jobs:
               run: |
                   python -m pip install --upgrade pip
                   pip install -r requirements.txt
-            - name: Run Tests
+            - name: Run Views Tests
               run: |
                   python manage.py test portfolioApi.tests.views
