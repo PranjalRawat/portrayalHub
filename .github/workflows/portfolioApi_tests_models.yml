@@ -1,4 +1,4 @@
-name: PortfolioApi Test Views
+name: PortfolioApi Test Models
 
 on:
     push:
