@@ -33,6 +33,8 @@ class ResumeUploadModelTest(TestCase):
             'user_profile': self.userProfileInstance,
             'resume': fake.file_path(extension='pdf', category='document', depth=1),
             'video_resume': fake.file_path(extension='mp4', category='video', depth=1),
+            'cover_letter': fake.word(),
+            'designation': fake.company(),
         }
 
         self.userResumeInstance = ResumeUploadModel.objects.create(**self.user_resume_data)
@@ -48,6 +50,8 @@ class ResumeUploadModelTest(TestCase):
                 user_profile = self.userProfileInstance,
                 resume = fake.file_path(extension='pdf', category='document', depth=1),
                 video_resume = fake.file_path(extension='mp4', category='video', depth=1),
+                cover_letter = fake.word(),
+                designation = fake.company(),
             )
             self.assertTrue('unique constraint' in str(context.exception))
 

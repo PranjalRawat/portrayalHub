@@ -57,6 +57,8 @@ class ResumeUploadViewSetTest(APITestCase):
             'user_profile': self.userProfileInstance,
             'resume': fake.file_path(extension='pdf', category='document', depth=1),
             'video_resume': fake.file_path(extension='mp4', category='video', depth=1),
+            'cover_letter': fake.word(),
+            'designation': fake.company(),
         }
         ResumeUploadModel.objects.create(**self.user_resume_data)
 
@@ -100,6 +102,8 @@ class ResumeUploadViewSetTest(APITestCase):
             'user_profile': self.userProfileInstance.pk,
             'resume': self.pdf_file,
             'video_resume': self.pdf_file,
+            'cover_letter': fake.word(),
+            'designation': fake.company(),
         }
         response = self.client.post(self.list_url, user_resume_data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -119,6 +123,8 @@ class ResumeUploadViewSetTest(APITestCase):
         user_resume_data = {
             'user_profile': self.userProfileInstance.pk,
             'resume': self.pdf_file,
+            'cover_letter': fake.word(),
+            'designation': fake.company(),
         }
 
         response_list_data_before_put = self.client.get(self.detail_url).data
