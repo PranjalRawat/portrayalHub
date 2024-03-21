@@ -14,7 +14,7 @@
 .light-theme {
     --mainbg: #fbe8a6;
     --clr-text: #000;
-    --clr-main-1: #574e24;
+    --clr-main-1: #a65353;
     --clr-main-2: #f4976c;
     --clr-hex: #e4c580;
     --nav-bg-clr: #e4c580;
@@ -116,11 +116,6 @@
 }
 
 @font-face {
-    font-family: Lulo-Clean;
-    src: url(fonts/Lulo-Clean-Bold.ttf);
-}
-
-@font-face {
     font-family: Luco-outline;
     src: url(fonts/Lulo-Clean-Outline-Bold.otf);
 }
@@ -201,7 +196,11 @@ header {
     text-align: center;
     top: 0;
     left: 0;
-    background: var(--nav-bg-clr);
+    background-image: radial-gradient(
+        circle at bottom,
+        var(--mainbg) 45%,
+        var(--nav-bg-clr)
+    );
     width: 100%;
     -webkit-transform: scale(0, 1);
     transform: scale(0, 1);
@@ -212,7 +211,7 @@ header {
     transition: transform 400ms ease-in-out;
     transition: transform 400ms ease-in-out, -webkit-transform 400ms ease-in-out;
     padding-top: 5em;
-    padding-bottom: 5em;
+    padding-bottom: 15em;
     border-bottom-right-radius: 10%;
 }
 

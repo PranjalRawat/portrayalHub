@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %} {% load designation %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,9 +13,65 @@
             content="Central hub for portraying your skills and projects"
         />
 
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+        />
+
         <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
     </head>
     <body>
-        {% include 'navigation.html' %}
+        <!-- ------------------------- Navigation ------------------------------------- -->
+        <navigation> {% include 'navigation.html' %} </navigation>
+
+        <!-- ------------------------- Home ------------------------------------- -->
+        <section id="home">
+            <div class="main">
+                <div class="main__content">
+                    {% for user in ResumeUpload %}
+                    <h1>
+                        I<span>'</span>M
+                        <br />
+                        {{ user.user_profile.first_name }}
+                        <br />
+                        {{ user.user_profile.last_name }}
+                        <span>.</span>
+                    </h1>
+
+                    <div class="main__content__desc">
+                        <desig1> {{ user.designation|desig:'first' }} </desig1>
+                        {% if user.designation|desig:'second' %}
+                        <desig2>
+                            <span><b>&</b></span>
+                            <br />
+                            {{ user.designation|desig:'second' }}
+                        </desig2>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="main__img">
+                    {% for user in ProfileImage %}
+                    <img src="{{ user.image.url }}" alt="My Image" />
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="social">
+                <ul class="social__presence">
+                    {% for socialProfile in SocialPlatforms %}
+                    <li>
+                        <a href="{{ socialProfile.profileUrl }}">
+                            <img
+                                src="{{ socialProfile.platformIcon.url }}"
+                                alt="My Image"
+                            />
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
     </body>
 </html>

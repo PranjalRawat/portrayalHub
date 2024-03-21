@@ -36,3 +36,221 @@
     --nav-clr-shadow: #294950;
     --invert: invert(100%);
 }
+
+*,
+*::before,
+*::after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: Lulo-Clean;
+    src: url(fonts/Lulo-Clean-Bold.otf);
+}
+
+@font-face {
+    font-family: Luco-outline;
+    src: url(fonts/Lulo-Clean-Outline-Bold.otf);
+}
+
+body {
+    background: var(--mainbg);
+    margin: 0;
+    color: var(--clr-text);
+    overflow-x: hidden;
+    font-size: 62.5%;
+}
+
+section {
+    background-image: radial-gradient(
+        circle at top left,
+        var(--clr-main-2),
+        var(--mainbg) 45%
+    );
+    position: relative;
+    text-align: center;
+    margin: 0;
+    padding: 1em;
+    font-size: 1rem;
+    padding-bottom: 2em;
+}
+
+section .main__content {
+    padding-top: 6em;
+    text-align: left;
+    color: var(--clr-text);
+    text-transform: uppercase;
+}
+
+section .main__content h1 {
+    font-family: 'Lulo-Clean', sans-serif;
+    font-size: 4rem;
+    letter-spacing: -1rem;
+    margin-bottom: 1em;
+}
+
+section .main__content__desc {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.1rem;
+    line-height: 2rem;
+}
+
+section .main__content span {
+    color: var(--clr-main-1);
+}
+
+section .main__img {
+    display: none;
+}
+
+section .social {
+    margin: 0;
+    margin-top: 4em;
+}
+
+section .social__presence {
+    margin: 0;
+    list-style: none;
+    text-decoration: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    font-size: 2rem;
+    padding: 0;
+}
+
+section .social__presence li + li {
+    padding-left: 0.5rem;
+}
+
+section .social__presence li img:hover,
+section .social__presence li img:focus {
+    border: 0.2rem solid var(--clr-main-2);
+}
+
+section .social__presence li img {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 30%;
+    background-color: #fff;
+}
+
+@media screen and (min-width: 480px) {
+    section .main__content h1 {
+        font-size: 5rem;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    section {
+        margin: 0;
+        padding-bottom: 4em;
+    }
+    section .main__content {
+        padding-top: 4em;
+    }
+    section .main__content h1 {
+        font-size: 5.6rem;
+        text-align: center;
+    }
+    section .main__content__desc {
+        text-align: center;
+    }
+    section .social__presence li img {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 30%;
+    }
+}
+
+@media screen and (min-width: 750px) {
+    section {
+        padding: 1em;
+        padding-top: 7em;
+        padding-bottom: 3em;
+    }
+    section .main {
+        display: -ms-grid;
+        display: grid;
+        -ms-grid-columns: 7fr 1fr 4fr;
+        grid-template-columns: 7fr 1fr 4fr;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        padding: 1em;
+    }
+    section .main__content {
+        padding: 0;
+        -ms-grid-column: 1;
+        -ms-grid-column-span: 1;
+        grid-column: 1/2;
+        text-align: left;
+    }
+    section .main__content h1 {
+        text-align: left;
+    }
+    section .main__content__desc {
+        text-align: left;
+        padding: 0;
+        margin-top: 1em;
+    }
+    section .main__img {
+        position: relative;
+        display: inline-block;
+        -ms-grid-column: 3;
+        -ms-grid-column-span: 1;
+        grid-column: 3/4;
+        padding: 0;
+        margin: 0 auto;
+    }
+    section .main__img img {
+        display: block;
+        width: 13em;
+        height: 13em;
+        border-radius: 50%;
+    }
+    section .social {
+        margin: 1em 0 0;
+    }
+}
+
+@media screen and (min-width: 986px) {
+    section {
+        padding: 4em 6em 6em 6em;
+    }
+    section .main {
+        padding: 2em;
+        -ms-grid-columns: 6fr 1fr 4fr;
+        grid-template-columns: 6fr 1fr 4fr;
+    }
+    section .main__content h1 {
+        letter-spacing: -0.5rem;
+    }
+    section .main__content__desc {
+        padding-top: 1.3em;
+        padding-right: 2em;
+        line-height: 2rem;
+        letter-spacing: 0.2rem;
+    }
+    section .main__img img {
+        width: 15em;
+        height: 15em;
+    }
+    section .social__presence li img {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 30%;
+    }
+}
