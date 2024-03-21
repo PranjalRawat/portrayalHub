@@ -116,7 +116,7 @@
 }
 
 @font-face {
-    font-family: Luco-outline;
+    font-family: Lulo-outline;
     src: url(fonts/Lulo-Clean-Outline-Bold.otf);
 }
 
@@ -191,7 +191,7 @@ header {
 }
 
 .topnav {
-    font-family: 'Luco-outline', sans-serif;
+    font-family: 'Lulo-outline', sans-serif;
     position: absolute;
     text-align: center;
     top: 0;
