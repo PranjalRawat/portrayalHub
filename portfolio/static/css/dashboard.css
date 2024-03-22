@@ -86,7 +86,7 @@ section .main__content {
 section .main__content h1 {
     font-family: 'Lulo-Clean', sans-serif;
     font-size: 4rem;
-    letter-spacing: -1rem;
+    letter-spacing: -0.8rem;
     margin-bottom: 1em;
 }
 
@@ -129,7 +129,7 @@ section .social__presence {
 }
 
 section .social__presence li + li {
-    padding-left: 0.5rem;
+    padding-left: 0.3em;
 }
 
 section .social__presence li img:hover,
@@ -144,9 +144,84 @@ section .social__presence li img {
     background-color: #fff;
 }
 
+.about {
+    position: relative;
+    padding: 2em;
+    padding-top: 4em;
+    text-align: center;
+}
+
+.about__content h1 {
+    font-size: 2.5rem;
+}
+
+.about__content__desc {
+    padding-top: 1.5em;
+    text-align: justify;
+    font-size: 1rem;
+    line-height: 1.3rem;
+}
+
+.about__contact {
+    padding-top: 1.4em;
+    text-align: left;
+}
+
+.about__contact h3 {
+    font-size: 1.5rem;
+}
+
+.about__contact__desc ul {
+    list-style: none;
+    padding-left: 1.5em;
+    font-size: 0.8rem;
+}
+
+.about__video_resume video {
+    padding: 5em 0;
+}
+
+.about__video_resume video {
+    width: 100%;
+    padding: 5em 0;
+}
+
+.about__resume__btn {
+    font-size: 1.3rem;
+    background: var(--clr-main-2);
+    color: var(--clr-text);
+    border: 0;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    -webkit-transition: 500ms ease-in-out;
+    transition: 500ms ease-in-out;
+    text-decoration: none;
+}
+
+.about__resume__btn:hover,
+.about__resume__btn:focus {
+    outline: none;
+    color: var(--clr-text);
+    background: var(--mainbg);
+}
+
+.about__resume__btn i {
+    padding-right: 0.25em;
+}
+
 @media screen and (min-width: 480px) {
     section .main__content h1 {
         font-size: 5rem;
+    }
+    section .social__presence li + li {
+        padding-left: 0.4em;
+    }
+
+    .about__contact__desc ul {
+        font-size: 1rem;
+    }
+    .about__video_resume video {
+        width: 80%;
     }
 }
 
@@ -169,6 +244,45 @@ section .social__presence li img {
         width: 2.5rem;
         height: 2.5rem;
         border-radius: 30%;
+    }
+    section .social__presence li + li {
+        padding-left: 0.5em;
+    }
+    .about {
+        padding-top: 3em;
+    }
+    .about__extra {
+        display: -ms-grid;
+        display: grid;
+        -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 5em;
+    }
+    .about__left {
+        padding: 0;
+        margin: 0;
+    }
+    .about__right {
+        padding: 0;
+        margin: 0;
+    }
+    .about__content__desc {
+        padding-top: 1.5em;
+        text-align: justify;
+        font-size: 1.3rem;
+        line-height: 1.3rem;
+    }
+    .about__video_resume video {
+        padding: 0;
+    }
+    .about__resume {
+        padding-top: 4em;
     }
 }
 
@@ -224,6 +338,12 @@ section .social__presence li img {
     section .social {
         margin: 1em 0 0;
     }
+    section .social__presence li + li {
+        padding-left: 0.8em;
+    }
+    .about {
+        padding: 4rem;
+    }
 }
 
 @media screen and (min-width: 986px) {
@@ -252,5 +372,11 @@ section .social__presence li img {
         width: 3rem;
         height: 3rem;
         border-radius: 30%;
+    }
+    section .social__presence li + li {
+        padding-left: 1em;
+    }
+    .about {
+        padding: 5em 16em;
     }
 }
