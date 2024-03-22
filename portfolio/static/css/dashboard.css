@@ -209,6 +209,165 @@ section .social__presence li img {
     padding-right: 0.25em;
 }
 
+.experience {
+    background-image: radial-gradient(
+        circle at top left,
+        var(--nav-bg-clr),
+        var(--mainbg) 25%
+    );
+    padding: 2em;
+    padding-top: 4em;
+}
+
+.experience__left h1 {
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+.experience__container {
+    padding: 2em 0;
+}
+
+.experience__right .company a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--nav-clr-hvr);
+    padding-bottom: 1em;
+    letter-spacing: 0.1rem;
+    text-decoration: none;
+}
+
+.experience__right .duration,
+.experience__right .designation {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--clr-main-2);
+    font-style: italic;
+}
+
+.experience__right .desc {
+    line-height: 1.3rem;
+    font-size: 1rem;
+    padding-top: 1em;
+}
+
+.education {
+    padding: 4em 1.5em 2em;
+}
+
+.education h1 {
+    text-align: center;
+    margin-bottom: 2em;
+    font-size: 2.5rem;
+}
+
+.education__container {
+    margin: 2em auto;
+    max-width: 100%;
+    position: relative;
+}
+
+.education__container .timeline {
+    width: 0.5em;
+    height: 95%;
+    position: absolute;
+    background: var(--clr-text);
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    border-radius: 0.5em;
+}
+
+.education__container .items {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.education__container .items:nth-child(even) {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+}
+
+.education__container .items:nth-child(even) .items__row::before {
+    right: -0.4em;
+}
+
+.education__container .items:nth-child(odd) {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+}
+
+.education__container .items:nth-child(odd) .items__row::before {
+    left: -0.4em;
+}
+
+.education__container .items__row {
+    background-color: var(--clr-hex);
+    border-radius: 0.5em;
+    width: calc(50% - 30px);
+    padding: 0.5em;
+    position: relative;
+    font-size: 1rem;
+}
+
+.education__container .items__row::before {
+    position: absolute;
+    content: '';
+    height: 1.5em;
+    width: 1.5em;
+    background: var(--clr-hex);
+    top: 1em;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    z-index: -1;
+}
+
+.education__container .items__row img {
+    font-size: 2rem;
+    position: absolute;
+    content: '';
+    background-color: var(--mainbg);
+    border-radius: 50%;
+    width: 1.3em;
+    height: 1.3em;
+    text-align: center;
+    padding-top: 0.1em;
+}
+
+.education__container .items__row .title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--nav-clr-hvr);
+}
+
+.education__container .items__row .course {
+    padding-top: 1em;
+}
+
+.education__container .items__row .duration {
+    padding-top: 0.3em;
+    color: var(--nav-clr-hvr);
+}
+
+.education__container .items__row .desc {
+    display: none;
+}
+
+.education__container .items + .items {
+    margin-top: 2em;
+}
+
+.education__container .items:nth-child(even) img {
+    right: -1.6em;
+}
+
+.education__container .items:nth-child(odd) img {
+    left: -1.6em;
+}
+
 @media screen and (min-width: 480px) {
     section .main__content h1 {
         font-size: 5rem;
@@ -284,6 +443,10 @@ section .social__presence li img {
     .about__resume {
         padding-top: 4em;
     }
+    .education__container .items .desc {
+        padding-top: 2em;
+        display: block;
+    }
 }
 
 @media screen and (min-width: 750px) {
@@ -344,6 +507,52 @@ section .social__presence li img {
     .about {
         padding: 4rem;
     }
+    .experience {
+        display: -ms-grid;
+        display: grid;
+        -ms-grid-columns: 2fr 0.4fr 7.6fr;
+        grid-template-columns: 2fr 0.4fr 7.6fr;
+    }
+    .experience__left {
+        -ms-grid-column: 1;
+        -ms-grid-column-span: 1;
+        grid-column: 1/2;
+    }
+    .experience__left h1 {
+        width: -webkit-max-content;
+        width: -moz-max-content;
+        width: max-content;
+        -webkit-box-shadow: 0 8px 0 -4px var(--clr-main-1);
+        box-shadow: 0 8px 0 -4px var(--clr-main-1);
+        margin: 0 auto;
+        padding: 4px;
+    }
+    .experience__right {
+        -ms-grid-column: 3;
+        -ms-grid-column-span: 1;
+        grid-column: 3/4;
+    }
+    .experience__container {
+        padding: 0;
+    }
+    .experience__container + .experience__container {
+        padding-top: 4em;
+    }
+    .experience__container .company a {
+        font-size: 2rem;
+    }
+    .education__container {
+        padding: 0 6em;
+    }
+    .education__container .items__row {
+        padding: 2em;
+    }
+    .education__container .items__row::before {
+        top: 2.8em;
+    }
+    .education h1 {
+        box-shadow: 0 -0.8em 1em -0.4em var(--clr-main-1);
+    }
 }
 
 @media screen and (min-width: 986px) {
@@ -378,5 +587,53 @@ section .social__presence li img {
     }
     .about {
         padding: 5em 16em;
+    }
+    .experience {
+        -ms-grid-columns: 2fr 1fr 3.7fr 0.8fr;
+        grid-template-columns: 2fr 1fr 3.7fr 0.8fr;
+        padding-bottom: 4em;
+    }
+    .education__container {
+        padding: 0 12em;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .education__container {
+        padding: 0 20em;
+    }
+
+    .education__container .items:nth-child(even) .items__row {
+        font-size: 1.5rem;
+        left: -2em;
+    }
+
+    .education__container .items:nth-child(odd) .items__row {
+        font-size: 1.5rem;
+        left: 2em;
+    }
+
+    .education__container .items__row .title {
+        font-size: 2rem;
+    }
+
+    .education__container .items__row::before {
+        top: 2.1em;
+    }
+
+    .education__container .items:nth-child(even) img {
+        right: -3.1em;
+    }
+
+    .education__container .items:nth-child(odd) img {
+        left: -3.1em;
+    }
+
+    .education__container .items:nth-child(even) .items__row::before {
+        right: -0.7em;
+    }
+
+    .education__container .items:nth-child(odd) .items__row::before {
+        left: -0.7em;
     }
 }

@@ -126,5 +126,68 @@
                 </div>
             </div>
         </div>
+
+        <!-- -------------------- Education & Experience -------------------- -->
+        <div class="journey" id="journey">
+            <!-- ------------ Experience ---------------------- -->
+            <div class="experience">
+                <div class="experience__left">
+                    <h1>Experience</h1>
+                </div>
+
+                <div class="experience__right">
+                    {% for experience in ExperienceInfo %}
+                    <div class="experience__container">
+                        <div class="company">
+                            <a href="{{ experience.company_website }}">
+                                {{experience.company_name}}
+                            </a>
+                        </div>
+                        <div class="designation">
+                            {{experience.designation}}
+                        </div>
+                        <div class="duration">
+                            {% if experience.currently_working %}
+                            <span>
+                                {{experience.start_date}} - Currently Working
+                            </span>
+                            {% else %}
+                            <span>
+                                {{experience.start_date}} -
+                                {{experience.end_date}}
+                            </span>
+                            {% endif %}
+                        </div>
+
+                        <div class="desc">{{experience.description}}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- ------------------ Education ------------------- -->
+            <div class="education">
+                <h1>Qualification</h1>
+                <div class="education__container">
+                    <div class="timeline"></div>
+                    {% for edu in EducationInfo %}
+                    <div class="items">
+                        <div class="items__row">
+                            <img
+                                src="{{ edu.university_logo.url }}"
+                                alt="{{ edu.university }}"
+                            />
+                            <div class="title">{{ edu.university }}</div>
+                            <div class="course">{{ edu.degree }}</div>
+                            <div class="cpga">cgpa - {{ edu.cgpa }}</div>
+                            <div class="duration">
+                                {{edu.start_date}} - {{edu.end_date}}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </body>
 </html>
