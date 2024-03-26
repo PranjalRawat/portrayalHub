@@ -134,9 +134,9 @@ header {
     text-align: center;
     position: fixed;
     z-index: 99;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
+    padding: 1em 0;
     width: 100%;
+    border-radius: 0 0 1em 1em;
 }
 
 .logo {

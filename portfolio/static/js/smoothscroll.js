@@ -1,44 +1,48 @@
-$(document).ready(function() {
-    let scrollLink = $('.smoothscroll');
-
-    // Smooth scrolling
-    scrollLink.click(function(e) {
-        e.preventDefault();
-        $('body,html').animate({
-            scrollTop: $(this.hash).offset().top
-        }, 1000);
-        $('.topnav').toggleClass("open");
-    });
-
-    // // Active link switching
-    // $(window).scroll(function() {
-    //     let scrollbarLocation = $(this).scrollTop();
-
-    //     scrollLink.each(function() {
-
-    //         let sectionOffset = $(this.hash).offset().top - 20;
-
-    //         if (sectionOffset <= scrollbarLocation) {
-    //             $(this).parent().addClass('current');
-    //             $(this).parent().siblings().removeClass('current');
-    //         }
-    //     })
-
-    // })
-
-    // navigation hide and Show
-    $(window).scroll(function() {
-        let scroll = $(window).scrollTop();
-        if (scroll > 50 && scroll < 610) {
-            $('#nav').fadeOut('fast');
+// navigation hide and Show
+window.addEventListener('scroll', function() {
+    const scroll = window.scrollY || document.documentElement.scrollTop;
+    if (scroll > 50 && scroll < 610) {
+        document.getElementById('nav').style.display = 'none';
+    } else {
+        document.getElementById('nav').style.display = 'block';
+        if (scroll > 610) {
+            document.getElementById('nav').classList.add('nav');
         } else {
-            $('#nav').fadeIn('fast');
-            if (scroll > 610) {
-                $('#nav').addClass("nav");
-            } else {
-                $('#nav').removeClass("nav");
-            }
+            document.getElementById('nav').classList.remove('nav');
         }
-    })
+    }
+});
 
-})
+// smoothscroll
+const smoothScrollLinks = document.querySelectorAll('.smoothscroll');
+
+smoothScrollLinks.forEach(smoothScrollLink => {
+    smoothScrollLink.addEventListener('click', event => {
+        event.preventDefault();
+
+        const targetId = smoothScrollLink.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        const offsetTop = targetElement.offsetTop;
+
+        const scrollDuration = 800; // Adjust scroll duration here (in milliseconds)
+
+        scrollToTarget(offsetTop, scrollDuration);
+    });
+});
+
+const scrollToTarget = (targetPosition, duration) => {
+    const start = window.scrollY;
+    const startTime = 'now' in window.performance ? performance.now() : new Date().getTime();
+
+    const scroll = () => {
+        const now = 'now' in window.performance ? performance.now() : new Date().getTime();
+        const time = Math.min(1, ((now - startTime) / duration));
+
+        window.scroll(0, Math.ceil((time * (targetPosition - start)) + start));
+
+        if (window.scrollY === targetPosition) return;
+        requestAnimationFrame(scroll);
+    };
+
+    scroll();
+};
