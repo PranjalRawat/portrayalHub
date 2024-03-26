@@ -209,6 +209,11 @@ section .social__presence li img {
     padding-right: 0.25em;
 }
 
+.journey,
+.skills__certificate {
+    padding-top: 5em;
+}
+
 .experience {
     background-image: radial-gradient(
         circle at top left,
@@ -376,7 +381,6 @@ section .social__presence li img {
     );
     position: relative;
     padding: 2em;
-    padding-top: 4em;
     text-align: center;
 }
 
