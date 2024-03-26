@@ -58,6 +58,7 @@ class SkillsInfoViewSetTest(APITestCase):
                 'user_profile': self.userProfileInstance,
                 'skill': fake.word(),
                 'years_of_exp': fake.random_int(min=0, max=5),
+                'proficiency': fake.random_int(min=0, max=10),
                 'skill_badge': fake.image_url(),
                 'featured': fake.boolean(),
             })
@@ -107,6 +108,7 @@ class SkillsInfoViewSetTest(APITestCase):
             'user_profile': self.userProfileInstance.pk,
             'skill': fake.word(),
             'years_of_exp': fake.random_int(min=0, max=5),
+            'proficiency': fake.random_int(min=0, max=10),
             'skill_badge': self.image_file,
             'featured': fake.boolean(),
         }
@@ -119,6 +121,7 @@ class SkillsInfoViewSetTest(APITestCase):
             'user_profile': self.userProfileInstance.pk,
             'skill': fake.word(),
             'years_of_exp': fake.random_int(min=0, max=5),
+            'proficiency': fake.random_int(min=0, max=10),
             'skill_badge': self.image_file,
             'featured': fake.boolean(),
         }
@@ -135,6 +138,7 @@ class SkillsInfoViewSetTest(APITestCase):
             'user_profile': self.userProfileInstance.pk,
             'skill': fake.word(),
             'years_of_exp': fake.random_int(min=0, max=5),
+            'proficiency': fake.random_int(min=0, max=10),
             'skill_badge': self.image_file,
             'featured': fake.boolean(),
         }
@@ -148,6 +152,7 @@ class SkillsInfoViewSetTest(APITestCase):
             'user_profile': self.userProfileInstance.pk,
             'skill': fake.word(),
             'years_of_exp': fake.random_int(min=0, max=5),
+            'proficiency': fake.random_int(min=0, max=10),
             'skill_badge': self.image_file,
             'featured': fake.boolean(),
         }

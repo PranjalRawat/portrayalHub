@@ -102,6 +102,10 @@ class SkillsInfoModel(models.Model):
     user_profile = models.ForeignKey(UserProfileModel, on_delete=models.CASCADE)
     skill = models.CharField(max_length = 100)
     years_of_exp = models.IntegerField(default = 0)
+    proficiency = models.IntegerField(default = 0, validators=[
+            MinValueValidator(0),
+            MaxValueValidator(10)
+        ],)
     skill_badge = models.ImageField(upload_to = 'skills_badge/', blank = True)
     featured = models.BooleanField(db_index = True, default = True)
 

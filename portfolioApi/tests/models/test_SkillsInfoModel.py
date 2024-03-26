@@ -33,6 +33,7 @@ class SkillsInfoModelTest(TestCase):
             'user_profile': self.userProfileInstance,
             'skill': fake.word(),
             'years_of_exp': fake.random_int(min=0, max=5),
+            'proficiency': fake.random_int(min=0, max=10),
             'skill_badge': fake.image_url(),
             'featured': fake.boolean(),
         }
@@ -49,6 +50,7 @@ class SkillsInfoModelTest(TestCase):
                 'user_profile': self.userProfileInstance,
                 'skill': fake.word(),
                 'years_of_exp': fake.random_int(min=0, max=5),
+                'proficiency': fake.random_int(min=0, max=10),
                 'skill_badge': fake.image_url(),
                 'featured': fake.boolean(),
             }
@@ -64,6 +66,7 @@ class SkillsInfoModelTest(TestCase):
         new_skills_info_field_data = {
             'skill': fake.word(),
             'years_of_exp': fake.random_int(min=0, max=5),
+            'proficiency': fake.random_int(min=0, max=10),
             'skill_badge': fake.image_url(),
             'featured': fake.boolean(),
         }
