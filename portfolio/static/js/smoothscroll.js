@@ -4,7 +4,7 @@ window.addEventListener('scroll', function() {
     if (scroll > 50 && scroll < 610) {
         document.getElementById('nav').style.display = 'none';
     } else {
-        document.getElementById('nav').style.display = 'block';
+        document.getElementById('nav').style.display = 'grid';
         if (scroll > 610) {
             document.getElementById('nav').classList.add('nav');
         } else {
