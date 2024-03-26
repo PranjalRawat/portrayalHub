@@ -15,6 +15,6 @@ class DashboardView(ListView):
         context['EducationInfo'] = EducationInfoModel.objects.filter(featured = True).order_by('-start_date')
         context['ExperienceInfo'] = ExperienceInfoModel.objects.filter(featured = True).order_by('-start_date', 'currently_working')
         context['CertificateInfo'] = CertificateInfoModel.objects.filter(featured = True).order_by('-issue_date')
-        context['SkillsInfo'] = SkillsInfoModel.objects.filter(featured = True).order_by('-years_of_exp')
+        context['SkillsInfo'] = SkillsInfoModel.objects.filter(featured = True).order_by('-proficiency', '-years_of_exp')
         context['MajorProjectsInfo'] = MajorProjectsInfoModel.objects.filter(featured = True).order_by('-currently_working')
         return context

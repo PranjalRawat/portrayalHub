@@ -1,4 +1,5 @@
-{% load static %} {% load designation %} {% load address_sep %}
+{% load static %} {% load skill_stars %} {% load designation %} {% load address_sep %}
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -182,6 +183,82 @@
                             <div class="cpga">cgpa - {{ edu.cgpa }}</div>
                             <div class="duration">
                                 {{edu.start_date}} - {{edu.end_date}}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- -------------------- Skills And Certificate --------------------- -->
+        <div class="skills__certificate" id="skills">
+            <div class="skills">
+                <div class="skills__left">
+                    <h1>Skills</h1>
+                </div>
+                <div class="skills__right">
+                    {% for skill in SkillsInfo %}
+                    <div class="octagon">
+                        <div class="inner">
+                            <div class="content">
+                                {% if 'media' in skill.skill_badge.url %}
+                                    <img
+                                        id="cover_img"
+                                        src="{{ skill.skill_badge.url }}"
+                                    />
+                                    <p>{{ skill.topic }}</p>
+                                {% else %}
+                                    <i class="devicon-{{ skill.skill|lower }}-plain"></i>
+                                {% endif %}
+                                <div class="stars">
+                                    {% for i in skill.proficiency|stars:'full' %}
+                                        <i class="fas fa-star"></i>
+                                    {% endfor %}
+                                    {% for i in skill.proficiency|stars:'half' %}
+                                        <i class="fas fa-star-half-alt"></i>
+                                    {% endfor %}
+                                    {% for i in skill.proficiency|stars:'none' %}
+                                        <i class="far fa-star"></i>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="certificates">
+                <div class="certificates__left">
+                    <h1>Certificates</h1>
+                </div>
+                <div class="certificates__right">
+                    {% for certificate in CertificateInfo %}
+                    <div class="certificate__container">
+                        <div class="certificate__container__left">
+                            <div class="title">{{ certificate.course_name }}</div>
+                            <div class="desc">
+                                <div class="org">
+                                    Issuing Orgianization - {{ certificate.issuing_organization }}
+                                </div>
+                                <div class="timeline">
+                                    {{ certificate.issue_date }} - {{ certificate.expiration_date }}
+                                </div>
+                            </div>
+                            <div class="verify">
+                                <span>Source</span>
+                                <sub>{{ certificate.credential_url }}</sub>
+                                <a href="{{ certificate.credential_url }}">Verify</a>
+                            </div>
+                        </div>
+                        <div class="certificate__container__right">
+                            <div class="badge">
+                                <a href="{{ certificate.course_badge }}"
+                                    ><img
+                                        src="{{ certificate.course_badge.url }}"
+                                        alt="Badge"
+                                /></a>
                             </div>
                         </div>
                     </div>

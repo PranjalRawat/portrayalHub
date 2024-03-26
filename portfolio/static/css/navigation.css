@@ -8,7 +8,6 @@
     --nav-clr: rgb(255, 255, 255);
     --nav-clr-hvr: var(--clr-main-1);
     --nav-clr-shadow: #294950;
-    --invert: invert(100%);
 }
 
 .light-theme {
@@ -21,7 +20,6 @@
     --nav-clr: rgb(0, 0, 0);
     --nav-clr-hvr: var(--clr-main-1);
     --nav-clr-shadow: #e4c580;
-    --invert: invert(0%);
 }
 
 .dark-theme {
@@ -34,7 +32,6 @@
     --nav-clr: rgb(255, 255, 255);
     --nav-clr-hvr: var(--clr-main-1);
     --nav-clr-shadow: #294950;
-    --invert: invert(100%);
 }
 
 #theme-toggle::after {
