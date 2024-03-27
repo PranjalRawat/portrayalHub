@@ -445,15 +445,15 @@ section .social__presence li img {
     position: relative;
     text-align: center;
     display: block;
-    width: 5rem;
-    left: 1.8em;
+    width: 4.3rem;
+    left: 2.1em;
     filter: var(--invert);
     margin-bottom: 0.25em;
 }
 
 .skills__right .inner p {
-    font-size: 0.6rem;
-    margin: 0 0 -5px;
+    font-size: 0.4rem;
+    margin: 0;
     padding: 0;
 }
 

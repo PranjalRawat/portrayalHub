@@ -353,6 +353,11 @@ header {
         font-size: 1.2rem;
     }
     .topnav li + li {
-        margin-left: 1.5em;
+        margin-left: 2em;
+    }
+}
+@media screen and (min-width: 1200px) {
+    .topnav li + li {
+        margin-left: 4em;
     }
 }
