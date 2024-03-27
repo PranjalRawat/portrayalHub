@@ -199,6 +199,7 @@ header {
         var(--nav-bg-clr)
     );
     width: 100%;
+    height: 100vh;
     -webkit-transform: scale(0, 1);
     transform: scale(0, 1);
     -webkit-transform-origin: left;
@@ -207,8 +208,7 @@ header {
     transition: -webkit-transform 400ms ease-in-out;
     transition: transform 400ms ease-in-out;
     transition: transform 400ms ease-in-out, -webkit-transform 400ms ease-in-out;
-    padding-top: 5em;
-    padding-bottom: 15em;
+    padding-top: 10em;
     border-bottom-right-radius: 10%;
 }
 

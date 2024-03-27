@@ -9,16 +9,9 @@
         <title>
             PortrayalHub || Central hub for portraying your skills and projects
         </title>
-        <meta
-            name="description"
-            content="Central hub for portraying your skills and projects"
-        />
+        <meta name="description" content="Central hub for portraying your skills and projects"/>
 
-        <link
-            rel="stylesheet"
-            type="text/css"
-            href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
-        />
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"/>
 
         <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
     </head>
@@ -265,6 +258,27 @@
                     {% endfor %}
                 </div>
             </div>
+        </div>
+
+        <!-- ----------------------- Portfolio work --------------------------- -->
+        <div class="portfolio" id="portfolio">
+            <h1>Portfolio</h1>
+            <div class="portfolio__container">
+                {% for project in MajorProjectsInfo %}
+                <div class="portfolio__container__items">
+                    <a href="{{ project.project_url }}">
+                        <img src="{{ project.project_logo.url }}" alt="{{ project.project_name }}" />
+                    </a>
+                    <h2>{{ project.project_name }}</h2>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- ------------------------- Copyright ------------------------------- -->
+        <div class="copyright">
+            <div class="copyright__left">&copy2024 PORTRAYAL HUB</div>
+            <div class="copyright__right">Designed by Pranjal Rawat</div>
         </div>
     </body>
 </html>

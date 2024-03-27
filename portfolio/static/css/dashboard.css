@@ -85,7 +85,7 @@ section .main__content {
 
 section .main__content h1 {
     font-family: 'Lulo-Clean', sans-serif;
-    font-size: 4rem;
+    font-size: 3.8rem;
     letter-spacing: -0.8rem;
     margin-bottom: 1em;
 }
@@ -527,6 +527,56 @@ section .social__presence li img {
     display: none;
 }
 
+.portfolio {
+    background-image: radial-gradient(
+        circle at bottom right,
+        var(--nav-bg-clr),
+        var(--mainbg) 60%
+    );
+    padding: 2em;
+    padding-top: 4em;
+    padding-bottom: 4em;
+}
+
+.portfolio h1 {
+    text-align: center;
+    padding-bottom: 1em;
+    font-size: 2.5rem;
+}
+
+.portfolio__container__items + .portfolio__container__items {
+    margin-top: 2em;
+}
+
+.portfolio__container__items {
+    margin: 0 auto;
+    text-align: center;
+    width: 300px;
+    height: 300px;
+    padding: 1em;
+    background-color: var(--clr-hex);
+    border-radius: 10%;
+}
+
+.portfolio__container__items img {
+    width: 90%;
+    border-radius: 1em;
+    -webkit-transition: 500ms ease-in-out;
+    transition: 500ms ease-in-out;
+}
+
+.portfolio__container__items img:hover {
+    -webkit-transform: scale(0.9, 0.9);
+    transform: scale(0.9, 0.9);
+}
+
+.copyright {
+    background: var(--nav-bg-clr);
+    text-align: center;
+    line-height: 2em;
+    letter-spacing: 1px;
+}
+
 @media screen and (min-width: 480px) {
     section .main__content h1 {
         font-size: 5rem;
@@ -624,6 +674,21 @@ section .social__presence li img {
     .education__container .items .desc {
         padding-top: 2em;
         display: block;
+    }
+    .portfolio__container {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        gap: 1em;
+    }
+    .portfolio__container__items + .portfolio__container__items {
+        margin-top: 0;
     }
 }
 
@@ -758,6 +823,25 @@ section .social__presence li img {
         -ms-flex-pack: left;
         justify-content: left;
     }
+    .portfolio__container {
+        gap: 1em;
+    }
+    .copyright {
+        display: -ms-grid;
+        display: grid;
+        -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+    }
+    .copyright__left {
+        -ms-grid-column: 1;
+        -ms-grid-column-span: 1;
+        grid-column: 1/2;
+    }
+    .copyright__right {
+        -ms-grid-column: 2;
+        -ms-grid-column-span: 1;
+        grid-column: 2/3;
+    }
 }
 
 @media screen and (min-width: 986px) {
@@ -834,6 +918,13 @@ section .social__presence li img {
         -ms-grid-column: 3;
         -ms-grid-column-span: 1;
         grid-column: 3/4;
+    }
+    .portfolio__container {
+        gap: 0.3em;
+    }
+    .portfolio__container__items {
+        width: 350px;
+        height: 350px;
     }
 }
 
