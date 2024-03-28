@@ -275,6 +275,33 @@
             </div>
         </div>
 
+        <!-- ------------------------ Contact US ------------------------------ -->
+        <div class="contact" id="contact">
+            <h1>Get In Touch</h1>
+            <div class="contact__container">
+                <div class="contact__left">
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <label for="name">Name</label><br/>
+                        <input type="text" placeholder="Enter Your Name ." name="name"><br/>
+                        <label for="subject">Subject</label><br/>
+                        <input type="text" placeholder="Enter the subject ." name="subject"><br/>
+                        <label for="email">Email Address</label><br/>
+                        <input type="email" placeholder="Enter Your Email Address ." name="email"><br/>
+                        <label for="message">Message</label><br/>
+
+                        <textarea name="message" cols="30" rows="8" placeholder="Enter Your Message ..."></textarea>
+                        <input type="submit" value="Mail" class="mail__btn">
+                    </form>
+                </div>
+                <div class="contact__right">
+                    <img src="{% static 'image/contact.png' %}" alt="Illustration by Icons 8">
+                    <div class="illu">Illustration by <a href="https://icons8.com/illustrations/author/5c07e68d82bcbc0092519bb6">Icons 8</a> from <a href="https://icons8.com/illustrations">Ouch!</a></div>
+
+                </div>
+            </div>
+        </div>
+
         <!-- ------------------------- Copyright ------------------------------- -->
         <div class="copyright">
             <div class="copyright__left">&copy2024 PORTRAYAL HUB</div>
