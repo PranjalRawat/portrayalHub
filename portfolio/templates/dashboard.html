@@ -82,7 +82,7 @@
                 <div class="about__left">
                     <div class="about__contact">
                         <h3>Contact Details</h3>
-                        {% for user in data %}
+                        {% for user in UserProfile %}
                         <div class="about__contact__desc">
                             <ul>
                                 <li>{{ user.address|address:'landmark' }}</li>
