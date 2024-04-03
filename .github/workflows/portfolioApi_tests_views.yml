@@ -26,3 +26,13 @@ jobs:
             - name: Run Views Tests
               run: |
                   python manage.py test portfolioApi.tests.views
+              env:
+                  SECRET_KEY: ${{ secrets.SECRET_KEY }}
+                  DEBUG: ${{ secrets.DEBUG }}
+                  ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+                  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  AWS_SES_REGION: ${{ secrets.AWS_SES_REGION }}
+                  AWS_SES_REGION_ENDPOINT: ${{ secrets.AWS_SES_REGION_ENDPOINT }}
+                  Email_from: ${{ secrets.Email_from }}
+                  Email_to: ${{ secrets.Email_to }}
