@@ -1,16 +1,20 @@
 from django.http import JsonResponse
 from rest_framework import generics
 from rest_framework.response import Response
+from django.contrib.auth.models import User
+
 from .models import SocialPlatformsModel, UserProfileModel, ProfileImageModel, ResumeUploadModel, EducationInfoModel, ExperienceInfoModel, CertificateInfoModel, SkillsInfoModel, MajorProjectsInfoModel
 from .serializers import SocialPlatformSerializer, UserProfileSerializer, UserProfileImageSerializer, ResumeUploadSerializer, EducationInfoSerializer, ExperienceInfoSerializer, CertificateInfoSerializer, SkillsInfoSerializer, MajorProjectsInfoSerializer
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework import viewsets, status
 
 class SocialPlatformViewSet(viewsets.ModelViewSet):
-    queryset = SocialPlatformsModel.objects.all()
     serializer_class = SocialPlatformSerializer
     search_fields = ['platformName']
     ordering_fields = ['id']
+
+    def get_queryset(self):
+        return SocialPlatformsModel.objects.filter(user_profile=self.request.user.pk)
 
     def get_permissions(self):
         permission_classes = []
@@ -20,7 +24,9 @@ class SocialPlatformViewSet(viewsets.ModelViewSet):
 
 class UserProfileViewSet(viewsets.ModelViewSet):
     serializer_class = UserProfileSerializer
-    queryset = UserProfileModel.objects.all()
+
+    def get_queryset(self):
+        return UserProfileModel.objects.filter(user=self.request.user)
 
     def get_permissions(self):
         permission_classes = []
@@ -41,7 +47,9 @@ class UserProfileViewSet(viewsets.ModelViewSet):
 
 class UserProfileImageViewSet(viewsets.ModelViewSet):
     serializer_class = UserProfileImageSerializer
-    queryset = ProfileImageModel.objects.all()
+
+    def get_queryset(self):
+        return ProfileImageModel.objects.filter(user_profile=self.request.user.pk)
 
     def get_permissions(self):
         permission_classes = []
@@ -62,7 +70,9 @@ class UserProfileImageViewSet(viewsets.ModelViewSet):
 
 class ResumeUploadViewSet(viewsets.ModelViewSet):
     serializer_class = ResumeUploadSerializer
-    queryset = ResumeUploadModel.objects.all()
+
+    def get_queryset(self):
+        return ResumeUploadModel.objects.filter(user_profile=self.request.user.pk)
 
     def get_permissions(self):
         permission_classes = []
@@ -82,10 +92,12 @@ class ResumeUploadViewSet(viewsets.ModelViewSet):
         return super().create(request, *args, **kwargs)
 
 class EducationInfoViewSet(viewsets.ModelViewSet):
-    queryset = EducationInfoModel.objects.all()
     serializer_class = EducationInfoSerializer
     search_fields = ['degree', 'university']
     ordering_fields = ['cgpa', 'end_date']
+
+    def get_queryset(self):
+        return EducationInfoModel.objects.filter(user_profile=self.request.user.pk)
 
     def get_permissions(self):
         permission_classes = []
@@ -94,10 +106,12 @@ class EducationInfoViewSet(viewsets.ModelViewSet):
         return [permission() for permission in permission_classes]
 
 class ExperienceInfoViewSet(viewsets.ModelViewSet):
-    queryset = ExperienceInfoModel.objects.all()
     serializer_class = ExperienceInfoSerializer
     search_fields = ['company_name', 'designation']
     ordering_fields = ['end_date']
+
+    def get_queryset(self):
+        return ExperienceInfoModel.objects.filter(user_profile=self.request.user.pk)
 
     def get_permissions(self):
         permission_classes = []
@@ -127,8 +141,10 @@ class ExperienceInfoViewSet(viewsets.ModelViewSet):
         return super().update(request, *args, **kwargs)
 
 class CertificateInfoViewSet(viewsets.ModelViewSet):
-    queryset = CertificateInfoModel.objects.all()
     serializer_class = CertificateInfoSerializer
+
+    def get_queryset(self):
+        return CertificateInfoModel.objects.filter(user_profile=self.request.user.pk)
 
     def get_permissions(self):
         permission_classes = []
@@ -137,8 +153,10 @@ class CertificateInfoViewSet(viewsets.ModelViewSet):
         return [permission() for permission in permission_classes]
 
 class SkillsInfoViewSet(viewsets.ModelViewSet):
-    queryset = SkillsInfoModel.objects.all()
     serializer_class = SkillsInfoSerializer
+
+    def get_queryset(self):
+        return SkillsInfoModel.objects.filter(user_profile=self.request.user.pk)
 
     def get_permissions(self):
         permission_classes = []
@@ -147,9 +165,11 @@ class SkillsInfoViewSet(viewsets.ModelViewSet):
         return [permission() for permission in permission_classes]
 
 class MajorProjectsInfoViewSet(viewsets.ModelViewSet):
-    queryset = MajorProjectsInfoModel.objects.all()
     serializer_class = MajorProjectsInfoSerializer
     search_fields = ['project_name']
+
+    def get_queryset(self):
+        return MajorProjectsInfoModel.objects.filter(user_profile=self.request.user.pk)
 
     def get_permissions(self):
         permission_classes = []
