@@ -11,6 +11,8 @@ django-filter = "*"
 drf-spectacular = "*"
 drf-spectacular-sidecar = "*"
 faker = "*"
+django-amazon-ses = "*"
+python-dotenv = "*"
 
 [dev-packages]
 

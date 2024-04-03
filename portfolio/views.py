@@ -3,7 +3,7 @@ from portfolio.forms import ContactForm
 from portfolioApi.models import CertificateInfoModel, EducationInfoModel, ExperienceInfoModel, MajorProjectsInfoModel, ProfileImageModel, ResumeUploadModel, SkillsInfoModel, SocialPlatformsModel, UserProfileModel
 from django.shortcuts import redirect
 from django.core.mail import send_mail
-from portrayalHub.settings import Email_from_to
+from portrayalHub.settings import Email_from, Email_to
 
 # Create your views here.
 class DashboardView(ListView):
@@ -24,8 +24,8 @@ class DashboardView(ListView):
             send_mail(
                 subject,
                 message,
-                Email_from_to,
-                [Email_from_to],
+                Email_from,
+                [Email_to],
             )
         return redirect('/')
 
