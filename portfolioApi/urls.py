@@ -17,6 +17,19 @@ router.register(r'projects', views.MajorProjectsInfoViewSet, basename='projectsI
 
 urlpatterns = [
     path('', include(router.urls)),
+
+    path('user/<str:username>/profile/info/', views.OtherUserProfileView.as_view(), name='otherUserprofileInfo'),
+    path('user/<str:username>/profile/image/', views.OtherUserProfileImageView.as_view(), name='otherUserprofileImage'),
+    path('user/<str:username>/profile/resume/', views.OtherResumeUploadView.as_view(), name='otherUserprofileResume'),
+
+    path('user/<str:username>/social_platforms/', views.OtherSocialPlatformView.as_view(), name='otherSocialPlatforms'),
+    path('user/<str:username>/education/', views.OtherEducationInfoView.as_view(), name='otherEducationInfo'),
+    path('user/<str:username>/experience/', views.OtherExperienceInfoView.as_view(), name='otherExperienceInfo'),
+    path('user/<str:username>/certificates/', views.OtherCertificateInfoView.as_view(), name='otherCertificatesInfo'),
+    path('user/<str:username>/skills/', views.OtherSkillsInfoView.as_view(), name='otherSkillsInfo'),
+    path('user/<str:username>/projects/', views.OtherMajorProjectsInfoView.as_view(), name='otherProjectsInfo'),
+
+
     path("schema/", SpectacularAPIView.as_view(), name="schema"),
     path("docs/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
 ]
