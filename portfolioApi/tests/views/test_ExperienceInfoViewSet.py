@@ -75,12 +75,13 @@ class ExperienceInfoViewSetTest(APITestCase):
             os.remove(image_file_path)
 
     def test_user_experience_info_list_view(self):
+        self.client.login(**self.user_data)
         response = self.client.get(self.list_url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(ExperienceInfoSerializer(ExperienceInfoModel.objects.all(), many=True).data), len(response.data))
+        self.assertEqual(len(ExperienceInfoSerializer(ExperienceInfoModel.objects.filter(user_profile=self.userProfileInstance), many=True).data), len(response.data))
 
-        serialized_data = ExperienceInfoSerializer(ExperienceInfoModel.objects.all(), many=True).data
+        serialized_data = ExperienceInfoSerializer(ExperienceInfoModel.objects.filter(user_profile=self.userProfileInstance), many=True).data
         view_data = response.data
 
         list_view_count = len(response.data)
@@ -94,6 +95,7 @@ class ExperienceInfoViewSetTest(APITestCase):
                     self.assertEqual(serialized_data_item[key], view_data_item[key])
 
     def test_user_experience_info_detail_view(self):
+        self.client.login(**self.user_data)
         response = self.client.get(self.detail_url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)

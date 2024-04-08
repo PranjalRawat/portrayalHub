@@ -37,16 +37,18 @@ class UserProfileViewSetTest(APITestCase):
         self.userProfileInstance = UserProfileModel.objects.create(**self.user_profile)
 
     def test_user_profile_list_view(self):
+        self.client.login(**self.user_data)
         response = self.client.get(self.list_url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        serialized_data = UserProfileSerializer(UserProfileModel.objects.all(), many=True).data
+        serialized_data = UserProfileSerializer(UserProfileModel.objects.filter(user=self.userInstance), many=True).data
         view_data = response.data
 
         self.assertEqual(len(serialized_data), len(view_data))
         self.assertEqual(serialized_data, view_data)
 
     def test_user_profile_detail_view(self):
+        self.client.login(**self.user_data)
         response = self.client.get(self.detail_url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)

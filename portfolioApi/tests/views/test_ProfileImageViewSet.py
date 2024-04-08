@@ -67,10 +67,11 @@ class ProfileImageViewSetTest(APITestCase):
             os.remove(image_file_path)
 
     def test_user_profile_image_list_view(self):
+        self.client.login(**self.user_data)
         response = self.client.get(self.list_url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        serialized_data = UserProfileImageSerializer(ProfileImageModel.objects.all(), many=True).data[0]
+        serialized_data = UserProfileImageSerializer(ProfileImageModel.objects.filter(user_profile=self.userProfileInstance), many=True).data[0]
         view_data = response.data[0]
 
         self.assertEqual(len(serialized_data), len(view_data))
@@ -81,6 +82,7 @@ class ProfileImageViewSetTest(APITestCase):
                 self.assertEqual(serialized_data[key], view_data[key])
 
     def test_user_profile_image_detail_view(self):
+        self.client.login(**self.user_data)
         response = self.client.get(self.detail_url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)

@@ -69,6 +69,40 @@ class SocialPlatformViewSetTest(APITestCase):
         if os.path.exists(image_file_path):
             os.remove(image_file_path)
 
+    def test_social_platform_list_view(self):
+        self.client.login(**self.user_data)
+        response = self.client.get(self.list_url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(SocialPlatformSerializer(SocialPlatformsModel.objects.filter(user_profile=self.userProfileInstance), many=True).data), len(response.data))
+
+        serialized_data = SocialPlatformSerializer(SocialPlatformsModel.objects.filter(user_profile=self.userProfileInstance), many=True).data
+        view_data = response.data
+
+        list_view_count = len(response.data)
+        for view_count in range(list_view_count):
+            view_data_item = view_data[view_count]
+            serialized_data_item = serialized_data[view_count]
+            for key in view_data_item:
+                if key in self.media_fields:
+                    self.assertIn(serialized_data_item[key], view_data_item[key])
+                else:
+                    self.assertEqual(serialized_data_item[key], view_data_item[key])
+
+    def test_social_platform_detail_view(self):
+        self.client.login(**self.user_data)
+        response = self.client.get(self.detail_url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        serialized_data_item = SocialPlatformSerializer(SocialPlatformsModel.objects.get(id=self.pk)).data
+        view_data_item = response.data
+
+        for key in view_data_item:
+            if key in self.media_fields:
+                self.assertIn(serialized_data_item[key], view_data_item[key])
+            else:
+                self.assertEqual(serialized_data_item[key], view_data_item[key])
+
     def test_unauthorized_user_cannot_post_data(self):
         self.client.logout()
         socialPlatform = {
@@ -165,35 +199,3 @@ class SocialPlatformViewSetTest(APITestCase):
         # Assert list data is deleted
         self.assertEqual(response_delete.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(len(response_list_data_before_delete), len(response_list_data_after_delete) + 1)
-
-    def test_social_platform_list_view(self):
-        response = self.client.get(self.list_url)
-
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(SocialPlatformSerializer(SocialPlatformsModel.objects.all(), many=True).data), len(response.data))
-
-        serialized_data = SocialPlatformSerializer(SocialPlatformsModel.objects.all(), many=True).data
-        view_data = response.data
-
-        list_view_count = len(response.data)
-        for view_count in range(list_view_count):
-            view_data_item = view_data[view_count]
-            serialized_data_item = serialized_data[view_count]
-            for key in view_data_item:
-                if key in self.media_fields:
-                    self.assertIn(serialized_data_item[key], view_data_item[key])
-                else:
-                    self.assertEqual(serialized_data_item[key], view_data_item[key])
-
-    def test_social_platform_detail_view(self):
-        response = self.client.get(self.detail_url)
-
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        serialized_data_item = SocialPlatformSerializer(SocialPlatformsModel.objects.get(id=self.pk)).data
-        view_data_item = response.data
-
-        for key in view_data_item:
-            if key in self.media_fields:
-                self.assertIn(serialized_data_item[key], view_data_item[key])
-            else:
-                self.assertEqual(serialized_data_item[key], view_data_item[key])
