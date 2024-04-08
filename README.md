@@ -16,16 +16,16 @@ Make sure you have the latest version of python installed: https://www.python.or
 -   Run `python3 manage.py runserver` for starting a lightweight development server
 -   Open 'https://127.0.0.1:8000/api/' in browser for web view
 
-    ![portrayalHub](</portrayalHub/medias/portrayalHub_API_dashboard.png>)
+    ![portrayalHub](/portrayalHub/medias/portrayalHub_API_dashboard.png)
 
 ## Testing Application
 
 1. Open Command-Line in the project root directory
 2. Run the virtual environment
 3. **Testing models** - Executing models tests
-    -  Run `python3 manage.py test portfolioApi.tests.models`
+    - Run `python3 manage.py test portfolioApi.tests.models`
 4. **Testing views** - Executing views tests
-    -  Run `python3 manage.py test portfolioApi.tests.views`
+    - Run `python3 manage.py test portfolioApi.tests.views`
 
 ## Project SwaggerUI API view
 
@@ -34,23 +34,30 @@ Once an application is running, you can access the SwaggerUI API view by followi
 1. Go to <https://127.0.0.1:8000/api/docs>
 2. All the URL and Views are visible.
 
-    - **Profile :** <http://127.0.0.1:8000/api/docs/#/profile>
-        ![Profile swaggerUI](/portrayalHub/medias/profile_swaggerUI.png)
+    - ### For Authorized users:
 
-    - **Social Platforms :** <http://127.0.0.1:8000/api/docs/#/social_platforms>
-        ![Social Platforms swaggerUI](/portrayalHub/medias/socialPlatforms_swaggerUI.png)
+        - **Profile :** <http://127.0.0.1:8000/api/docs/#/profile>
+          ![Profile swaggerUI](/portrayalHub/medias/profile_swaggerUI.png)
 
-    - **Educations :** <http://127.0.0.1:8000/api/docs/#/education>
-        ![Education swaggerUI](/portrayalHub/medias/education_swaggerUI.png)
+        - **Social Platforms :** <http://127.0.0.1:8000/api/docs/#/social_platforms>
+          ![Social Platforms swaggerUI](/portrayalHub/medias/socialPlatforms_swaggerUI.png)
 
-    - **Skills :** <http://127.0.0.1:8000/api/docs/#/skills>
-        ![Skills swaggerUI](/portrayalHub/medias/skills_swaggerUI.png)
+        - **Educations :** <http://127.0.0.1:8000/api/docs/#/education>
+          ![Education swaggerUI](/portrayalHub/medias/education_swaggerUI.png)
 
-    - **Experience :** <http://127.0.0.1:8000/api/docs/#/experience>
-        ![Experience swaggerUI](/portrayalHub/medias/experience_swaggerUI.png)
+        - **Skills :** <http://127.0.0.1:8000/api/docs/#/skills>
+          ![Skills swaggerUI](/portrayalHub/medias/skills_swaggerUI.png)
 
-    - **Projects :** <http://127.0.0.1:8000/api/docs/#/projects>
-        ![Projects swaggerUI](/portrayalHub/medias/projects_swaggerUI.png)
+        - **Experience :** <http://127.0.0.1:8000/api/docs/#/experience>
+          ![Experience swaggerUI](/portrayalHub/medias/experience_swaggerUI.png)
 
-    - **Certificate :** <http://127.0.0.1:8000/api/docs/#/certificates>
-        ![Certificate swaggerUI](/portrayalHub/medias/certificate_swaggerUI.png)
+        - **Projects :** <http://127.0.0.1:8000/api/docs/#/projects>
+          ![Projects swaggerUI](/portrayalHub/medias/projects_swaggerUI.png)
+
+        - **Certificate :** <http://127.0.0.1:8000/api/docs/#/certificates>
+          ![Certificate swaggerUI](/portrayalHub/medias/certificate_swaggerUI.png)
+
+    - ### For Un-Authorized users:
+
+        - **Users :** <http://127.0.0.1:8000/api/docs/#/user>
+          ![Users swaggerUI](/portrayalHub/medias/usets_swaggerUI.png)
