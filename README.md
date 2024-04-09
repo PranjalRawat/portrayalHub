@@ -34,7 +34,7 @@ Once an application is running, you can access the SwaggerUI API view by followi
 1. Go to <https://127.0.0.1:8000/api/docs>
 2. All the URL and Views are visible.
 
-    - ### For Authorized users:
+    - ### For Authenticated users:
 
         - **Profile :** <http://127.0.0.1:8000/api/docs/#/profile>
           ![Profile swaggerUI](/portrayalHub/medias/profile_swaggerUI.png)
@@ -57,7 +57,7 @@ Once an application is running, you can access the SwaggerUI API view by followi
         - **Certificate :** <http://127.0.0.1:8000/api/docs/#/certificates>
           ![Certificate swaggerUI](/portrayalHub/medias/certificate_swaggerUI.png)
 
-    - ### For Un-Authorized users:
+    - ### For Un-Authenticated users:
 
         - **Users :** <http://127.0.0.1:8000/api/docs/#/user>
           ![Users swaggerUI](/portrayalHub/medias/usets_swaggerUI.png)
