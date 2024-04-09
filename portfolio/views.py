@@ -68,3 +68,7 @@ class DashboardView(DetailView):
         context['MajorProjectsInfo'] = MajorProjectsInfoModel.objects.filter(user_profile=user_profile, featured = True).order_by('-currently_working')
         context['contacts'] = ContactForm
         return context
+
+class PageNotFoundView(DetailView):
+    def dispatch(self, request, *args, **kwargs):
+        return render(request, '404.html', status=404)

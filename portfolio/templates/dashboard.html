@@ -21,258 +21,284 @@
 
         <!-- ------------------------- Home ------------------------------------- -->
         <section id="home">
-            <div class="main">
-                <div class="main__content">
-                    {% for user in ResumeUpload %}
-                    <h1>
-                        I<span>'</span>M
-                        <br />
-                        {{ user.user_profile.first_name }}
-                        <br />
-                        {{ user.user_profile.last_name }}
-                        <span>.</span>
-                    </h1>
+            {% if ResumeUpload or ProfileImage or SocialPlatforms %}
+                <div class="main">
+                    {% if ResumeUpload %}
+                        <div class="main__content">
+                            {% for user in ResumeUpload %}
+                            <h1>
+                                I<span>'</span>M
+                                <br />
+                                {{ user.user_profile.first_name }}
+                                <br />
+                                {{ user.user_profile.last_name }}
+                                <span>.</span>
+                            </h1>
 
-                    <div class="main__content__desc">
-                        <desig1> {{ user.designation|desig:'first' }} </desig1>
-                        {% if user.designation|desig:'second' %}
-                        <desig2>
-                            <span><b>&</b></span>
-                            <br />
-                            {{ user.designation|desig:'second' }}
-                        </desig2>
-                        {% endif %}
-                    </div>
-                    {% endfor %}
-                </div>
+                            <div class="main__content__desc">
+                                <desig1> {{ user.designation|desig:'first' }} </desig1>
+                                {% if user.designation|desig:'second' %}
+                                <desig2>
+                                    <span><b>&</b></span>
+                                    <br />
+                                    {{ user.designation|desig:'second' }}
+                                </desig2>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
 
-                <div class="main__img">
-                    {% for user in ProfileImage %}
-                    <img src="{{ user.image.url }}" alt="My Image" />
-                    {% endfor %}
+                    {% if ProfileImage %}
+                        <div class="main__img">
+                            {% for user in ProfileImage %}
+                            <img src="{{ user.image.url }}" alt="My Image" />
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 </div>
-            </div>
-            <div class="social">
-                <ul class="social__presence">
-                    {% for socialProfile in SocialPlatforms %}
-                    <li>
-                        <a href="{{ socialProfile.profileUrl }}">
-                            <img
-                                src="{{ socialProfile.platformIcon.url }}"
-                                alt="My Image"
-                            />
-                        </a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
+                <div class="social">
+                    {% if SocialPlatforms %}
+                        <ul class="social__presence">
+                            {% for socialProfile in SocialPlatforms %}
+                            <li>
+                                <a href="{{ socialProfile.profileUrl }}">
+                                    <img
+                                        src="{{ socialProfile.platformIcon.url }}"
+                                        alt="My Image"
+                                    />
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            {% endif %}
         </section>
 
         <!-- ----------------------- About Me ----------------------------------- -->
         <div class="about" id="about">
-            <div class="about__content">
-                <h1>About Me</h1>
-                {% for userProfile in ResumeUpload %}
-                <div class="about__content__desc">
-                    {{ userProfile.cover_letter }}
-                </div>
-                {% endfor %}
-            </div>
-            <div class="about__extra">
-                <div class="about__left">
-                    <div class="about__contact">
-                        <h3>Contact Details</h3>
-                        {% for user in UserProfile %}
-                        <div class="about__contact__desc">
-                            <ul>
-                                <li>{{ user.address|address:'landmark' }}</li>
-                                <li>{{ user.address|address:'city' }},</li>
-                                <li>{{ user.address|address:'state' }},</li>
-                                <li>{{ user.address|address:'country' }},</li>
-                                <li>{{ user.phone_number }},</li>
-                                <li>{{ user.email }}</li>
-                            </ul>
+            {% if ResumeUpload or UserProfile %}
+                <div class="about__content">
+                    <h1>About Me</h1>
+                    {% if ResumeUpload %}
+                        {% for userProfile in ResumeUpload %}
+                        <div class="about__content__desc">
+                            {{ userProfile.cover_letter }}
                         </div>
                         {% endfor %}
-                    </div>
+                    {% endif %}
                 </div>
-                <div class="about__right">
-                    {% for userProfile in ResumeUpload %}
-                    <div class="about__video_resume">
-                        <video controls>
-                            <source
-                                src="{{ userProfile.video_resume.url }}"
-                                type="video/mp4"
-                            />
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    <div class="about__resume">
-                        <a
-                            href="{{ userProfile.resume.url }}"
-                            class="about__resume__btn"
-                        >
-                            <i class="fa fa-download"></i> Download Resume
-                        </a>
-                    </div>
+                <div class="about__extra">
+                    {% if UserProfile %}
+                        <div class="about__left">
+                            <div class="about__contact">
+                                <h3>Contact Details</h3>
+                                {% for user in UserProfile %}
+                                <div class="about__contact__desc">
+                                    <ul>
+                                        <li>{{ user.address|address:'landmark' }}</li>
+                                        <li>{{ user.address|address:'city' }},</li>
+                                        <li>{{ user.address|address:'state' }},</li>
+                                        <li>{{ user.address|address:'country' }},</li>
+                                        <li>{{ user.phone_number }},</li>
+                                        <li>{{ user.email }}</li>
+                                    </ul>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if ResumeUpload %}
+                        <div class="about__right">
+                            {% for userProfile in ResumeUpload %}
+                            <div class="about__video_resume">
+                                <video controls>
+                                    <source
+                                        src="{{ userProfile.video_resume.url }}"
+                                        type="video/mp4"
+                                    />
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="about__resume">
+                                <a
+                                    href="{{ userProfile.resume.url }}"
+                                    class="about__resume__btn"
+                                >
+                                    <i class="fa fa-download"></i> Download Resume
+                                </a>
+                            </div>
 
-                    {% endfor %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 </div>
-            </div>
+            {% endif %}
         </div>
 
         <!-- -------------------- Education & Experience -------------------- -->
         <div class="journey" id="journey">
             <!-- ------------ Experience ---------------------- -->
-            <div class="experience">
-                <div class="experience__left">
-                    <h1>Experience</h1>
-                </div>
-
-                <div class="experience__right">
-                    {% for experience in ExperienceInfo %}
-                    <div class="experience__container">
-                        <div class="company">
-                            <a href="{{ experience.company_website }}">
-                                {{experience.company_name}}
-                            </a>
-                        </div>
-                        <div class="designation">
-                            {{experience.designation}}
-                        </div>
-                        <div class="duration">
-                            {% if experience.currently_working %}
-                            <span>
-                                {{experience.start_date}} - Currently Working
-                            </span>
-                            {% else %}
-                            <span>
-                                {{experience.start_date}} -
-                                {{experience.end_date}}
-                            </span>
-                            {% endif %}
-                        </div>
-
-                        <div class="desc">{{experience.description}}</div>
+            {% if ExperienceInfo %}
+                <div class="experience">
+                    <div class="experience__left">
+                        <h1>Experience</h1>
                     </div>
-                    {% endfor %}
+
+                    <div class="experience__right">
+                        {% for experience in ExperienceInfo %}
+                        <div class="experience__container">
+                            <div class="company">
+                                <a href="{{ experience.company_website }}">
+                                    {{experience.company_name}}
+                                </a>
+                            </div>
+                            <div class="designation">
+                                {{experience.designation}}
+                            </div>
+                            <div class="duration">
+                                {% if experience.currently_working %}
+                                <span>
+                                    {{experience.start_date}} - Currently Working
+                                </span>
+                                {% else %}
+                                <span>
+                                    {{experience.start_date}} -
+                                    {{experience.end_date}}
+                                </span>
+                                {% endif %}
+                            </div>
+
+                            <div class="desc">{{experience.description}}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
-            </div>
+            {% endif %}
 
             <!-- ------------------ Education ------------------- -->
-            <div class="education">
-                <h1>Qualification</h1>
-                <div class="education__container">
-                    <div class="timeline"></div>
-                    {% for edu in EducationInfo %}
-                    <div class="items">
-                        <div class="items__row">
-                            <img
-                                src="{{ edu.university_logo.url }}"
-                                alt="{{ edu.university }}"
-                            />
-                            <div class="title">{{ edu.university }}</div>
-                            <div class="course">{{ edu.degree }}</div>
-                            <div class="cpga">cgpa - {{ edu.cgpa }}</div>
-                            <div class="duration">
-                                {{edu.start_date}} - {{edu.end_date}}
+            {% if EducationInfo %}
+                <div class="education">
+                    <h1>Qualification</h1>
+                    <div class="education__container">
+                        <div class="timeline"></div>
+                        {% for edu in EducationInfo %}
+                        <div class="items">
+                            <div class="items__row">
+                                <img
+                                    src="{{ edu.university_logo.url }}"
+                                    alt="{{ edu.university }}"
+                                />
+                                <div class="title">{{ edu.university }}</div>
+                                <div class="course">{{ edu.degree }}</div>
+                                <div class="cpga">cgpa - {{ edu.cgpa }}</div>
+                                <div class="duration">
+                                    {{edu.start_date}} - {{edu.end_date}}
+                                </div>
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
                 </div>
-            </div>
+            {% endif %}
         </div>
 
         <!-- -------------------- Skills And Certificate --------------------- -->
         <div class="skills__certificate" id="skills">
-            <div class="skills">
-                <div class="skills__left">
-                    <h1>Skills</h1>
-                </div>
-                <div class="skills__right">
-                    {% for skill in SkillsInfo %}
-                    <div class="octagon">
-                        <div class="inner">
-                            <div class="content">
-                                {% if 'media' in skill.skill_badge.url %}
-                                    <img
-                                        id="cover_img"
-                                        src="{{ skill.skill_badge.url }}"
-                                    />
-                                    <p>{{ skill.skill }}</p>
-                                {% else %}
-                                    <i class="devicon-{{ skill.skill|lower }}-plain"></i>
-                                {% endif %}
-                                <div class="stars">
-                                    {% for i in skill.proficiency|stars:'full' %}
-                                        <i class="fas fa-star"></i>
-                                    {% endfor %}
-                                    {% for i in skill.proficiency|stars:'half' %}
-                                        <i class="fas fa-star-half-alt"></i>
-                                    {% endfor %}
-                                    {% for i in skill.proficiency|stars:'none' %}
-                                        <i class="far fa-star"></i>
-                                    {% endfor %}
+            {% if SkillsInfo %}
+                <div class="skills">
+                    <div class="skills__left">
+                        <h1>Skills</h1>
+                    </div>
+                    <div class="skills__right">
+                        {% for skill in SkillsInfo %}
+                        <div class="octagon">
+                            <div class="inner">
+                                <div class="content">
+                                    {% if 'media' in skill.skill_badge.url %}
+                                        <img
+                                            id="cover_img"
+                                            src="{{ skill.skill_badge.url }}"
+                                        />
+                                        <p>{{ skill.skill }}</p>
+                                    {% else %}
+                                        <i class="devicon-{{ skill.skill|lower }}-plain"></i>
+                                    {% endif %}
+                                    <div class="stars">
+                                        {% for i in skill.proficiency|stars:'full' %}
+                                            <i class="fas fa-star"></i>
+                                        {% endfor %}
+                                        {% for i in skill.proficiency|stars:'half' %}
+                                            <i class="fas fa-star-half-alt"></i>
+                                        {% endfor %}
+                                        {% for i in skill.proficiency|stars:'none' %}
+                                            <i class="far fa-star"></i>
+                                        {% endfor %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
                 </div>
-            </div>
+            {% endif %}
 
-            <div class="certificates">
-                <div class="certificates__left">
-                    <h1>Certificates</h1>
-                </div>
-                <div class="certificates__right">
-                    {% for certificate in CertificateInfo %}
-                    <div class="certificate__container">
-                        <div class="certificate__container__left">
-                            <div class="title">{{ certificate.course_name }}</div>
-                            <div class="desc">
-                                <div class="org">
-                                    Issuing Orgianization - {{ certificate.issuing_organization }}
-                                </div>
-                                <div class="timeline">
-                                    {{ certificate.issue_date }} - {{ certificate.expiration_date }}
-                                </div>
-                            </div>
-                            <div class="verify">
-                                <span>Source</span>
-                                <sub>{{ certificate.credential_url }}</sub>
-                                <a href="{{ certificate.credential_url }}">Verify</a>
-                            </div>
-                        </div>
-                        <div class="certificate__container__right">
-                            <div class="badge">
-                                <a href="{{ certificate.credential_url }}"
-                                    ><img
-                                        src="{{ certificate.course_badge.url }}"
-                                        alt="Badge"
-                                /></a>
-                            </div>
-                        </div>
+            {%if CertificateInfo %}
+                <div class="certificates">
+                    <div class="certificates__left">
+                        <h1>Certificates</h1>
                     </div>
-                    {% endfor %}
+                    <div class="certificates__right">
+                        {% for certificate in CertificateInfo %}
+                        <div class="certificate__container">
+                            <div class="certificate__container__left">
+                                <div class="title">{{ certificate.course_name }}</div>
+                                <div class="desc">
+                                    <div class="org">
+                                        Issuing Orgianization - {{ certificate.issuing_organization }}
+                                    </div>
+                                    <div class="timeline">
+                                        {{ certificate.issue_date }} - {{ certificate.expiration_date }}
+                                    </div>
+                                </div>
+                                <div class="verify">
+                                    <span>Source</span>
+                                    <sub>{{ certificate.credential_url }}</sub>
+                                    <a href="{{ certificate.credential_url }}">Verify</a>
+                                </div>
+                            </div>
+                            <div class="certificate__container__right">
+                                <div class="badge">
+                                    <a href="{{ certificate.credential_url }}"
+                                        ><img
+                                            src="{{ certificate.course_badge.url }}"
+                                            alt="Badge"
+                                    /></a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
-            </div>
+            {% endif %}
         </div>
 
         <!-- ----------------------- Portfolio work --------------------------- -->
         <div class="portfolio" id="portfolio">
-            <h1>Portfolio</h1>
-            <div class="portfolio__container">
-                {% for project in MajorProjectsInfo %}
-                <div class="portfolio__container__items">
-                    <a href="{{ project.project_url }}">
-                        <img src="{{ project.project_logo.url }}" alt="{{ project.project_name }}" />
-                    </a>
-                    <h2>{{ project.project_name }}</h2>
+            {% if MajorProjectsInfo %}
+                <h1>Portfolio</h1>
+                <div class="portfolio__container">
+                    {% for project in MajorProjectsInfo %}
+                    <div class="portfolio__container__items">
+                        <a href="{{ project.project_url }}">
+                            <img src="{{ project.project_logo.url }}" alt="{{ project.project_name }}" />
+                        </a>
+                        <h2>{{ project.project_name }}</h2>
+                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
-            </div>
+            {% endif %}
         </div>
 
         <!-- ------------------------ Contact US ------------------------------ -->

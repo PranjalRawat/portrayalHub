@@ -1,1 +1,19 @@
-user is not authenticated
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Not Authenticated</title>
+    <link rel="stylesheet" href="{% static 'css/errors.css' %}" />
+</head>
+<body>
+    <div id="theme-toggle"></div>
+    <div class="user__error__container">
+        <h1 class="error__status__title">401</h1>
+        <h1 class="error__title">Access Denied</h1>
+        <p class="error__message">You are not authenticated to access this content.</p>
+        <p class="error__message">Please <a class="error__link" href="/login">log in</a> to view this page.</p>
+    </div>
+</body>
+</html>
