@@ -1,0 +1,25 @@
+{% load static %}
+<!-- logout_success.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout Success</title>
+    <link rel="stylesheet" href="{% static 'css/registration.css' %}" />
+    <script src="https://kit.fontawesome.com/20280fd8f6.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="theme-toggle"></div>
+    <div class="user__registration__container">
+        <i class="fas fa-check-circle registration__success"></i>
+        <h1 class="registration__title">Logout Successful!</h1>
+        <p class="registration__message">You have been successfully logged out.</p>
+
+        <!-- Add a countdown timer -->
+        <p class="registration_logout_redirect">This page will automatically redirect to the home page in <span id="countdown">5</span> seconds.</p>
+    </div>
+
+    <script src="{% static 'js/logout_redirect.js' %}"></script>
+</body>
+</html>

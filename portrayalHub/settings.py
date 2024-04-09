@@ -183,3 +183,6 @@ AWS_SES_REGION = os.getenv('AWS_SES_REGION')
 AWS_SES_REGION_ENDPOINT = os.getenv('AWS_SES_REGION_ENDPOINT')
 Email_from = os.getenv('Email_from')
 Email_to = os.getenv('Email_to')
+
+
+LOGIN_REDIRECT_URL = '/'

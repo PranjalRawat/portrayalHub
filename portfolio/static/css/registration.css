@@ -54,33 +54,29 @@ body {
     src: url(fonts/Lulo-Clean-Outline-Bold.otf);
 }
 
-.user__error__container {
+.user__registration__container {
     text-align: center;
 }
 
-.error__status__title {
+.registration__success {
     font-family: 'Lulo-outline', sans-serif;
     font-size: 5rem;
     margin: 0;
     color: var(--clr-main-2);
 }
 
-.error__title,
-.error__message {
+.registration__title,
+.registration__message {
     color: var(--clr-text);
 }
 
-.error__link {
+#countdown {
     color: var(--clr-main-2);
     text-decoration: none;
 }
 
-.error_footer {
-    padding-top: 2em;
-}
-
 @media screen and (min-width: 480px) {
-    .error__status__title {
+    .registration__success {
         font-size: 10rem;
     }
 }

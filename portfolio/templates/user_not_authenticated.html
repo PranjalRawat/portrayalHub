@@ -13,7 +13,8 @@
         <h1 class="error__status__title">401</h1>
         <h1 class="error__title">Access Denied</h1>
         <p class="error__message">You are not authenticated to access this content.</p>
-        <p class="error__message">Please <a class="error__link" href="/login">log in</a> to view this page.</p>
+        <p class="error__message">Please <a class="error__link" href="{% url 'loginView' %}">log in</a> to view this page.</p>
+        <p class="error_footer">Navigate to <a class="error__link" href="{% url 'otherUserView' username='demo_user' %}">/user/demo_user/</a> to view user profile for particular users.<p>
     </div>
 </body>
 </html>

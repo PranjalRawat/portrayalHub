@@ -1,12 +1,12 @@
 from django.db.models.base import Model as Model
 from django.views.generic import DetailView
+from django.contrib.auth.views import LoginView, LogoutView
 from portfolio.forms import ContactForm
 from portfolioApi.models import CertificateInfoModel, EducationInfoModel, ExperienceInfoModel, MajorProjectsInfoModel, ProfileImageModel, ResumeUploadModel, SkillsInfoModel, SocialPlatformsModel, UserProfileModel
 from django.shortcuts import redirect, render
 from django.core.mail import send_mail
 from portrayalHub.settings import Email_from, Email_to
 from django.contrib.auth.models import User
-from django.http import Http404
 
 # Create your views here.
 class DashboardView(DetailView):
@@ -72,3 +72,9 @@ class DashboardView(DetailView):
 class PageNotFoundView(DetailView):
     def dispatch(self, request, *args, **kwargs):
         return render(request, '404.html', status=404)
+
+class LogInView(LoginView):
+    template_name = 'registration/login.html'
+
+class LogOutView(LogoutView):
+    template_name = 'registration/logout_success.html'
