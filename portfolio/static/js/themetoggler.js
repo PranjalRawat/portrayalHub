@@ -1,21 +1,29 @@
-const themeToggle = document.querySelector("#theme-toggle");
+const themeToggle = document.querySelectorAll("#theme-toggle");
 
-themeToggle.addEventListener("click", () => {
-    document.body.classList.contains("light-theme") ?
-        enableDarkMode() :
-        enableLightMode();
-});
+for (let [idx, _] of themeToggle.entries()) {
+    themeToggle[idx].addEventListener("click", () => {
+        document.body.classList.contains("light-theme") ?
+            enableDarkMode() :
+            enableLightMode();
+    });
+}
+
+function setCssAttribute(name, value) {
+    for (let [idx, _] of themeToggle.entries()) {
+        themeToggle[idx].setAttribute(name, value);
+    }
+}
 
 function enableDarkMode() {
     document.body.classList.remove("light-theme");
     document.body.classList.add("dark-theme");
-    themeToggle.setAttribute("aria-label", "Light theme");
+    setCssAttribute("aria-label", "Light theme");
 }
 
 function enableLightMode() {
     document.body.classList.remove("dark-theme");
     document.body.classList.add("light-theme");
-    themeToggle.setAttribute("aria-label", "Dark theme");
+    setCssAttribute("aria-label", "Dark theme");
 }
 
 function setThemePreference() {

@@ -1,5 +1,5 @@
 from django.db.models.base import Model as Model
-from django.views.generic import DetailView
+from django.views.generic import DetailView, TemplateView, UpdateView
 from django.contrib.auth.views import LoginView, LogoutView
 from portfolio.forms import ContactForm
 from portfolioApi.models import CertificateInfoModel, EducationInfoModel, ExperienceInfoModel, MajorProjectsInfoModel, ProfileImageModel, ResumeUploadModel, SkillsInfoModel, SocialPlatformsModel, UserProfileModel
@@ -78,3 +78,33 @@ class LogInView(LoginView):
 
 class LogOutView(LogoutView):
     template_name = 'registration/logout_success.html'
+
+class ProfileEditView(TemplateView):
+    template_name = 'profile.html'
+    user_not_authenticated_template = 'user_not_authenticated.html'
+    context_object_name = 'data'
+
+    def get_object(self):
+        if self.request.user.is_authenticated:
+            return User.objects.get(username=self.request.user)
+        return None
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return render(request, self.user_not_authenticated_template, status=401)
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.get_object()
+        user_profile = UserProfileModel.objects.get(user=user)
+        context['UserProfile'] = UserProfileModel.objects.filter(user=user)
+        context['ProfileImage'] = ProfileImageModel.objects.filter(user_profile=user_profile)
+        context['ResumeUpload'] = ResumeUploadModel.objects.filter(user_profile=user_profile)
+        context['SocialPlatforms'] = SocialPlatformsModel.objects.filter(user_profile=user_profile)
+        context['EducationInfo'] = EducationInfoModel.objects.filter(user_profile=user_profile)
+        context['ExperienceInfo'] = ExperienceInfoModel.objects.filter(user_profile=user_profile)
+        context['CertificateInfo'] = CertificateInfoModel.objects.filter(user_profile=user_profile)
+        context['SkillsInfo'] = SkillsInfoModel.objects.filter(user_profile=user_profile)
+        context['MajorProjectsInfo'] = MajorProjectsInfoModel.objects.filter(user_profile=user_profile)
+        return context
