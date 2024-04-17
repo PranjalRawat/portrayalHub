@@ -22,130 +22,132 @@
     </head>
     <body>
         <div class="profile_container">
-            <div class="sidebar">
-                <div class="logo-details">
-                    <i class="icon">
-                      {% for user in ProfileImage %}
-                        <img src="{{ user.image.url }}" alt="My Image" />
-                      {% endfor %}
-                    </i>
-                    <div class="logo_name">
-                      {% for user_profile in UserProfile %}
-                        {{user_profile.user.username}}
-                      {% endfor %}
-                    </div>
-                    <i class="bx bx-menu" id="btn"></i>
+            <nav>
+              <div class="sidebar">
+                  <div class="logo-details">
+                      <i class="icon">
+                        {% for user in ProfileImage %}
+                          <img src="{{ user.image.url }}" alt="My Image" />
+                        {% endfor %}
+                      </i>
+                      <div class="logo_name">
+                        {% for user_profile in UserProfile %}
+                          {{user_profile.user.username}}
+                        {% endfor %}
+                      </div>
+                      <i class="bx bx-menu" id="btn"></i>
+                  </div>
+                  <ul class="nav-list">
+                      <li>
+                          <a href="{% url 'userView' %}">
+                              <i class="bx bx-grid-alt"></i>
+                              <span class="links_name">Dashboard</span>
+                          </a>
+                          <span class="tooltip">Dashboard</span>
+                      </li>
+                      <li>
+                          <a href="#profile">
+                              <i class="bx bx-user"></i>
+                              <span class="links_name">Profile</span>
+                          </a>
+                          <span class="tooltip">Profile</span>
+                      </li>
+                      <li>
+                          <a href="#resume">
+                              <i class="bx bx-folder"></i>
+                              <span class="links_name">Resume</span>
+                          </a>
+                          <span class="tooltip">Resume</span>
+                      </li>
+                      <li>
+                          <a href="#social">
+                              <i class="bx bx-message-alt-dots"></i>
+                              <span class="links_name">Social Platforms</span>
+                          </a>
+                          <span class="tooltip">Social Platforms</span>
+                      </li>
+                      <li>
+                          <a href="#education">
+                              <i class="bx bx-book-reader"></i>
+                              <span class="links_name">Education</span>
+                          </a>
+                          <span class="tooltip">Education</span>
+                      </li>
+                      <li>
+                          <a href="#experience">
+                              <i class="bx bx-id-card"></i>
+                              <span class="links_name">Experience</span>
+                          </a>
+                          <span class="tooltip">Experience</span>
+                      </li>
+                      <li>
+                          <a href="#skills">
+                              <i class="bx bx-shape-polygon"></i>
+                              <span class="links_name">Skills</span>
+                          </a>
+                          <span class="tooltip">Skills</span>
+                      </li>
+                      <li>
+                          <a href="#projects">
+                              <i class="bx bx-slideshow"></i>
+                              <span class="links_name">Projects</span>
+                          </a>
+                          <span class="tooltip">Setting</span>
+                      </li>
+                      <li>
+                        <a href="#certificates">
+                            <i class='bx bx-certification bx-spin bx-rotate-90' ></i>
+                            <span class="links_name">Certificates</span>
+                        </a>
+                        <span class="tooltip">Certificates</span>
+                      </li>
+                      <li class="theme">
+                        <a href="#" id="theme-toggle">
+                            <i class='bx bx-color bx-tada bx-rotate-90' ></i>
+                            <span class="links_name">Theme</span>
+                        </a>
+                        <span class="tooltip">Theme</span>
+                    </li>
+                      <li class="profile">
+                        <a href="{% url 'logoutView' %}">
+                          <div class="profile-details">
+                              <i class="bx bx-export"></i>
+                              <div class="name_job">
+                                  <div class="name">Logout</div>
+                              </div>
+                          </div>
+                          <i class="bx bx-log-out" id="log_out"></i>
+                        </a>
+                      </li>
+                  </ul>
+              </div>
+              <div class="navbar">
+                <i class="icon">
+                  {% for user in ProfileImage %}
+                    <img src="{{ user.image.url }}" alt="My Image" />
+                  {% endfor %}
+                </i>
+                <div class="logo_name">
+                  {% for user_profile in UserProfile %}
+                    {{user_profile.user.username}}
+                  {% endfor %}
                 </div>
                 <ul class="nav-list">
-                    <li>
-                        <a href="{% url 'userView' %}">
-                            <i class="bx bx-grid-alt"></i>
-                            <span class="links_name">Dashboard</span>
-                        </a>
-                        <span class="tooltip">Dashboard</span>
-                    </li>
-                    <li>
-                        <a href="#profile">
-                            <i class="bx bx-user"></i>
-                            <span class="links_name">Profile</span>
-                        </a>
-                        <span class="tooltip">Profile</span>
-                    </li>
-                    <li>
-                        <a href="#resume">
-                            <i class="bx bx-folder"></i>
-                            <span class="links_name">Resume</span>
-                        </a>
-                        <span class="tooltip">Resume</span>
-                    </li>
-                    <li>
-                        <a href="#social">
-                            <i class="bx bx-message-alt-dots"></i>
-                            <span class="links_name">Social Platforms</span>
-                        </a>
-                        <span class="tooltip">Social Platforms</span>
-                    </li>
-                    <li>
-                        <a href="#education">
-                            <i class="bx bx-book-reader"></i>
-                            <span class="links_name">Education</span>
-                        </a>
-                        <span class="tooltip">Education</span>
-                    </li>
-                    <li>
-                        <a href="#experience">
-                            <i class="bx bx-id-card"></i>
-                            <span class="links_name">Experience</span>
-                        </a>
-                        <span class="tooltip">Experience</span>
-                    </li>
-                    <li>
-                        <a href="#skills">
-                            <i class="bx bx-shape-polygon"></i>
-                            <span class="links_name">Skills</span>
-                        </a>
-                        <span class="tooltip">Skills</span>
-                    </li>
-                    <li>
-                        <a href="#projects">
-                            <i class="bx bx-slideshow"></i>
-                            <span class="links_name">Projects</span>
-                        </a>
-                        <span class="tooltip">Setting</span>
-                    </li>
-                    <li>
-                      <a href="#certificates">
-                          <i class='bx bx-certification bx-spin bx-rotate-90' ></i>
-                          <span class="links_name">Certificates</span>
-                      </a>
-                      <span class="tooltip">Certificates</span>
-                    </li>
                     <li class="theme">
                       <a href="#" id="theme-toggle">
                           <i class='bx bx-color bx-tada bx-rotate-90' ></i>
-                          <span class="links_name">Theme</span>
                       </a>
                       <span class="tooltip">Theme</span>
                   </li>
                     <li class="profile">
                       <a href="{% url 'logoutView' %}">
-                        <div class="profile-details">
-                            <i class="bx bx-export"></i>
-                            <div class="name_job">
-                                <div class="name">Logout</div>
-                            </div>
-                        </div>
                         <i class="bx bx-log-out" id="log_out"></i>
                       </a>
+                      <span class="tooltip">Logout</span>
                     </li>
                 </ul>
-            </div>
-            <div class="navbar">
-              <i class="icon">
-                {% for user in ProfileImage %}
-                  <img src="{{ user.image.url }}" alt="My Image" />
-                {% endfor %}
-              </i>
-              <div class="logo_name">
-                {% for user_profile in UserProfile %}
-                  {{user_profile.user.username}}
-                {% endfor %}
               </div>
-              <ul class="nav-list">
-                  <li class="theme">
-                    <a href="#" id="theme-toggle">
-                        <i class='bx bx-color bx-tada bx-rotate-90' ></i>
-                    </a>
-                    <span class="tooltip">Theme</span>
-                </li>
-                  <li class="profile">
-                    <a href="{% url 'logoutView' %}">
-                      <i class="bx bx-log-out" id="log_out"></i>
-                    </a>
-                    <span class="tooltip">Logout</span>
-                  </li>
-              </ul>
-            </div>
+            </nav>
             <section class="home-section">
                 <div class="text">Dashboard</div>
             </section>
