@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %} {% load form_fields_disabled %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -46,56 +46,56 @@
                           <span class="tooltip">Dashboard</span>
                       </li>
                       <li>
-                          <a href="#profile">
+                          <a class="smoothscroll" href="#profile">
                               <i class="bx bx-user"></i>
                               <span class="links_name">Profile</span>
                           </a>
                           <span class="tooltip">Profile</span>
                       </li>
                       <li>
-                          <a href="#resume">
+                          <a class="smoothscroll" href="#resume">
                               <i class="bx bx-folder"></i>
                               <span class="links_name">Resume</span>
                           </a>
                           <span class="tooltip">Resume</span>
                       </li>
                       <li>
-                          <a href="#social">
+                          <a class="smoothscroll" href="#social">
                               <i class="bx bx-message-alt-dots"></i>
                               <span class="links_name">Social Platforms</span>
                           </a>
                           <span class="tooltip">Social Platforms</span>
                       </li>
                       <li>
-                          <a href="#education">
+                          <a class="smoothscroll" href="#education">
                               <i class="bx bx-book-reader"></i>
                               <span class="links_name">Education</span>
                           </a>
                           <span class="tooltip">Education</span>
                       </li>
                       <li>
-                          <a href="#experience">
+                          <a class="smoothscroll" href="#experience">
                               <i class="bx bx-id-card"></i>
                               <span class="links_name">Experience</span>
                           </a>
                           <span class="tooltip">Experience</span>
                       </li>
                       <li>
-                          <a href="#skills">
+                          <a class="smoothscroll" href="#skills">
                               <i class="bx bx-shape-polygon"></i>
                               <span class="links_name">Skills</span>
                           </a>
                           <span class="tooltip">Skills</span>
                       </li>
                       <li>
-                          <a href="#projects">
+                          <a class="smoothscroll" href="#projects">
                               <i class="bx bx-slideshow"></i>
                               <span class="links_name">Projects</span>
                           </a>
                           <span class="tooltip">Setting</span>
                       </li>
                       <li>
-                        <a href="#certificates">
+                        <a class="smoothscroll" href="#certificates">
                             <i class='bx bx-certification bx-spin bx-rotate-90' ></i>
                             <span class="links_name">Certificates</span>
                         </a>
@@ -149,7 +149,20 @@
               </div>
             </nav>
             <section class="home-section">
-                <div class="text">Dashboard</div>
+              <div class='profile' id='profile'>
+                <h1> My Profile </h1>
+                <div class="profile_image">
+                  {% for user in ProfileImage %}
+                    <img src="{{ user.image.url }}" alt="My Image" />
+                  {% endfor %}
+                </div>
+                <div class="profile_details">
+                  <form class="user-profile-form">
+                    {% csrf_token %}
+                    {{ user_profile_form|add_disabled }}
+                  </form>
+                </div>
+              </div>
             </section>
         </div>
     </body>

@@ -1,7 +1,7 @@
 from django.db.models.base import Model as Model
 from django.views.generic import DetailView, TemplateView, UpdateView
 from django.contrib.auth.views import LoginView, LogoutView
-from portfolio.forms import ContactForm
+from portfolio.forms import CertificateInfoModelForm, ContactForm, EducationInfoModelForm, ExperienceInfoModelForm, MajorProjectsInfoModelForm, ProfileImageModelForm, ResumeUploadModelForm, SkillsInfoModelForm, SocialPlatformsModelForm, UserProfileModelForm
 from portfolioApi.models import CertificateInfoModel, EducationInfoModel, ExperienceInfoModel, MajorProjectsInfoModel, ProfileImageModel, ResumeUploadModel, SkillsInfoModel, SocialPlatformsModel, UserProfileModel
 from django.shortcuts import redirect, render
 from django.core.mail import send_mail
@@ -100,11 +100,16 @@ class ProfileEditView(TemplateView):
         user_profile = UserProfileModel.objects.get(user=user)
         context['UserProfile'] = UserProfileModel.objects.filter(user=user)
         context['ProfileImage'] = ProfileImageModel.objects.filter(user_profile=user_profile)
-        context['ResumeUpload'] = ResumeUploadModel.objects.filter(user_profile=user_profile)
-        context['SocialPlatforms'] = SocialPlatformsModel.objects.filter(user_profile=user_profile)
-        context['EducationInfo'] = EducationInfoModel.objects.filter(user_profile=user_profile)
-        context['ExperienceInfo'] = ExperienceInfoModel.objects.filter(user_profile=user_profile)
-        context['CertificateInfo'] = CertificateInfoModel.objects.filter(user_profile=user_profile)
-        context['SkillsInfo'] = SkillsInfoModel.objects.filter(user_profile=user_profile)
-        context['MajorProjectsInfo'] = MajorProjectsInfoModel.objects.filter(user_profile=user_profile)
+
+        # Populate forms with data from the first instance for each model
+        context['user_profile_form'] = UserProfileModelForm(instance=user_profile)
+        context['profile_image_form'] = ProfileImageModelForm(instance=ProfileImageModel.objects.first())
+        context['resume_upload_form'] = ResumeUploadModelForm(instance=ResumeUploadModel.objects.first())
+        context['social_platforms_form'] = SocialPlatformsModelForm(instance=SocialPlatformsModel.objects.first())
+        context['education_info_form'] = EducationInfoModelForm(instance=EducationInfoModel.objects.first())
+        context['experience_info_form'] = ExperienceInfoModelForm(instance=ExperienceInfoModel.objects.first())
+        context['certificate_info_form'] = CertificateInfoModelForm(instance=CertificateInfoModel.objects.first())
+        context['skills_info_form'] = SkillsInfoModelForm(instance=SkillsInfoModel.objects.first())
+        context['major_projects_info_form'] = MajorProjectsInfoModelForm(instance=MajorProjectsInfoModel.objects.first())
+
         return context
