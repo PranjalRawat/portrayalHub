@@ -499,8 +499,8 @@ body {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        justify-content: center;
-        gap: 5%;
+        justify-content: space-between;
+        gap: 4%;
         line-height: 4em;
     }
     .resume_details .resume_upload_form p {
@@ -508,7 +508,7 @@ body {
     }
     .resume_details .resume_upload_form p.video_resume,
     .resume_details .resume_upload_form p.pdf_resume {
-        width: 45%;
+        width: calc(50% - 2%);
     }
     .resume_details .video_resume video,
     .resume_details .pdf_resume iframe {
