@@ -395,3 +395,50 @@ body {
         width: calc(100% - 78px);
     }
 }
+@media screen and (min-width: 600px) {
+    .home-section.sidebarOpen {
+        width: calc(100% - 250px);
+        left: 250px;
+    }
+
+    .profile .user-profile-form {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .profile .user-profile-form p {
+        width: 100%;
+    }
+    .profile .user-profile-form label {
+        display: block;
+    }
+    .profile .user-profile-form p:has(#id_date_of_birth, #id_gender) {
+        width: 50%;
+    }
+}
+@media screen and (min-width: 750px) {
+    .profile .user-profile-form {
+        justify-content: space-between;
+        gap: 10%;
+        padding: 1em 15%;
+    }
+    .profile .user-profile-form select,
+    .profile .user-profile-form textarea,
+    .profile .user-profile-form input {
+        padding: 15px;
+    }
+    .profile
+        .user-profile-form
+        p:has(#id_first_name, #id_last_name, #id_date_of_birth, #id_gender) {
+        width: 45%;
+    }
+}
+@media screen and (min-width: 986px) {
+    .profile .user-profile-form {
+        line-height: 4em;
+    }
+    .profile .user-profile-form p:has(#id_email, #id_phone_number) {
+        width: 45%;
+    }
+}
