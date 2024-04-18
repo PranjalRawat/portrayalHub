@@ -186,3 +186,4 @@ Email_to = os.getenv('Email_to')
 
 
 LOGIN_REDIRECT_URL = '/'
+X_FRAME_OPTIONS = 'ALLOWALL'

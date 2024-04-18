@@ -20,7 +20,7 @@ class ProfileImageModelForm(forms.ModelForm):
 class ResumeUploadModelForm(forms.ModelForm):
     class Meta:
         model = ResumeUploadModel
-        fields = ['designation', 'cover_letter', 'resume', 'video_resume']
+        fields = ['designation', 'cover_letter']
 
 class SocialPlatformsModelForm(forms.ModelForm):
     class Meta:

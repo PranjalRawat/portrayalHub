@@ -176,11 +176,6 @@ section .social__presence li img {
     padding-left: 1.5em;
     font-size: 0.8rem;
 }
-
-.about__video_resume video {
-    padding: 5em 0;
-}
-
 .about__video_resume video {
     width: 100%;
     padding: 5em 0;

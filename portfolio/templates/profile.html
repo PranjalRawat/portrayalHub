@@ -163,6 +163,31 @@
                   </form>
                 </div>
               </div>
+              <div class='resume' id='resume'>
+                <h1> My Resume </h1>
+                <div class="resume_details">
+                  <form class="resume_upload_form">
+                    {% csrf_token %}
+                    {{ resume_upload_form|add_disabled }}
+
+                    {% for userResume in ResumeUpload %}
+                      <p class="video_resume">
+                        <label for="id_video_resume">Video Resume:</label>
+                          <video controls>
+                              <source src="{{ userResume.video_resume.url }}" type="video/mp4" />
+                              Your browser does not support the video tag.
+                          </video>
+                      </p>
+                      <p class="pdf_resume">
+                        <label for="id_pdf_resume">Document Resume:</label>
+                        <iframe src="{{ userResume.resume.url }}" frameborder="0">
+                          Your browser does not support the iframe tag.
+                        </iframe>
+                      </p>
+                    {% endfor %}
+                  </form>
+                </div>
+              </div>
             </section>
         </div>
     </body>
