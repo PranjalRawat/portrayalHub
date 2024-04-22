@@ -198,6 +198,19 @@
                   {% endfor %}
                 </div>
               </div>
+              <div class='education' id='education'>
+                <h1> Education </h1>
+                <div class="education_items">
+                  {% for education in EducationInfo %}
+                    <div class="education_details">
+                      <div class="education_degree">{{ education.degree }}</div>
+                      <div class="education_university">{{ education.university }}</div>
+                      <div class="education_year">{{ education.start_date }} - {{ education.end_date }}</div>
+                      <div class="education_cgpa">CGPA - {{ education.cgpa }}</div>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
             </section>
         </div>
     </body>

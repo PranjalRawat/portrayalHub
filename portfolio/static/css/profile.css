@@ -449,6 +449,39 @@ body {
     text-align: center;
     width: calc(100% - 54%);
 }
+
+.education {
+    padding: 2em 0;
+    font-size: 1rem;
+    color: var(--clr-text);
+}
+.education h1 {
+    text-align: center;
+    font-weight: normal;
+    padding-bottom: 1em;
+}
+.education .education_items {
+    padding: 1em 5%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+.education .education_items .education_details {
+    padding: 1em;
+    background-color: var(--clr-main-3);
+    color: var(--clr-text);
+    font-size: 0.8rem;
+    width: calc(100%);
+    line-height: 2em;
+}
+.education .education_items .education_details .education_degree {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+.education .education_items .education_details .education_university {
+    font-style: italic;
+}
 @media screen and (min-width: 480px) {
     .sidebar {
         display: block;
@@ -495,6 +528,9 @@ body {
     .resume_details .pdf_resume iframe {
         height: 200px;
     }
+    .education .education_items .education_details {
+        padding: 2em;
+    }
 }
 @media screen and (min-width: 750px) {
     .profile .user-profile-form {
@@ -519,12 +555,19 @@ body {
     .resume_details .resume_upload_form {
         padding: 1em 15%;
     }
+
     .social_platforms .social_details {
         padding: 1em 15%;
     }
-
     .social_platforms .social_details .social_items {
         width: calc(100% - 70%);
+    }
+
+    .education .education_items {
+        padding: 1em 15%;
+    }
+    .education .education_items .education_details {
+        font-size: 1rem;
     }
 }
 @media screen and (min-width: 986px) {
@@ -558,5 +601,11 @@ body {
 @media screen and (min-width: 1200px) {
     .social_platforms .social_details .social_items {
         width: calc(100% - 77%);
+    }
+
+    .education .education_items .education_details {
+        width: calc(100% - 52%);
+        line-height: 1.6em;
+        padding: 1em;
     }
 }
