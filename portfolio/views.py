@@ -103,6 +103,7 @@ class ProfileEditView(TemplateView):
         context['ResumeUpload'] = ResumeUploadModel.objects.filter(user_profile=user_profile)
         context['SocialPlatforms'] = SocialPlatformsModel.objects.filter(user_profile=user_profile)
         context['EducationInfo'] = EducationInfoModel.objects.filter(user_profile=user_profile)
+        context['ExperienceInfo'] = ExperienceInfoModel.objects.filter(user_profile=user_profile)
 
         # Populate forms with data from the first instance for each model
         context['user_profile_form'] = UserProfileModelForm(instance=user_profile)

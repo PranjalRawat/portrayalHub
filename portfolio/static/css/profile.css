@@ -482,6 +482,39 @@ body {
 .education .education_items .education_details .education_university {
     font-style: italic;
 }
+
+.experience {
+    padding: 2em 0;
+    font-size: 1rem;
+    color: var(--clr-text);
+}
+.experience h1 {
+    text-align: center;
+    font-weight: normal;
+    padding-bottom: 1em;
+}
+.experience .experience_items {
+    padding: 1em 5%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+.experience .experience_items .experience_details {
+    padding: 1em;
+    background-color: var(--clr-main-3);
+    color: var(--clr-text);
+    font-size: 0.8rem;
+    width: calc(100%);
+    line-height: 2em;
+}
+.experience .experience_items .experience_details .experience_company {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+.experience .experience_items .experience_details .experience_designation {
+    font-style: italic;
+}
 @media screen and (min-width: 480px) {
     .sidebar {
         display: block;
@@ -531,6 +564,9 @@ body {
     .education .education_items .education_details {
         padding: 2em;
     }
+    .experience .experience_items .experience_details {
+        padding: 2em;
+    }
 }
 @media screen and (min-width: 750px) {
     .profile .user-profile-form {
@@ -569,6 +605,13 @@ body {
     .education .education_items .education_details {
         font-size: 1rem;
     }
+
+    .experience .experience_items {
+        padding: 1em 15%;
+    }
+    .experience .experience_items .experience_details {
+        font-size: 1rem;
+    }
 }
 @media screen and (min-width: 986px) {
     .profile .user-profile-form {
@@ -604,6 +647,12 @@ body {
     }
 
     .education .education_items .education_details {
+        width: calc(100% - 52%);
+        line-height: 1.6em;
+        padding: 1em;
+    }
+
+    .experience .experience_items .experience_details {
         width: calc(100% - 52%);
         line-height: 1.6em;
         padding: 1em;
