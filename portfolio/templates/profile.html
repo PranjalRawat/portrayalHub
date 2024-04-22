@@ -188,6 +188,16 @@
                   </form>
                 </div>
               </div>
+              <div class='social_platforms' id='social'>
+                <h1> Social Platforms </h1>
+                <div class="social_details">
+                  {% for social in SocialPlatforms %}
+                    <div class="social_items">
+                      {{social.platformName}}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
             </section>
         </div>
     </body>
