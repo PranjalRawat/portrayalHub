@@ -515,6 +515,32 @@ body {
 .experience .experience_items .experience_details .experience_designation {
     font-style: italic;
 }
+
+.skills {
+    padding: 2em 0;
+    font-size: 1rem;
+    color: var(--clr-text);
+}
+.skills h1 {
+    text-align: center;
+    font-weight: normal;
+    padding-bottom: 1em;
+}
+.skills .skills_items {
+    padding: 1em 5%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+.skills .skills_items .skills_details {
+    padding: 1em;
+    background-color: var(--clr-main-3);
+    color: var(--clr-text);
+    font-size: 0.8rem;
+    text-align: center;
+    width: calc(100% - 54%);
+}
 @media screen and (min-width: 480px) {
     .sidebar {
         display: block;
@@ -532,6 +558,14 @@ body {
         padding: 1em 10%;
     }
     .social_platforms .social_details .social_items {
+        font-size: 1rem;
+        width: calc(100% - 53%);
+    }
+
+    .skills .skills_items {
+        padding: 1em 10%;
+    }
+    .skills .skills_items .skills_details {
         font-size: 1rem;
         width: calc(100% - 53%);
     }
@@ -612,6 +646,13 @@ body {
     .experience .experience_items .experience_details {
         font-size: 1rem;
     }
+
+    .skills .skills_items {
+        padding: 1em 15%;
+    }
+    .skills .skills_items .skills_details {
+        width: calc(100% - 70%);
+    }
 }
 @media screen and (min-width: 986px) {
     .profile .user-profile-form {
@@ -656,5 +697,9 @@ body {
         width: calc(100% - 52%);
         line-height: 1.6em;
         padding: 1em;
+    }
+
+    .skills .skills_items .skills_details {
+        width: calc(100% - 77%);
     }
 }

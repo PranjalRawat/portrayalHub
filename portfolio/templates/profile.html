@@ -92,7 +92,7 @@
                               <i class="bx bx-slideshow"></i>
                               <span class="links_name">Projects</span>
                           </a>
-                          <span class="tooltip">Setting</span>
+                          <span class="tooltip">Projects</span>
                       </li>
                       <li>
                         <a class="smoothscroll" href="#certificates">
@@ -219,6 +219,16 @@
                       <div class="experience_company">{{ experience.company_name }}</div>
                       <div class="experience_designation">{{ experience.designation }}</div>
                       <div class="experience_year">{{ experience.start_date }} - {{ experience.end_date }}</div>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+              <div class='skills' id='skills'>
+                <h1> Skills </h1>
+                <div class="skills_items">
+                  {% for skills in SkillsInfo %}
+                    <div class="skills_details">
+                      {{skills.skill}}
                     </div>
                   {% endfor %}
                 </div>
