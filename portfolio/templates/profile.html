@@ -233,6 +233,18 @@
                   {% endfor %}
                 </div>
               </div>
+              <div class='projects' id='projects'>
+                <h1> projects </h1>
+                <div class="projects_items">
+                  {% for projects in MajorProjectsInfo %}
+                    <div class="projects_details">
+                      <div class="projects_name">{{ projects.project_name }}</div>
+                      <div class="projects_url">{{ projects.project_url }}</div>
+                      <div class="projects_year">{{ projects.start_date }} - {{ projects.end_date }}</div>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
             </section>
         </div>
     </body>
