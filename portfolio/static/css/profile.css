@@ -574,6 +574,42 @@ body {
 .projects .projects_items .projects_details .projects_url {
     font-style: italic;
 }
+
+.certificates {
+    padding: 2em 0;
+    font-size: 1rem;
+    color: var(--clr-text);
+}
+.certificates h1 {
+    text-align: center;
+    font-weight: normal;
+    padding-bottom: 1em;
+}
+.certificates .certificates_items {
+    padding: 1em 5%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+.certificates .certificates_items .certificates_details {
+    padding: 1em;
+    background-color: var(--clr-main-3);
+    color: var(--clr-text);
+    font-size: 0.8rem;
+    width: calc(100%);
+    line-height: 2em;
+}
+.certificates .certificates_items .certificates_details .certificates_name {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+.certificates
+    .certificates_items
+    .certificates_details
+    .certificates_issuing_org {
+    font-style: italic;
+}
 @media screen and (min-width: 480px) {
     .sidebar {
         display: block;
@@ -637,6 +673,9 @@ body {
     .projects .projects_items .projects_details {
         padding: 2em;
     }
+    .certificates .certificates_items .certificates_details {
+        padding: 2em;
+    }
 }
 @media screen and (min-width: 750px) {
     .profile .user-profile-form {
@@ -696,6 +735,13 @@ body {
     .projects .projects_items .projects_details {
         font-size: 1rem;
     }
+
+    .certificates .certificates_items {
+        padding: 1em 15%;
+    }
+    .certificates .certificates_items .certificates_details {
+        font-size: 1rem;
+    }
 }
 @media screen and (min-width: 986px) {
     .profile .user-profile-form {
@@ -747,6 +793,12 @@ body {
     }
 
     .projects .projects_items .projects_details {
+        width: calc(100% - 52%);
+        line-height: 1.6em;
+        padding: 1em;
+    }
+
+    .certificates .certificates_items .certificates_details {
         width: calc(100% - 52%);
         line-height: 1.6em;
         padding: 1em;

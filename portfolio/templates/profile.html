@@ -234,13 +234,25 @@
                 </div>
               </div>
               <div class='projects' id='projects'>
-                <h1> projects </h1>
+                <h1> Projects </h1>
                 <div class="projects_items">
                   {% for projects in MajorProjectsInfo %}
                     <div class="projects_details">
                       <div class="projects_name">{{ projects.project_name }}</div>
                       <div class="projects_url">{{ projects.project_url }}</div>
                       <div class="projects_year">{{ projects.start_date }} - {{ projects.end_date }}</div>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+              <div class='certificates' id='certificates'>
+                <h1> Certificates </h1>
+                <div class="certificates_items">
+                  {% for certificates in CertificateInfo %}
+                    <div class="certificates_details">
+                      <div class="certificates_name">{{ certificates.course_name }}</div>
+                      <div class="certificates_issuing_org">{{ certificates.issuing_organization }}</div>
+                      <div class="certificates_year">{{ certificates.issue_date }} - {{ certificates.expiration_date }}</div>
                     </div>
                   {% endfor %}
                 </div>
