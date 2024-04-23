@@ -10,7 +10,7 @@ class ContactForm(forms.Form):
 class UserProfileModelForm(forms.ModelForm):
     class Meta:
         model = UserProfileModel
-        fields = '__all__'
+        fields = ['first_name', 'last_name', 'date_of_birth', 'gender', 'address', 'email', 'phone_number']
 
 class ProfileImageModelForm(forms.ModelForm):
     class Meta:

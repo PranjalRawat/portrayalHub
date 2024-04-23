@@ -1,4 +1,5 @@
 from django.db.models.base import Model as Model
+from django.urls import reverse_lazy
 from django.views.generic import DetailView, TemplateView, UpdateView
 from django.contrib.auth.views import LoginView, LogoutView
 from portfolio.forms import CertificateInfoModelForm, ContactForm, EducationInfoModelForm, ExperienceInfoModelForm, MajorProjectsInfoModelForm, ProfileImageModelForm, ResumeUploadModelForm, SkillsInfoModelForm, SocialPlatformsModelForm, UserProfileModelForm
@@ -119,4 +120,23 @@ class ProfileEditView(TemplateView):
         context['skills_info_form'] = SkillsInfoModelForm(instance=SkillsInfoModel.objects.first())
         context['major_projects_info_form'] = MajorProjectsInfoModelForm(instance=MajorProjectsInfoModel.objects.first())
 
+        context['user_profile_action_url'] = reverse_lazy('updateProfileView', kwargs={'pk': user_profile.pk})
         return context
+
+class UpdateProfileView(UpdateView):
+
+    def get_object(self):
+        if self.request.user.is_authenticated:
+            return User.objects.get(username=self.request.user)
+        return None
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        # Get the user profile instance and pass it to the form
+        user = self.get_object()
+        user_profile = UserProfileModel.objects.get(user=user)
+        kwargs['instance'] = user_profile
+        return kwargs
+
+    form_class = UserProfileModelForm
+    success_url = '/profile'

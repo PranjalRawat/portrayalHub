@@ -39,3 +39,21 @@ function addClassIfWidthGreaterThanEqual986() {
 }
 
 addClassIfWidthGreaterThanEqual986();
+
+function toggleUpdateProfile() {
+    const update_view = document.querySelector(".update_view");
+    const list_view = document.querySelector(".list_view");
+    const edit_icon = document.querySelector("#edit-icon");
+
+    if (update_view.style.display === 'none') {
+        update_view.style.display = 'block';
+        list_view.style.display = 'none';
+        edit_icon.classList.remove('bxs-edit');
+        edit_icon.classList.add('bxs-badge-check');
+    } else {
+        update_view.style.display = 'none';
+        list_view.style.display = 'block';
+        edit_icon.classList.add('bxs-edit');
+        edit_icon.classList.remove('bxs-badge-check');
+    }
+}

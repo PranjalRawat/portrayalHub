@@ -1,4 +1,4 @@
-{% load static %} {% load form_fields_disabled %}
+{% load static %} {% load form_fields_toggle %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -152,7 +152,9 @@
               <div class='profile' id='profile'>
                 <div class="content_heading">
                   <h1> My Profile </h1>
-                  <i class='bx bxs-edit'></i>
+                    <a onclick="toggleUpdateProfile()">
+                      <i id='edit-icon' class='bx bxs-edit'></i>
+                    </a>
                 </div>
                 <div class="profile_image">
                   {% for user in ProfileImage %}
@@ -160,10 +162,17 @@
                   {% endfor %}
                 </div>
                 <div class="profile_details">
-                  <form class="user-profile-form">
-                    {% csrf_token %}
-                    {{ user_profile_form|add_disabled }}
-                  </form>
+                  <div class="list_view">
+                    <form class="user-profile-form">
+                      {% csrf_token %}
+                      {{ user_profile_form|add_disabled }}
+                    </form>
+                  </div>
+                  <div class="update_view">
+                    <div class="user-profile-form">
+                      {% include 'profile/update_form.html' with form=user_profile_form  form_action_url=user_profile_action_url %}
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class='resume' id='resume'>
