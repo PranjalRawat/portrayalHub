@@ -150,7 +150,10 @@
             </nav>
             <section class="home-section">
               <div class='profile' id='profile'>
-                <h1> My Profile </h1>
+                <div class="content_heading">
+                  <h1> My Profile </h1>
+                  <i class='bx bxs-edit'></i>
+                </div>
                 <div class="profile_image">
                   {% for user in ProfileImage %}
                     <img src="{{ user.image.url }}" alt="My Image" />
@@ -164,7 +167,10 @@
                 </div>
               </div>
               <div class='resume' id='resume'>
-                <h1> My Resume </h1>
+                <div class="content_heading">
+                  <h1> My Resume </h1>
+                  <i class='bx bxs-edit'></i>
+                </div>
                 <div class="resume_details">
                   <form class="resume_upload_form">
                     {% csrf_token %}
@@ -189,7 +195,10 @@
                 </div>
               </div>
               <div class='social_platforms' id='social'>
-                <h1> Social Platforms </h1>
+                <div class="content_heading">
+                  <h1> Social Platforms </h1>
+                  <i class='bx bxs-edit'></i>
+                </div>
                 <div class="social_items">
                   {% for social in SocialPlatforms %}
                     <div class="social_details">
@@ -199,7 +208,10 @@
                 </div>
               </div>
               <div class='education' id='education'>
-                <h1> Education </h1>
+                <div class="content_heading">
+                  <h1> Education </h1>
+                  <i class='bx bxs-edit'></i>
+                </div>
                 <div class="education_items">
                   {% for education in EducationInfo %}
                     <div class="education_details">
@@ -212,7 +224,10 @@
                 </div>
               </div>
               <div class='experience' id='experience'>
-                <h1> Experience </h1>
+                <div class="content_heading">
+                  <h1> Experience </h1>
+                  <i class='bx bxs-edit'></i>
+                </div>
                 <div class="experience_items">
                   {% for experience in ExperienceInfo %}
                     <div class="experience_details">
@@ -224,7 +239,10 @@
                 </div>
               </div>
               <div class='skills' id='skills'>
-                <h1> Skills </h1>
+                <div class="content_heading">
+                  <h1> Skills </h1>
+                  <i class='bx bxs-edit'></i>
+                </div>
                 <div class="skills_items">
                   {% for skills in SkillsInfo %}
                     <div class="skills_details">
@@ -234,7 +252,10 @@
                 </div>
               </div>
               <div class='projects' id='projects'>
-                <h1> Projects </h1>
+                <div class="content_heading">
+                  <h1> Projects </h1>
+                  <i class='bx bxs-edit'></i>
+                </div>
                 <div class="projects_items">
                   {% for projects in MajorProjectsInfo %}
                     <div class="projects_details">
@@ -246,7 +267,10 @@
                 </div>
               </div>
               <div class='certificates' id='certificates'>
-                <h1> Certificates </h1>
+                <div class="content_heading">
+                  <h1> Certificates </h1>
+                  <i class='bx bxs-edit'></i>
+                </div>
                 <div class="certificates_items">
                   {% for certificates in CertificateInfo %}
                     <div class="certificates_details">

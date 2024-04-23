@@ -338,6 +338,16 @@ body {
     width: calc(100% - 250px);
 }
 
+.content_heading {
+    display: grid;
+    grid-template-columns: 11fr 1fr;
+}
+.content_heading i {
+    text-align: center;
+    font-size: 1.2rem;
+    cursor: grab;
+}
+
 .profile {
     padding: 2em 0;
     font-size: 1rem;
@@ -346,6 +356,8 @@ body {
 .profile h1 {
     text-align: center;
     font-weight: normal;
+    right: -5%;
+    position: relative;
 }
 .profile .profile_image {
     text-align: center;
@@ -392,6 +404,8 @@ body {
     text-align: center;
     font-weight: normal;
     padding-bottom: 1em;
+    right: -5%;
+    position: relative;
 }
 .resume .resume_upload_form {
     padding: 1em 10%;
@@ -433,6 +447,8 @@ body {
     text-align: center;
     font-weight: normal;
     padding-bottom: 1em;
+    right: -5%;
+    position: relative;
 }
 .social_platforms .social_items {
     padding: 1em 5%;
@@ -459,6 +475,8 @@ body {
     text-align: center;
     font-weight: normal;
     padding-bottom: 1em;
+    right: -5%;
+    position: relative;
 }
 .education .education_items {
     padding: 1em 5%;
@@ -492,6 +510,8 @@ body {
     text-align: center;
     font-weight: normal;
     padding-bottom: 1em;
+    right: -5%;
+    position: relative;
 }
 .experience .experience_items {
     padding: 1em 5%;
@@ -525,6 +545,8 @@ body {
     text-align: center;
     font-weight: normal;
     padding-bottom: 1em;
+    right: -5%;
+    position: relative;
 }
 .skills .skills_items {
     padding: 1em 5%;
@@ -551,6 +573,8 @@ body {
     text-align: center;
     font-weight: normal;
     padding-bottom: 1em;
+    right: -5%;
+    position: relative;
 }
 .projects .projects_items {
     padding: 1em 5%;
@@ -584,6 +608,8 @@ body {
     text-align: center;
     font-weight: normal;
     padding-bottom: 1em;
+    right: -5%;
+    position: relative;
 }
 .certificates .certificates_items {
     padding: 1em 5%;

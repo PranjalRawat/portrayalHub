@@ -1,17 +1,20 @@
 // navigation hide and Show
-window.addEventListener('scroll', function() {
-    const scroll = window.scrollY || document.documentElement.scrollTop;
-    if (scroll > 50 && scroll < 610) {
-        document.getElementById('nav').style.display = 'none';
-    } else {
-        document.getElementById('nav').style.display = 'grid';
-        if (scroll > 610) {
-            document.getElementById('nav').classList.add('nav');
+const navbar = document.getElementById('nav') || null;
+if (navbar) {
+    window.addEventListener('scroll', function() {
+        const scroll = window.scrollY || document.documentElement.scrollTop;
+        if (scroll > 50 && scroll < 610) {
+            navbar.style.display = 'none';
         } else {
-            document.getElementById('nav').classList.remove('nav');
+            navbar.style.display = 'grid';
+            if (scroll > 610) {
+                navbar.classList.add('nav');
+            } else {
+                navbar.classList.remove('nav');
+            }
         }
-    }
-});
+    });
+}
 
 // smoothscroll
 const smoothScrollLinks = document.querySelectorAll('.smoothscroll');
