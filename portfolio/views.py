@@ -111,7 +111,7 @@ class ProfileEditView(TemplateView):
 
         # Populate forms with data from the first instance for each model
         context['user_profile_form'] = UserProfileModelForm(instance=user_profile)
-        context['profile_image_form'] = ProfileImageModelForm(instance=ProfileImageModel.objects.first())
+        context['profile_image_form'] = ProfileImageModelForm(instance=context['ProfileImage'].first())
         context['resume_upload_form'] = ResumeUploadModelForm(instance=ResumeUploadModel.objects.first())
         context['social_platforms_form'] = SocialPlatformsModelForm(instance=SocialPlatformsModel.objects.first())
         context['education_info_form'] = EducationInfoModelForm(instance=EducationInfoModel.objects.first())
@@ -121,6 +121,7 @@ class ProfileEditView(TemplateView):
         context['major_projects_info_form'] = MajorProjectsInfoModelForm(instance=MajorProjectsInfoModel.objects.first())
 
         context['user_profile_action_url'] = reverse_lazy('updateProfileView', kwargs={'pk': user_profile.pk})
+        context['user_profile_image_action_url'] = reverse_lazy('updateProfileImageView', kwargs={'pk': user_profile.pk})
         return context
 
 class UpdateProfileView(UpdateView):
@@ -139,4 +140,9 @@ class UpdateProfileView(UpdateView):
         return kwargs
 
     form_class = UserProfileModelForm
+    success_url = '/profile'
+
+class UpdateProfileImageView(UpdateView):
+    queryset = ProfileImageModel.objects.all()
+    form_class = ProfileImageModelForm
     success_url = '/profile'

@@ -379,12 +379,32 @@ body {
     text-align: center;
     padding: 2em 0;
 }
+.profile .profile_image i {
+    position: relative;
+    left: 115px;
+    top: -90px;
+    color: var(--clr-main-2);
+}
 .profile .profile_image img {
     width: 100px;
     height: 100px;
     border-radius: 50%;
     border: 2px solid var(--clr-hex);
     box-shadow: 0 1px 10px rgba(230, 217, 217, 0.5);
+}
+.profile_image .update_view form input {
+    font-size: 1rem;
+    padding: 5px;
+}
+.profile_image .update_view form p {
+    font-size: 0;
+}
+.profile_image .update_view form p label,
+.profile_image .update_view form p a {
+    display: none;
+}
+.profile_image .update_view form p input[type='file'] {
+    margin-top: 2em;
 }
 .profile .user-profile-form {
     padding: 1em 10%;

@@ -152,14 +152,21 @@
               <div class='profile' id='profile'>
                 <div class="content_heading">
                   <h1> My Profile </h1>
-                    <a onclick="toggleUpdateProfile()">
-                      <i id='edit-icon' class='bx bxs-edit'></i>
+                    <a onclick="toggleUpdateProfile('profile_details', 'profile_details_edit_icon')" id='profile_details_edit_icon'>
+                      <i class='bx bx-edit'></i>
                     </a>
                 </div>
                 <div class="profile_image">
+                  <a onclick="toggleUpdateProfile('profile_image', 'profile_image_edit_icon')" id='profile_image_edit_icon'>
+                    <i class='bx bx-edit'></i>
+                  </a>
                   {% for user in ProfileImage %}
                     <img src="{{ user.image.url }}" alt="My Image" />
                   {% endfor %}
+                  <div class="list_view"></div>
+                  <div class="update_view">
+                    {% include 'profile/update_form.html' with form=profile_image_form  form_action_url=user_profile_image_action_url %}
+                  </div>
                 </div>
                 <div class="profile_details">
                   <div class="list_view">

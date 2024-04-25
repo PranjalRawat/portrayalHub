@@ -40,10 +40,10 @@ function addClassIfWidthGreaterThanEqual986() {
 
 addClassIfWidthGreaterThanEqual986();
 
-function toggleUpdateProfile() {
-    const update_view = document.querySelector(".update_view");
-    const list_view = document.querySelector(".list_view");
-    const edit_icon = document.querySelector("#edit-icon");
+function toggleUpdateProfile(parentClass, editIconId) {
+    const update_view = document.querySelector(`.${parentClass} .update_view`);
+    const list_view = document.querySelector(`.${parentClass} .list_view`);
+    const edit_icon = document.querySelector(`#${editIconId} i`);
 
     if (update_view.style.display === 'none') {
         update_view.style.display = 'block';

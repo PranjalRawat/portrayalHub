@@ -9,6 +9,7 @@ urlpatterns = [
     path('logout/', views.LogOutView.as_view(), name='logoutView'),
 
     path('profile/info/update/<int:pk>/', views.UpdateProfileView.as_view(), name='updateProfileView'),
+    path('profile/image/update/<int:pk>/', views.UpdateProfileImageView.as_view(), name='updateProfileImageView'),
 ]
 
 # Add a catch-all pattern for page not found errors
