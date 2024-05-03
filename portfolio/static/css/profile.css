@@ -538,6 +538,23 @@ i.bxs-edit:hover > .tooltip {
     width: 100%;
     padding: 0;
 }
+.resume_details .update_view form p {
+    line-height: 2em;
+}
+.resume_details .update_view form p input[type='checkbox'],
+.resume_details .update_view form p label[for='resume-clear_id'],
+.resume_details .update_view form p label[for='video_resume-clear_id'] {
+    display: none;
+}
+.resume_details .update_view form p a {
+    background: var(--clr-main-2);
+    padding: 0.5em;
+    font-size: 0.8rem;
+}
+.resume_details .update_view form p input[type='file'] {
+    width: 6.5em;
+    padding: 0.3em;
+}
 
 .social_platforms {
     padding: 2em 0;

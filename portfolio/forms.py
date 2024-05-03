@@ -22,6 +22,11 @@ class ResumeUploadModelForm(forms.ModelForm):
         model = ResumeUploadModel
         fields = ['designation', 'cover_letter']
 
+class ResumeUploadUpdateModelForm(forms.ModelForm):
+    class Meta:
+        model = ResumeUploadModel
+        fields = ['designation', 'cover_letter', 'video_resume', 'resume']
+
 class SocialPlatformsModelForm(forms.ModelForm):
     class Meta:
         model = SocialPlatformsModel

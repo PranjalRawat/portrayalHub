@@ -149,6 +149,7 @@
               </div>
             </nav>
             <section class="home-section">
+
               <div class='profile' id='profile'>
                 <div class="content_heading">
                   <h1> My Profile </h1>
@@ -184,6 +185,7 @@
                   </div>
                 </div>
               </div>
+
               <div class='resume' id='resume'>
                 <div class="content_heading">
                   <h1> My Resume </h1>
@@ -194,28 +196,34 @@
                   </a>
                 </div>
                 <div class="resume_details">
-                  <form class="resume_upload_form">
-                    {% csrf_token %}
-                    {{ resume_upload_form|add_disabled }}
+                  <div class="list_view">
+                    <form class="resume_upload_form">
+                      {% csrf_token %}
+                      {{ resume_upload_form|add_disabled }}
 
-                    {% for userResume in ResumeUpload %}
-                      <p class="video_resume">
-                        <label for="id_video_resume">Video Resume:</label>
-                          <video controls>
-                              <source src="{{ userResume.video_resume.url }}" type="video/mp4" />
-                              Your browser does not support the video tag.
-                          </video>
-                      </p>
-                      <p class="pdf_resume">
-                        <label for="id_pdf_resume">Document Resume:</label>
-                        <iframe src="{{ userResume.resume.url }}" frameborder="0">
-                          Your browser does not support the iframe tag.
-                        </iframe>
-                      </p>
-                    {% endfor %}
-                  </form>
+                      {% for userResume in ResumeUpload %}
+                        <p class="video_resume">
+                          <label for="id_video_resume">Video Resume:</label>
+                            <video controls>
+                                <source src="{{ userResume.video_resume.url }}" type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+                        </p>
+                        <p class="pdf_resume">
+                          <label for="id_pdf_resume">Document Resume:</label>
+                          <iframe src="{{ userResume.resume.url }}" frameborder="0">
+                            Your browser does not support the iframe tag.
+                          </iframe>
+                        </p>
+                      {% endfor %}
+                    </form>
+                  </div>
+                  <div class="update_view">
+                    {% include 'profile/update_form.html' with form=resume_upload_update_form  form_action_url=user_resume_upload_action_url form_class='resume_upload_form'%}
+                  </div>
                 </div>
               </div>
+
               <div class='social_platforms' id='social'>
                 <div class="content_heading">
                   <h1> Social Platforms </h1>

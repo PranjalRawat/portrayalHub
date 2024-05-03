@@ -2,7 +2,7 @@ from django.db.models.base import Model as Model
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, TemplateView, UpdateView
 from django.contrib.auth.views import LoginView, LogoutView
-from portfolio.forms import CertificateInfoModelForm, ContactForm, EducationInfoModelForm, ExperienceInfoModelForm, MajorProjectsInfoModelForm, ProfileImageModelForm, ResumeUploadModelForm, SkillsInfoModelForm, SocialPlatformsModelForm, UserProfileModelForm
+from portfolio.forms import CertificateInfoModelForm, ContactForm, EducationInfoModelForm, ExperienceInfoModelForm, MajorProjectsInfoModelForm, ProfileImageModelForm, ResumeUploadModelForm, ResumeUploadUpdateModelForm, SkillsInfoModelForm, SocialPlatformsModelForm, UserProfileModelForm
 from portfolioApi.models import CertificateInfoModel, EducationInfoModel, ExperienceInfoModel, MajorProjectsInfoModel, ProfileImageModel, ResumeUploadModel, SkillsInfoModel, SocialPlatformsModel, UserProfileModel
 from django.shortcuts import redirect, render
 from django.core.mail import send_mail
@@ -113,6 +113,7 @@ class ProfileEditView(TemplateView):
         context['user_profile_form'] = UserProfileModelForm(instance=user_profile)
         context['profile_image_form'] = ProfileImageModelForm(instance=context['ProfileImage'].first())
         context['resume_upload_form'] = ResumeUploadModelForm(instance=ResumeUploadModel.objects.first())
+        context['resume_upload_update_form'] = ResumeUploadUpdateModelForm(instance=ResumeUploadModel.objects.first())
         context['social_platforms_form'] = SocialPlatformsModelForm(instance=SocialPlatformsModel.objects.first())
         context['education_info_form'] = EducationInfoModelForm(instance=EducationInfoModel.objects.first())
         context['experience_info_form'] = ExperienceInfoModelForm(instance=ExperienceInfoModel.objects.first())
@@ -122,6 +123,7 @@ class ProfileEditView(TemplateView):
 
         context['user_profile_action_url'] = reverse_lazy('updateProfileView', kwargs={'pk': user_profile.pk})
         context['user_profile_image_action_url'] = reverse_lazy('updateProfileImageView', kwargs={'pk': user_profile.pk})
+        context['user_resume_upload_action_url'] = reverse_lazy('updateResumeUploadView', kwargs={'pk': user_profile.pk})
         return context
 
 class UpdateProfileView(UpdateView):
@@ -145,4 +147,9 @@ class UpdateProfileView(UpdateView):
 class UpdateProfileImageView(UpdateView):
     queryset = ProfileImageModel.objects.all()
     form_class = ProfileImageModelForm
+    success_url = '/profile'
+
+class UpdateResumeUploadView(UpdateView):
+    queryset = ResumeUploadModel.objects.all()
+    form_class = ResumeUploadUpdateModelForm
     success_url = '/profile'
