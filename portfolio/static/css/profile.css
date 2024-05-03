@@ -349,6 +349,7 @@ body {
 .content_heading i {
     font-size: 1.2rem;
     color: var(--clr-main-2);
+    position: relative;
 }
 .update_view {
     display: none;
@@ -362,6 +363,32 @@ body {
 }
 .update_view input[type='submit'] {
     margin-top: 1em;
+}
+i.bxs-badge-check > .tooltip {
+    display: none;
+}
+i.bxs-edit > .tooltip {
+    position: absolute;
+    top: 2.5em;
+    right: -1em;
+    z-index: 3;
+    background: var(--mainbg);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 400;
+    opacity: 0;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: 0s;
+}
+
+i.bxs-edit:hover > .tooltip {
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 0.4s ease;
+    transform: translateY(-50%);
 }
 
 .profile {

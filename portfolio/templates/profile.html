@@ -152,13 +152,17 @@
               <div class='profile' id='profile'>
                 <div class="content_heading">
                   <h1> My Profile </h1>
-                    <a onclick="toggleUpdateProfile('profile_details', 'profile_details_edit_icon')" id='profile_details_edit_icon'>
-                      <i class='bx bx-edit'></i>
-                    </a>
+                  <a onclick="toggleUpdateProfile('profile_details', 'profile_details_edit_icon')" id='profile_details_edit_icon'>
+                    <i class='bx bxs-edit'>
+                      <span class="tooltip">edit</span>
+                    </i>
+                  </a>
                 </div>
                 <div class="profile_image">
                   <a onclick="toggleUpdateProfile('profile_image', 'profile_image_edit_icon')" id='profile_image_edit_icon'>
-                    <i class='bx bx-edit'></i>
+                    <i class='bx bxs-edit'>
+                      <span class="tooltip">edit</span>
+                    </i>
                   </a>
                   {% for user in ProfileImage %}
                     <img src="{{ user.image.url }}" alt="My Image" />
@@ -176,16 +180,18 @@
                     </form>
                   </div>
                   <div class="update_view">
-                    <div class="user-profile-form">
-                      {% include 'profile/update_form.html' with form=user_profile_form  form_action_url=user_profile_action_url %}
-                    </div>
+                      {% include 'profile/update_form.html' with form=user_profile_form  form_action_url=user_profile_action_url form_class='user-profile-form' %}
                   </div>
                 </div>
               </div>
               <div class='resume' id='resume'>
                 <div class="content_heading">
                   <h1> My Resume </h1>
-                  <i class='bx bxs-edit'></i>
+                  <a onclick="toggleUpdateProfile('resume_details', 'resume_edit_icon')" id='resume_edit_icon'>
+                    <i class='bx bxs-edit'>
+                      <span class="tooltip">edit</span>
+                    </i>
+                  </a>
                 </div>
                 <div class="resume_details">
                   <form class="resume_upload_form">
@@ -213,7 +219,9 @@
               <div class='social_platforms' id='social'>
                 <div class="content_heading">
                   <h1> Social Platforms </h1>
-                  <i class='bx bxs-edit'></i>
+                  <i class='bx bxs-edit'>
+                    <span class="tooltip">edit</span>
+                  </i>
                 </div>
                 <div class="social_items">
                   {% for social in SocialPlatforms %}
@@ -226,7 +234,9 @@
               <div class='education' id='education'>
                 <div class="content_heading">
                   <h1> Education </h1>
-                  <i class='bx bxs-edit'></i>
+                  <i class='bx bxs-edit'>
+                    <span class="tooltip">edit</span>
+                  </i>
                 </div>
                 <div class="education_items">
                   {% for education in EducationInfo %}
@@ -242,7 +252,9 @@
               <div class='experience' id='experience'>
                 <div class="content_heading">
                   <h1> Experience </h1>
-                  <i class='bx bxs-edit'></i>
+                  <i class='bx bxs-edit'>
+                    <span class="tooltip">edit</span>
+                  </i>
                 </div>
                 <div class="experience_items">
                   {% for experience in ExperienceInfo %}
@@ -257,7 +269,9 @@
               <div class='skills' id='skills'>
                 <div class="content_heading">
                   <h1> Skills </h1>
-                  <i class='bx bxs-edit'></i>
+                  <i class='bx bxs-edit'>
+                    <span class="tooltip">edit</span>
+                  </i>
                 </div>
                 <div class="skills_items">
                   {% for skills in SkillsInfo %}
@@ -270,7 +284,9 @@
               <div class='projects' id='projects'>
                 <div class="content_heading">
                   <h1> Projects </h1>
-                  <i class='bx bxs-edit'></i>
+                  <i class='bx bxs-edit'>
+                    <span class="tooltip">edit</span>
+                  </i>
                 </div>
                 <div class="projects_items">
                   {% for projects in MajorProjectsInfo %}
@@ -285,7 +301,9 @@
               <div class='certificates' id='certificates'>
                 <div class="content_heading">
                   <h1> Certificates </h1>
-                  <i class='bx bxs-edit'></i>
+                  <i class='bx bxs-edit'>
+                    <span class="tooltip">edit</span>
+                  </i>
                 </div>
                 <div class="certificates_items">
                   {% for certificates in CertificateInfo %}

@@ -1,5 +1,5 @@
 {% load static %}  {% load form_fields_toggle %}
-<form class='form' method="POST" action="{{ form_action_url }}" enctype="multipart/form-data">
+<form class='form {{form_class}}' method="POST" action="{{ form_action_url }}" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form|remove_disabled }}
     <input type="submit" value="Submit">
