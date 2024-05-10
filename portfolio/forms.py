@@ -32,6 +32,17 @@ class SocialPlatformsModelForm(forms.ModelForm):
         model = SocialPlatformsModel
         fields = ['platformName', 'platformIcon', 'profileUrl', 'featured']
 
+    def __init__(self, *args, **kwargs):
+        self.user_profile = kwargs.pop('user_profile', None)
+        super().__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.user_profile = self.user_profile
+        if commit:
+            instance.save()
+        return instance
+
 class EducationInfoModelForm(forms.ModelForm):
     class Meta:
         model = EducationInfoModel

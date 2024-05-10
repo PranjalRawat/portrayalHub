@@ -583,6 +583,45 @@ i.bxs-edit:hover > .tooltip {
     text-align: center;
     width: calc(100% - 54%);
 }
+.social_platforms .social_platform_upload_form {
+    padding: 1em 10%;
+}
+.social_platforms .social_platform_upload_form p {
+    margin-bottom: 0.5em;
+}
+.social_platforms .social_platform_upload_form label {
+    font-family: 'Times New Roman', Times, serif;
+    line-height: 2em;
+    display: block;
+}
+.social_platforms .social_platform_upload_form select,
+.social_platforms .social_platform_upload_form textarea,
+.social_platforms .social_platform_upload_form input {
+    font-family: 'Times New Roman', Times, serif;
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--clr-hex);
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #fffffffc;
+}
+.social_platforms .social_platform_upload_form label[for='id_featured'],
+.social_platforms .social_platform_upload_form label[for='id_platformIcon'],
+.social_platforms .social_platform_upload_form input[type='checkbox'] {
+    display: inline;
+    width: 10%;
+}
+.social_platforms .new_items .update_view form p {
+    line-height: 2em;
+}
+.social_platforms .new_items .update_view form p a {
+    background: var(--clr-main-2);
+    padding: 0.5em;
+    font-size: 0.8rem;
+}
+.social_platforms .new_items .update_view form p input[type='file'] {
+    color: var(--clr-hex);
+}
 
 .education {
     padding: 2em 0;
@@ -850,6 +889,9 @@ i.bxs-edit:hover > .tooltip {
     }
     .social_platforms .social_items .social_details {
         width: calc(100% - 70%);
+    }
+    .social_platforms .social_platform_upload_form {
+        padding: 1em 15%;
     }
 
     .education .education_items {

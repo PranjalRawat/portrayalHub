@@ -1,6 +1,6 @@
 from django.db.models.base import Model as Model
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, TemplateView, UpdateView
+from django.views.generic import DetailView, TemplateView, UpdateView, CreateView
 from django.contrib.auth.views import LoginView, LogoutView
 from portfolio.forms import CertificateInfoModelForm, ContactForm, EducationInfoModelForm, ExperienceInfoModelForm, MajorProjectsInfoModelForm, ProfileImageModelForm, ResumeUploadModelForm, ResumeUploadUpdateModelForm, SkillsInfoModelForm, SocialPlatformsModelForm, UserProfileModelForm
 from portfolioApi.models import CertificateInfoModel, EducationInfoModel, ExperienceInfoModel, MajorProjectsInfoModel, ProfileImageModel, ResumeUploadModel, SkillsInfoModel, SocialPlatformsModel, UserProfileModel
@@ -114,7 +114,7 @@ class ProfileEditView(TemplateView):
         context['profile_image_form'] = ProfileImageModelForm(instance=context['ProfileImage'].first())
         context['resume_upload_form'] = ResumeUploadModelForm(instance=ResumeUploadModel.objects.first())
         context['resume_upload_update_form'] = ResumeUploadUpdateModelForm(instance=ResumeUploadModel.objects.first())
-        context['social_platforms_form'] = SocialPlatformsModelForm(instance=SocialPlatformsModel.objects.first())
+        context['social_platforms_form'] = SocialPlatformsModelForm(user_profile = user_profile)
         context['education_info_form'] = EducationInfoModelForm(instance=EducationInfoModel.objects.first())
         context['experience_info_form'] = ExperienceInfoModelForm(instance=ExperienceInfoModel.objects.first())
         context['certificate_info_form'] = CertificateInfoModelForm(instance=CertificateInfoModel.objects.first())
@@ -124,6 +124,8 @@ class ProfileEditView(TemplateView):
         context['user_profile_action_url'] = reverse_lazy('updateProfileView', kwargs={'pk': user_profile.pk})
         context['user_profile_image_action_url'] = reverse_lazy('updateProfileImageView', kwargs={'pk': user_profile.pk})
         context['user_resume_upload_action_url'] = reverse_lazy('updateResumeUploadView', kwargs={'pk': user_profile.pk})
+        context['create_social_platform_action_url'] = reverse_lazy('createSocialPlatformView')
+
         return context
 
 class UpdateProfileView(UpdateView):
@@ -152,4 +154,21 @@ class UpdateProfileImageView(UpdateView):
 class UpdateResumeUploadView(UpdateView):
     queryset = ResumeUploadModel.objects.all()
     form_class = ResumeUploadUpdateModelForm
+    success_url = '/profile'
+
+class CreateSocialPlatformView(CreateView):
+    def get_object(self):
+        if self.request.user.is_authenticated:
+            return User.objects.get(username=self.request.user)
+        return None
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        # Get the user profile instance and pass it to the form
+        user = self.get_object()
+        user_profile = UserProfileModel.objects.get(user=user)
+        kwargs['user_profile'] = user_profile
+        return kwargs
+
+    form_class = SocialPlatformsModelForm
     success_url = '/profile'
