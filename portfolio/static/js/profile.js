@@ -57,3 +57,28 @@ function toggleUpdateProfile(parentClass, editIconId) {
         edit_icon.classList.remove('bxs-badge-check');
     }
 }
+
+function toggleAddItem(parentClass, editIconId) {
+    const add_item = document.querySelector(`.${parentClass} .add_item`)
+    const edit_icon = document.querySelector(`#${editIconId} i`);
+
+    if (add_item.style.display === 'none') {
+        add_item.style.display = 'block';
+        edit_icon.classList.remove('bxs-edit');
+        edit_icon.classList.add('bxs-badge-check');
+    } else {
+        add_item.style.display = 'none';
+        edit_icon.classList.add('bxs-edit');
+        edit_icon.classList.remove('bxs-badge-check');
+    }
+}
+
+function toggleAddForm(parentClass) {
+    const update_view = document.querySelector(`.${parentClass} .update_view`);
+
+    if (update_view.style.display === 'none') {
+        update_view.style.display = 'block';
+    } else {
+        update_view.style.display = 'none';
+    }
+}

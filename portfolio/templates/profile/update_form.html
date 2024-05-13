@@ -3,4 +3,11 @@
     {% csrf_token %}
     {{ form|remove_disabled }}
     <input type="submit" value="Submit">
+    <button type="button" onclick="closeForm()" value="Close">Close</button>
 </form>
+
+<script>
+    function closeForm() {
+        window.location.reload();
+    }
+</script>

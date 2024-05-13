@@ -351,19 +351,68 @@ body {
     color: var(--clr-main-2);
     position: relative;
 }
-.update_view {
+.update_view,
+.add_item {
     display: none;
+}
+.update_view form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 1em 10%;
+}
+.update_view form p {
+    line-height: 2em;
+    width: 100%;
 }
 .update_view select,
 .update_view textarea,
-.update_view input {
+.update_view input,
+.update_view button {
     border: 4px solid var(--clr-main-3) !important;
     border-radius: 5px;
     box-sizing: border-box;
+    font-size: 1rem;
+    padding: 5px;
+}
+.update_view input[type='submit'],
+.update_view button[value='Close'] {
+    margin-top: 1em;
+    width: 45% !important;
+    color: var(--clr-text);
+    padding: 10px;
 }
 .update_view input[type='submit'] {
-    margin-top: 1em;
+    background: var(--clr-main-2) !important;
 }
+.update_view button[value='Close'] {
+    background: var(--clr-main-3) !important;
+}
+.update_view form p:has(label[for='id_image']) {
+    font-size: 0;
+}
+.update_view form p input[id='id_image'] {
+    margin-top: 2em;
+}
+.update_view form p input[type='file'] {
+    width: 100%;
+    color: var(--clr-main-3);
+}
+
+.update_view form p input[id='resume-clear_id'],
+.update_view form p input[id='video_resume-clear_id'],
+.update_view form p label[for='resume-clear_id'],
+.update_view form p label[for='video_resume-clear_id'] {
+    display: none;
+}
+.update_view form p label[for='id_video_resume'] + a,
+.update_view form p label[for='id_resume'] + a {
+    background: var(--clr-main-2);
+    padding: 0.5em;
+    font-size: 0.8rem;
+}
+
 i.bxs-badge-check > .tooltip {
     display: none;
 }
@@ -419,33 +468,28 @@ i.bxs-edit:hover > .tooltip {
     border: 2px solid var(--clr-hex);
     box-shadow: 0 1px 10px rgba(230, 217, 217, 0.5);
 }
-.profile_image .update_view form input {
-    font-size: 1rem;
-    padding: 5px;
-}
-.profile_image .update_view form p {
-    font-size: 0;
-}
-.profile_image .update_view form p label,
-.profile_image .update_view form p a {
-    display: none;
-}
-.profile_image .update_view form p input[type='file'] {
-    margin-top: 2em;
-}
+
 .profile .user-profile-form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
     padding: 1em 10%;
 }
 .profile .user-profile-form p {
     margin-bottom: 0.5em;
+    width: 100%;
 }
 .profile .user-profile-form label {
     font-family: 'Times New Roman', Times, serif;
     line-height: 2em;
+    display: block;
 }
+
 .profile .user-profile-form select,
 .profile .user-profile-form textarea,
-.profile .user-profile-form input {
+.profile .user-profile-form input,
+.profile .user-profile-form button {
     font-family: 'Times New Roman', Times, serif;
     width: 100%;
     padding: 10px;
@@ -538,23 +582,6 @@ i.bxs-edit:hover > .tooltip {
     width: 100%;
     padding: 0;
 }
-.resume_details .update_view form p {
-    line-height: 2em;
-}
-.resume_details .update_view form p input[type='checkbox'],
-.resume_details .update_view form p label[for='resume-clear_id'],
-.resume_details .update_view form p label[for='video_resume-clear_id'] {
-    display: none;
-}
-.resume_details .update_view form p a {
-    background: var(--clr-main-2);
-    padding: 0.5em;
-    font-size: 0.8rem;
-}
-.resume_details .update_view form p input[type='file'] {
-    width: 6.5em;
-    padding: 0.3em;
-}
 
 .social_platforms {
     padding: 2em 0;
@@ -583,6 +610,9 @@ i.bxs-edit:hover > .tooltip {
     text-align: center;
     width: calc(100% - 54%);
 }
+.social_platforms .social_items .social_details:has(a) {
+    background-color: var(--clr-main-2);
+}
 .social_platforms .social_platform_upload_form {
     padding: 1em 10%;
 }
@@ -610,17 +640,6 @@ i.bxs-edit:hover > .tooltip {
 .social_platforms .social_platform_upload_form input[type='checkbox'] {
     display: inline;
     width: 10%;
-}
-.social_platforms .new_items .update_view form p {
-    line-height: 2em;
-}
-.social_platforms .new_items .update_view form p a {
-    background: var(--clr-main-2);
-    padding: 0.5em;
-    font-size: 0.8rem;
-}
-.social_platforms .new_items .update_view form p input[type='file'] {
-    color: var(--clr-hex);
 }
 
 .education {
@@ -828,20 +847,8 @@ i.bxs-edit:hover > .tooltip {
         left: 250px;
     }
 
-    .profile .user-profile-form {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    .profile .user-profile-form p {
-        width: 100%;
-    }
-    .profile .user-profile-form label {
-        display: block;
-    }
     .profile .user-profile-form p:has(#id_date_of_birth, #id_gender) {
-        width: 50%;
+        width: 48%;
     }
 
     .resume_details .pdf_resume iframe {
@@ -862,8 +869,6 @@ i.bxs-edit:hover > .tooltip {
 }
 @media screen and (min-width: 750px) {
     .profile .user-profile-form {
-        justify-content: space-between;
-        gap: 10%;
         padding: 1em 15%;
     }
     .profile .user-profile-form select,

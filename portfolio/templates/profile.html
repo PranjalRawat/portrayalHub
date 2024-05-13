@@ -227,24 +227,30 @@
               <div class='social_platforms' id='social'>
                 <div class="content_heading">
                   <h1> Social Platforms </h1>
-                  <a onclick="toggleUpdateProfile('new_items', 'social_edit_icon')" id='social_edit_icon'>
+                  <a onclick="toggleAddItem('social_items', 'social_edit_icon')" id='social_edit_icon'>
                     <i class='bx bxs-edit'>
                       <span class="tooltip">edit</span>
                     </i>
                   </a>
                 </div>
-                <div class="new_items">
-                  <div class="update_view">
-                    {% include 'profile/update_form.html' with form=social_platforms_form  form_action_url=create_social_platform_action_url form_class='social_platform_upload_form'%}
-                  </div>
-                  <div class="list_view"></div>
-                </div>
                 <div class="social_items">
                   {% for social in SocialPlatforms %}
-                    <div class="social_details">
+                    <div class="social_details list_view">
                       {{social.platformName}}
                     </div>
                   {% endfor %}
+                  <div class="social_details add_item">
+                    <a onclick="toggleAddForm('social_items')">
+                      <i class='bx bx-plus-medical'>
+                        <span class="tooltip">Add Item</span>
+                      </i>
+                    </a>
+                  </div>
+                </div>
+                <div class="social_items">
+                  <div class="update_view">
+                    {% include 'profile/update_form.html' with form=social_platforms_form  form_action_url=create_social_platform_action_url form_class='social_platform_upload_form'%}
+                  </div>
                 </div>
               </div>
 
