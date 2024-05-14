@@ -237,15 +237,20 @@
                   {% for social in SocialPlatforms %}
                     <div class="social_details list_view">
                       {{social.platformName}}
+                      <div class="remove_item">
+                        <a href = "{% url 'deleteSocialPlatformView' social.id %}">
+                          <i class='bx bx-x'></i>
+                        </a>
+                      </div>
                     </div>
                   {% endfor %}
-                  <div class="social_details add_item">
-                    <a onclick="toggleAddForm('social_items')">
-                      <i class='bx bx-plus-medical'>
-                        <span class="tooltip">Add Item</span>
-                      </i>
-                    </a>
-                  </div>
+                    <div class="social_details add_item">
+                      <a onclick="toggleAddForm('social_items')">
+                        <i class='bx bx-plus-medical'>
+                          <span class="tooltip">Add Item</span>
+                        </i>
+                      </a>
+                    </div>
                 </div>
                 <div class="social_items">
                   <div class="update_view">

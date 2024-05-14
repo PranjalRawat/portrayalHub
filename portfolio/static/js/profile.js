@@ -58,16 +58,27 @@ function toggleUpdateProfile(parentClass, editIconId) {
     }
 }
 
+function toggleRemoveItem(parentClass, display) {
+    const remove_items = document.querySelectorAll(`.${parentClass} .remove_item`)
+    for (let [idx, _] of remove_items.entries()) {
+        remove_items[idx].style.display = display
+    }
+}
+
 function toggleAddItem(parentClass, editIconId) {
     const add_item = document.querySelector(`.${parentClass} .add_item`)
     const edit_icon = document.querySelector(`#${editIconId} i`);
 
     if (add_item.style.display === 'none') {
+        toggleRemoveItem(parentClass, 'block')
         add_item.style.display = 'block';
+        add_item.classList.add("list_view");
         edit_icon.classList.remove('bxs-edit');
         edit_icon.classList.add('bxs-badge-check');
     } else {
         add_item.style.display = 'none';
+        add_item.classList.remove("list_view");
+        toggleRemoveItem(parentClass, 'none')
         edit_icon.classList.add('bxs-edit');
         edit_icon.classList.remove('bxs-badge-check');
     }

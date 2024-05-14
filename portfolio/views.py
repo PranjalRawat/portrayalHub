@@ -1,6 +1,6 @@
 from django.db.models.base import Model as Model
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, TemplateView, UpdateView, CreateView
+from django.views.generic import DetailView, TemplateView, UpdateView, CreateView, DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
 from portfolio.forms import CertificateInfoModelForm, ContactForm, EducationInfoModelForm, ExperienceInfoModelForm, MajorProjectsInfoModelForm, ProfileImageModelForm, ResumeUploadModelForm, ResumeUploadUpdateModelForm, SkillsInfoModelForm, SocialPlatformsModelForm, UserProfileModelForm
 from portfolioApi.models import CertificateInfoModel, EducationInfoModel, ExperienceInfoModel, MajorProjectsInfoModel, ProfileImageModel, ResumeUploadModel, SkillsInfoModel, SocialPlatformsModel, UserProfileModel
@@ -172,3 +172,14 @@ class CreateSocialPlatformView(CreateView):
 
     form_class = SocialPlatformsModelForm
     success_url = '/profile'
+
+class DeleteSocialPlatformView(DeleteView):
+    model = SocialPlatformsModel
+    success_url = '/profile'
+
+    def dispatch(self, request, *args, **kwargs):
+        # Directly delete the object without displaying the confirmation page
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        self.object.delete()
+        return redirect(success_url)

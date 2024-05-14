@@ -13,6 +13,7 @@ urlpatterns = [
     path('profile/resume/update/<int:pk>/', views.UpdateResumeUploadView.as_view(), name='updateResumeUploadView'),
 
     path('profile/social_platforms/create/', views.CreateSocialPlatformView.as_view(), name='createSocialPlatformView'),
+    path('profile/social_platforms/delete/<int:pk>', views.DeleteSocialPlatformView.as_view(), name='deleteSocialPlatformView'),
 ]
 
 # Add a catch-all pattern for page not found errors
