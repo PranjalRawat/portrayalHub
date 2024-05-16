@@ -1,3 +1,4 @@
+import json
 from django.db.models.base import Model as Model
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, TemplateView, UpdateView, CreateView, DeleteView
@@ -171,11 +172,11 @@ class CreateSocialPlatformView(CreateView):
         return kwargs
 
     form_class = SocialPlatformsModelForm
-    success_url = '/profile'
+    success_url = '/profile#social'
 
 class DeleteSocialPlatformView(DeleteView):
     model = SocialPlatformsModel
-    success_url = '/profile'
+    success_url = '/profile#social'
 
     def dispatch(self, request, *args, **kwargs):
         # Directly delete the object without displaying the confirmation page
@@ -183,3 +184,21 @@ class DeleteSocialPlatformView(DeleteView):
         success_url = self.get_success_url()
         self.object.delete()
         return redirect(success_url)
+
+class UpdateSocialPlatformView(UpdateView):
+    def get_object(self):
+        if self.request.user.is_authenticated:
+            return User.objects.get(username=self.request.user)
+        return None
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        # Get the user profile instance and pass it to the form
+        user = self.get_object()
+        user_profile = UserProfileModel.objects.get(user=user)
+        kwargs['user_profile'] = user_profile
+        return kwargs
+
+    form_class = SocialPlatformsModelForm
+    success_url = '/profile#social'
+    template_name = 'profile/update_form.html'

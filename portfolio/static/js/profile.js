@@ -84,12 +84,25 @@ function toggleAddItem(parentClass, editIconId) {
     }
 }
 
-function toggleAddForm(parentClass) {
-    const update_view = document.querySelector(`.${parentClass} .update_view`);
+function toggleCreateView(parentClass) {
+    const create_view = document.querySelector(`.${parentClass} .create_view`);
 
-    if (update_view.style.display === 'none') {
-        update_view.style.display = 'block';
+    if (create_view.style.display === 'none') {
+        create_view.style.display = 'block';
     } else {
-        update_view.style.display = 'none';
+        create_view.style.display = 'none';
+    }
+}
+
+function toggleUpdateForm(parentClass, id) {
+    const update_view = document.querySelector(`.${parentClass} #instance-${id}.update_view`);
+    const add_item = document.querySelector(`.${parentClass} .add_item`)
+
+    if (add_item.style.display === 'block') {
+        if (update_view.style.display === 'none') {
+            update_view.style.display = 'block';
+        } else {
+            update_view.style.display = 'none';
+        }
     }
 }

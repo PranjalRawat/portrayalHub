@@ -353,7 +353,8 @@ body {
 }
 .update_view,
 .add_item,
-.remove_item {
+.remove_item,
+.create_view {
     display: none;
 }
 .add_item {
@@ -362,21 +363,27 @@ body {
 .remove_item {
     font-weight: 900;
 }
-.update_view form {
+.update_view form,
+.create_view form {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 1em 10%;
 }
-.update_view form p {
+.update_view form p,
+.create_view form p {
     line-height: 2em;
     width: 100%;
 }
 .update_view select,
 .update_view textarea,
 .update_view input,
-.update_view button {
+.update_view button,
+.create_view select,
+.create_view textarea,
+.create_view input,
+.create_view button {
     border: 4px solid var(--clr-main-3) !important;
     border-radius: 5px;
     box-sizing: border-box;
@@ -384,25 +391,32 @@ body {
     padding: 5px;
 }
 .update_view input[type='submit'],
-.update_view button[value='Close'] {
+.update_view button[value='Close'],
+.create_view input[type='submit'],
+.create_view button[value='Close'] {
     margin-top: 1em;
     width: 45% !important;
     color: var(--clr-text);
     padding: 10px;
 }
-.update_view input[type='submit'] {
+.update_view input[type='submit'],
+.create_view input[type='submit'] {
     background: var(--clr-main-2) !important;
 }
-.update_view button[value='Close'] {
+.update_view button[value='Close'],
+.create_view button[value='Close'] {
     background: var(--clr-main-3) !important;
 }
-.update_view form p:has(label[for='id_image']) {
+.update_view form p:has(label[for='id_image']),
+.create_view form p:has(label[for='id_image']) {
     font-size: 0;
 }
-.update_view form p input[id='id_image'] {
+.update_view form p input[id='id_image'],
+.create_view form p input[id='id_image'] {
     margin-top: 2em;
 }
-.update_view form p input[type='file'] {
+.update_view form p input[type='file'],
+.create_view form p input[type='file'] {
     width: 100%;
     color: var(--clr-main-3);
 }
@@ -410,11 +424,17 @@ body {
 .update_view form p input[id='resume-clear_id'],
 .update_view form p input[id='video_resume-clear_id'],
 .update_view form p label[for='resume-clear_id'],
-.update_view form p label[for='video_resume-clear_id'] {
+.update_view form p label[for='video_resume-clear_id'],
+.create_view form p input[id='resume-clear_id'],
+.create_view form p input[id='video_resume-clear_id'],
+.create_view form p label[for='resume-clear_id'],
+.create_view form p label[for='video_resume-clear_id'] {
     display: none;
 }
 .update_view form p label[for='id_video_resume'] + a,
-.update_view form p label[for='id_resume'] + a {
+.update_view form p label[for='id_resume'] + a,
+.create_view form p label[for='id_video_resume'] + a,
+.create_view form p label[for='id_resume'] + a {
     background: var(--clr-main-2);
     padding: 0.5em;
     font-size: 0.8rem;

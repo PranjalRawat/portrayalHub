@@ -1,4 +1,4 @@
-{% load static %} {% load form_fields_toggle %}
+{% load static %} {% load form_fields_toggle %} {% load form_instance %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -236,16 +236,24 @@
                 <div class="social_items">
                   {% for social in SocialPlatforms %}
                     <div class="social_details list_view">
-                      {{social.platformName}}
+                      <a onclick="toggleUpdateForm('social_items', {{social.id}})">
+                        {{social.platformName}}
+                      </a>
                       <div class="remove_item">
                         <a href = "{% url 'deleteSocialPlatformView' social.id %}">
                           <i class='bx bx-x'></i>
                         </a>
                       </div>
                     </div>
+                    <div class="update_view" id="instance-{{social.id}}">
+                      {% url 'updateSocialPlatformView' social.id as update_social_platform_action_url %}
+                      {% with social_platforms_form|set_social_instance:social.id as updated_social_instance_form %}
+                        {% include 'profile/update_form.html' with form=updated_social_instance_form form_action_url=update_social_platform_action_url form_class='social_platform_upload_form'%}
+                      {% endwith %}
+                    </div>
                   {% endfor %}
                     <div class="social_details add_item">
-                      <a onclick="toggleAddForm('social_items')">
+                      <a onclick="toggleCreateView('social_items')">
                         <i class='bx bx-plus-medical'>
                           <span class="tooltip">Add Item</span>
                         </i>
@@ -253,7 +261,7 @@
                     </div>
                 </div>
                 <div class="social_items">
-                  <div class="update_view">
+                  <div class="create_view">
                     {% include 'profile/update_form.html' with form=social_platforms_form  form_action_url=create_social_platform_action_url form_class='social_platform_upload_form'%}
                   </div>
                 </div>
