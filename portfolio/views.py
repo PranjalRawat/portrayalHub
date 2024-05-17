@@ -197,8 +197,9 @@ class UpdateSocialPlatformView(UpdateView):
         user = self.get_object()
         user_profile = UserProfileModel.objects.get(user=user)
         kwargs['user_profile'] = user_profile
+        instance_id = self.kwargs.get('pk')
+        kwargs['instance'] = SocialPlatformsModel.objects.get(id=instance_id)
         return kwargs
 
     form_class = SocialPlatformsModelForm
     success_url = '/profile#social'
-    template_name = 'profile/update_form.html'

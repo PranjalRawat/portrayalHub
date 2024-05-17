@@ -363,6 +363,9 @@ body {
 .remove_item {
     font-weight: 900;
 }
+.remove_item a {
+    color: var(--clr-text);
+}
 .update_view form,
 .create_view form {
     display: flex;
@@ -919,7 +922,7 @@ i.bxs-edit:hover > .tooltip {
         padding: 1em 15%;
     }
     .social_platforms .social_items .social_details.list_view {
-        width: calc(100% - 69%);
+        width: calc(100% - 70%);
     }
     .social_platforms .social_platform_upload_form {
         padding: 1em 15%;
