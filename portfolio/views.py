@@ -104,7 +104,7 @@ class ProfileEditView(TemplateView):
         context['ProfileImage'] = ProfileImageModel.objects.filter(user_profile=user_profile)
         context['ResumeUpload'] = ResumeUploadModel.objects.filter(user_profile=user_profile)
         context['SocialPlatforms'] = SocialPlatformsModel.objects.filter(user_profile=user_profile)
-        context['EducationInfo'] = EducationInfoModel.objects.filter(user_profile=user_profile)
+        context['EducationInfo'] = EducationInfoModel.objects.filter(user_profile=user_profile).order_by('-start_date')
         context['ExperienceInfo'] = ExperienceInfoModel.objects.filter(user_profile=user_profile)
         context['SkillsInfo'] = SkillsInfoModel.objects.filter(user_profile=user_profile)
         context['MajorProjectsInfo'] = MajorProjectsInfoModel.objects.filter(user_profile=user_profile)
@@ -116,7 +116,7 @@ class ProfileEditView(TemplateView):
         context['resume_upload_form'] = ResumeUploadModelForm(instance=ResumeUploadModel.objects.first())
         context['resume_upload_update_form'] = ResumeUploadUpdateModelForm(instance=ResumeUploadModel.objects.first())
         context['social_platforms_form'] = SocialPlatformsModelForm(user_profile = user_profile)
-        context['education_info_form'] = EducationInfoModelForm(instance=EducationInfoModel.objects.first())
+        context['education_info_form'] = EducationInfoModelForm(user_profile = user_profile)
         context['experience_info_form'] = ExperienceInfoModelForm(instance=ExperienceInfoModel.objects.first())
         context['certificate_info_form'] = CertificateInfoModelForm(instance=CertificateInfoModel.objects.first())
         context['skills_info_form'] = SkillsInfoModelForm(instance=SkillsInfoModel.objects.first())
@@ -126,6 +126,7 @@ class ProfileEditView(TemplateView):
         context['user_profile_image_action_url'] = reverse_lazy('updateProfileImageView', kwargs={'pk': user_profile.pk})
         context['user_resume_upload_action_url'] = reverse_lazy('updateResumeUploadView', kwargs={'pk': user_profile.pk})
         context['create_social_platform_action_url'] = reverse_lazy('createSocialPlatformView')
+        context['create_education_info_action_url'] = reverse_lazy('createEducationInfoView')
 
         return context
 
@@ -203,3 +204,50 @@ class UpdateSocialPlatformView(UpdateView):
 
     form_class = SocialPlatformsModelForm
     success_url = '/profile#social'
+
+class CreateEducationInfoView(CreateView):
+    def get_object(self):
+        if self.request.user.is_authenticated:
+            return User.objects.get(username=self.request.user)
+        return None
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        # Get the user profile instance and pass it to the form
+        user = self.get_object()
+        user_profile = UserProfileModel.objects.get(user=user)
+        kwargs['user_profile'] = user_profile
+        return kwargs
+
+    form_class = EducationInfoModelForm
+    success_url = '/profile#education'
+
+class DeleteEducationInfoView(DeleteView):
+    model = EducationInfoModel
+    success_url = '/profile#education'
+
+    def dispatch(self, request, *args, **kwargs):
+        # Directly delete the object without displaying the confirmation page
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        self.object.delete()
+        return redirect(success_url)
+
+class UpdateEducationInfoView(UpdateView):
+    def get_object(self):
+        if self.request.user.is_authenticated:
+            return User.objects.get(username=self.request.user)
+        return None
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        # Get the user profile instance and pass it to the form
+        user = self.get_object()
+        user_profile = UserProfileModel.objects.get(user=user)
+        kwargs['user_profile'] = user_profile
+        instance_id = self.kwargs.get('pk')
+        kwargs['instance'] = EducationInfoModel.objects.get(id=instance_id)
+        return kwargs
+
+    form_class = EducationInfoModelForm
+    success_url = '/profile#education'

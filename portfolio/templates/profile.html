@@ -252,13 +252,13 @@
                       {% endwith %}
                     </div>
                   {% endfor %}
-                    <div class="social_details add_item">
-                      <a onclick="toggleCreateView('social_items')">
-                        <i class='bx bx-plus-medical'>
-                          <span class="tooltip">Add Item</span>
-                        </i>
-                      </a>
-                    </div>
+                  <div class="social_details add_item">
+                    <a onclick="toggleCreateView('social_items')">
+                      <i class='bx bx-plus-medical'>
+                        <span class="tooltip">Add Item</span>
+                      </i>
+                    </a>
+                  </div>
                 </div>
                 <div class="social_items">
                   <div class="create_view">
@@ -270,21 +270,49 @@
               <div class='education' id='education'>
                 <div class="content_heading">
                   <h1> Education </h1>
-                  <i class='bx bxs-edit'>
-                    <span class="tooltip">edit</span>
-                  </i>
+                  <a onclick="toggleAddItem('education_items', 'education_edit_icon')" id='education_edit_icon'>
+                    <i class='bx bxs-edit'>
+                      <span class="tooltip">edit</span>
+                    </i>
+                  </a>
                 </div>
                 <div class="education_items">
                   {% for education in EducationInfo %}
-                    <div class="education_details">
-                      <div class="education_degree">{{ education.degree }}</div>
-                      <div class="education_university">{{ education.university }}</div>
-                      <div class="education_year">{{ education.start_date }} - {{ education.end_date }}</div>
-                      <div class="education_cgpa">CGPA - {{ education.cgpa }}</div>
+                    <div class="education_details list_view">
+                      <a onclick="toggleUpdateForm('education_items', {{education.id}})">
+                        <div class="education_degree">{{ education.degree }}</div>
+                        <div class="education_university">{{ education.university }}</div>
+                        <div class="education_year">{{ education.start_date }} - {{ education.end_date }}</div>
+                        <div class="education_cgpa">CGPA - {{ education.cgpa }}</div>
+                      </a>
+                      <div class="remove_item">
+                        <a href = "{% url 'deleteEducationInfoView' education.id %}">
+                          <i class='bx bx-x'></i>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="update_view" id="instance-{{education.id}}">
+                      {% url 'updateEducationInfoView' education.id as update_education_info_action_url %}
+                      {% with education_info_form|set_education_instance:education.id as updated_education_instance_form %}
+                        {% include 'profile/update_form.html' with form=updated_education_instance_form form_action_url=update_education_info_action_url form_class='education_info_upload_form'%}
+                      {% endwith %}
                     </div>
                   {% endfor %}
+                  <div class="education_details add_item">
+                    <a onclick="toggleCreateView('education_items')">
+                      <i class='bx bx-plus-medical'>
+                        <span class="tooltip">Add Item</span>
+                      </i>
+                    </a>
+                  </div>
+                </div>
+                <div class="education_items">
+                  <div class="create_view">
+                    {% include 'profile/update_form.html' with form=education_info_form  form_action_url=create_education_info_action_url form_class='education_info_upload_form'%}
+                  </div>
                 </div>
               </div>
+
               <div class='experience' id='experience'>
                 <div class="content_heading">
                   <h1> Experience </h1>

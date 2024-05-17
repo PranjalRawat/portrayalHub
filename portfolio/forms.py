@@ -48,6 +48,17 @@ class EducationInfoModelForm(forms.ModelForm):
         model = EducationInfoModel
         fields = ['degree', 'university', 'start_date', 'end_date', 'university_logo', 'cgpa', 'featured']
 
+    def __init__(self, *args, **kwargs):
+        self.user_profile = kwargs.pop('user_profile', None)
+        super().__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.user_profile = self.user_profile
+        if commit:
+            instance.save()
+        return instance
+
 class ExperienceInfoModelForm(forms.ModelForm):
     class Meta:
         model = ExperienceInfoModel
