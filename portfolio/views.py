@@ -120,7 +120,7 @@ class ProfileEditView(TemplateView):
         context['experience_info_form'] = ExperienceInfoModelForm(user_profile = user_profile)
         context['skills_info_form'] = SkillsInfoModelForm(user_profile = user_profile)
         context['major_projects_info_form'] = MajorProjectsInfoModelForm(user_profile = user_profile)
-        context['certificate_info_form'] = CertificateInfoModelForm(instance=CertificateInfoModel.objects.first())
+        context['certificate_info_form'] = CertificateInfoModelForm(user_profile = user_profile)
 
         context['user_profile_action_url'] = reverse_lazy('updateProfileView', kwargs={'pk': user_profile.pk})
         context['user_profile_image_action_url'] = reverse_lazy('updateProfileImageView', kwargs={'pk': user_profile.pk})
@@ -130,7 +130,7 @@ class ProfileEditView(TemplateView):
         context['create_experience_info_action_url'] = reverse_lazy('createExperienceInfoView')
         context['create_skill_info_action_url'] = reverse_lazy('createSkillsInfoView')
         context['create_major_project_info_action_url'] = reverse_lazy('createMajorProjectsInfoView')
-
+        context['create_certificate_info_action_url'] = reverse_lazy('createCertificateInfoView')
 
         return context
 
@@ -396,3 +396,50 @@ class UpdateMajorProjectsInfoView(UpdateView):
 
     form_class = MajorProjectsInfoModelForm
     success_url = '/profile#projects'
+
+class CreateCertificateInfoView(CreateView):
+    def get_object(self):
+        if self.request.user.is_authenticated:
+            return User.objects.get(username=self.request.user)
+        return None
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        # Get the user profile instance and pass it to the form
+        user = self.get_object()
+        user_profile = UserProfileModel.objects.get(user=user)
+        kwargs['user_profile'] = user_profile
+        return kwargs
+
+    form_class = CertificateInfoModelForm
+    success_url = '/profile#certificates'
+
+class DeleteCertificateInfoView(DeleteView):
+    model = CertificateInfoModel
+    success_url = '/profile#certificates'
+
+    def dispatch(self, request, *args, **kwargs):
+        # Directly delete the object without displaying the confirmation page
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        self.object.delete()
+        return redirect(success_url)
+
+class UpdateCertificateInfoView(UpdateView):
+    def get_object(self):
+        if self.request.user.is_authenticated:
+            return User.objects.get(username=self.request.user)
+        return None
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        # Get the user profile instance and pass it to the form
+        user = self.get_object()
+        user_profile = UserProfileModel.objects.get(user=user)
+        kwargs['user_profile'] = user_profile
+        instance_id = self.kwargs.get('pk')
+        kwargs['instance'] = CertificateInfoModel.objects.get(id=instance_id)
+        return kwargs
+
+    form_class = CertificateInfoModelForm
+    success_url = '/profile#certificatescertificates'

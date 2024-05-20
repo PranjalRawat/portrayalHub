@@ -449,20 +449,48 @@
               <div class='certificates' id='certificates'>
                 <div class="content_heading">
                   <h1> Certificates </h1>
-                  <i class='bx bxs-edit'>
-                    <span class="tooltip">edit</span>
-                  </i>
+                    <a onclick="toggleAddItem('certificates_items', 'certificates_edit_icon')" id='certificates_edit_icon'>
+                    <i class='bx bxs-edit'>
+                      <span class="tooltip">edit</span>
+                    </i>
+                  </a>
                 </div>
                 <div class="certificates_items">
                   {% for certificates in CertificateInfo %}
-                    <div class="certificates_details">
-                      <div class="certificates_name">{{ certificates.course_name }}</div>
-                      <div class="certificates_issuing_org">{{ certificates.issuing_organization }}</div>
-                      <div class="certificates_year">{{ certificates.issue_date }} - {{ certificates.expiration_date }}</div>
+                    <div class="certificates_details list_view">
+                      <a onclick="toggleUpdateForm('certificates_items', {{certificates.id}})">
+                        <div class="certificates_name">{{ certificates.course_name }}</div>
+                        <div class="certificates_issuing_org">{{ certificates.issuing_organization }}</div>
+                        <div class="certificates_year">{{ certificates.issue_date }} - {{ certificates.expiration_date }}</div>
+                      </a>
+                      <div class="remove_item">
+                        <a href = "{% url 'deleteCertificateInfoView' certificates.id %}">
+                          <i class='bx bx-x'></i>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="update_view" id="instance-{{certificates.id}}">
+                      {% url 'updateCertificateInfoView' certificates.id as update_certificates_info_action_url %}
+                      {% with certificate_info_form|set_certificate_instance:certificates.id as updated_certificates_instance_form %}
+                        {% include 'profile/update_form.html' with form=updated_certificates_instance_form form_action_url=update_certificates_info_action_url form_class='certificates_info_upload_form'%}
+                      {% endwith %}
                     </div>
                   {% endfor %}
+                  <div class="certificates_details add_item">
+                    <a onclick="toggleCreateView('certificates_items')">
+                      <i class='bx bx-plus-medical'>
+                        <span class="tooltip">Add a new certificate</span>
+                      </i>
+                    </a>
+                  </div>
+                </div>
+                <div class="certificates_items">
+                  <div class="create_view">
+                    {% include 'profile/update_form.html' with form=certificate_info_form  form_action_url=createCertificateInfoView form_class='certificates_info_upload_form'%}
+                  </div>
                 </div>
               </div>
+
             </section>
         </div>
     </body>

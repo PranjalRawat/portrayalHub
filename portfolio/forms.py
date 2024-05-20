@@ -111,3 +111,14 @@ class CertificateInfoModelForm(forms.ModelForm):
     class Meta:
         model = CertificateInfoModel
         fields = ['course_name', 'issuing_organization', 'issue_date', 'expiration_date', 'credential_url', 'course_badge', 'featured']
+
+    def __init__(self, *args, **kwargs):
+        self.user_profile = kwargs.pop('user_profile', None)
+        super().__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.user_profile = self.user_profile
+        if commit:
+            instance.save()
+        return instance
