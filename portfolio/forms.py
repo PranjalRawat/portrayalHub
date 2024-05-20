@@ -64,6 +64,17 @@ class ExperienceInfoModelForm(forms.ModelForm):
         model = ExperienceInfoModel
         fields = ['designation', 'company_name' , 'start_date', 'end_date', 'currently_working', 'company_logo', 'company_website', 'description',  'featured']
 
+    def __init__(self, *args, **kwargs):
+        self.user_profile = kwargs.pop('user_profile', None)
+        super().__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.user_profile = self.user_profile
+        if commit:
+            instance.save()
+        return instance
+
 class CertificateInfoModelForm(forms.ModelForm):
     class Meta:
         model = CertificateInfoModel

@@ -316,20 +316,48 @@
               <div class='experience' id='experience'>
                 <div class="content_heading">
                   <h1> Experience </h1>
-                  <i class='bx bxs-edit'>
-                    <span class="tooltip">edit</span>
-                  </i>
+                  <a onclick="toggleAddItem('experience_items', 'experience_edit_icon')" id='experience_edit_icon'>
+                    <i class='bx bxs-edit'>
+                      <span class="tooltip">edit</span>
+                    </i>
+                  </a>
                 </div>
                 <div class="experience_items">
                   {% for experience in ExperienceInfo %}
-                    <div class="experience_details">
-                      <div class="experience_company">{{ experience.company_name }}</div>
-                      <div class="experience_designation">{{ experience.designation }}</div>
-                      <div class="experience_year">{{ experience.start_date }} - {{ experience.end_date }}</div>
+                    <div class="experience_details list_view">
+                      <a onclick="toggleUpdateForm('experience_items', {{experience.id}})">
+                        <div class="experience_company">{{ experience.company_name }}</div>
+                        <div class="experience_designation">{{ experience.designation }}</div>
+                        <div class="experience_year">{{ experience.start_date }} - {{ experience.end_date }}</div>
+                      </a>
+                      <div class="remove_item">
+                        <a href = "{% url 'deleteExperienceInfoView' experience.id %}">
+                          <i class='bx bx-x'></i>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="update_view" id="instance-{{experience.id}}">
+                      {% url 'updateExperienceInfoView' experience.id as update_experience_info_action_url %}
+                      {% with experience_info_form|set_experience_instance:experience.id as updated_experience_instance_form %}
+                        {% include 'profile/update_form.html' with form=updated_experience_instance_form form_action_url=update_experience_info_action_url form_class='experience_info_upload_form'%}
+                      {% endwith %}
                     </div>
                   {% endfor %}
+                  <div class="experience_details add_item">
+                    <a onclick="toggleCreateView('experience_items')">
+                      <i class='bx bx-plus-medical'>
+                        <span class="tooltip">Add a new experience</span>
+                      </i>
+                    </a>
+                  </div>
+                </div>
+                <div class="experience_items">
+                  <div class="create_view">
+                    {% include 'profile/update_form.html' with form=experience_info_form  form_action_url=create_experience_info_action_url form_class='experience_info_upload_form'%}
+                  </div>
                 </div>
               </div>
+
               <div class='skills' id='skills'>
                 <div class="content_heading">
                   <h1> Skills </h1>
