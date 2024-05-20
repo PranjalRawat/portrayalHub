@@ -23,6 +23,10 @@ urlpatterns = [
     path('profile/experience/create/', views.CreateExperienceInfoView.as_view(), name='createExperienceInfoView'),
     path('profile/experience/delete/<int:pk>', views.DeleteExperienceInfoView.as_view(), name='deleteExperienceInfoView'),
     path('profile/experience/update/<int:pk>/', views.UpdateExperienceInfoView.as_view(), name='updateExperienceInfoView'),
+
+    path('profile/skill/create/', views.CreateSkillsInfoView.as_view(), name='createSkillsInfoView'),
+    path('profile/skill/delete/<int:pk>', views.DeleteSkillsInfoView.as_view(), name='deleteSkillsInfoView'),
+    path('profile/skill/update/<int:pk>/', views.UpdateSkillsInfoView.as_view(), name='updateSkillsInfoView'),
 ]
 
 # Add a catch-all pattern for page not found errors

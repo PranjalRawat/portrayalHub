@@ -118,8 +118,8 @@ class ProfileEditView(TemplateView):
         context['social_platforms_form'] = SocialPlatformsModelForm(user_profile = user_profile)
         context['education_info_form'] = EducationInfoModelForm(user_profile = user_profile)
         context['experience_info_form'] = ExperienceInfoModelForm(user_profile = user_profile)
+        context['skills_info_form'] = SkillsInfoModelForm(user_profile = user_profile)
         context['certificate_info_form'] = CertificateInfoModelForm(instance=CertificateInfoModel.objects.first())
-        context['skills_info_form'] = SkillsInfoModelForm(instance=SkillsInfoModel.objects.first())
         context['major_projects_info_form'] = MajorProjectsInfoModelForm(instance=MajorProjectsInfoModel.objects.first())
 
         context['user_profile_action_url'] = reverse_lazy('updateProfileView', kwargs={'pk': user_profile.pk})
@@ -128,6 +128,8 @@ class ProfileEditView(TemplateView):
         context['create_social_platform_action_url'] = reverse_lazy('createSocialPlatformView')
         context['create_education_info_action_url'] = reverse_lazy('createEducationInfoView')
         context['create_experience_info_action_url'] = reverse_lazy('createExperienceInfoView')
+        context['create_skill_info_action_url'] = reverse_lazy('createSkillsInfoView')
+
 
         return context
 
@@ -299,3 +301,50 @@ class UpdateExperienceInfoView(UpdateView):
 
     form_class = ExperienceInfoModelForm
     success_url = '/profile#experience'
+
+class CreateSkillsInfoView(CreateView):
+    def get_object(self):
+        if self.request.user.is_authenticated:
+            return User.objects.get(username=self.request.user)
+        return None
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        # Get the user profile instance and pass it to the form
+        user = self.get_object()
+        user_profile = UserProfileModel.objects.get(user=user)
+        kwargs['user_profile'] = user_profile
+        return kwargs
+
+    form_class = SkillsInfoModelForm
+    success_url = '/profile#skills'
+
+class DeleteSkillsInfoView(DeleteView):
+    model = SkillsInfoModel
+    success_url = '/profile#skills'
+
+    def dispatch(self, request, *args, **kwargs):
+        # Directly delete the object without displaying the confirmation page
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        self.object.delete()
+        return redirect(success_url)
+
+class UpdateSkillsInfoView(UpdateView):
+    def get_object(self):
+        if self.request.user.is_authenticated:
+            return User.objects.get(username=self.request.user)
+        return None
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        # Get the user profile instance and pass it to the form
+        user = self.get_object()
+        user_profile = UserProfileModel.objects.get(user=user)
+        kwargs['user_profile'] = user_profile
+        instance_id = self.kwargs.get('pk')
+        kwargs['instance'] = SkillsInfoModel.objects.get(id=instance_id)
+        return kwargs
+
+    form_class = SkillsInfoModelForm
+    success_url = '/profile#skills'

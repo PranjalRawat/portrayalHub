@@ -428,18 +428,22 @@ body {
 .update_view form p input[id='video_resume-clear_id'],
 .update_view form p input[id='university_logo-clear_id'],
 .update_view form p input[id='company_logo-clear_id'],
+.update_view form p input[id='skill_badge-clear_id'],
 .create_view form p input[id='resume-clear_id'],
 .create_view form p input[id='video_resume-clear_id'],
 .create_view form p input[id='university_logo-clear_id'],
 .create_view form p input[id='company_logo-clear_id'],
+.create_view form p input[id='skill_badge-clear_id'],
 .update_view form p label[for='resume-clear_id'],
 .update_view form p label[for='video_resume-clear_id'],
 .update_view form p label[for='university_logo-clear_id'],
 .update_view form p label[for='company_logo-clear_id'],
+.update_view form p label[for='skill_badge-clear_id'],
 .create_view form p label[for='resume-clear_id'],
 .create_view form p label[for='video_resume-clear_id'],
 .create_view form p label[for='university_logo-clear_id'],
-.create_view form p label[for='company_logo-clear_id'] {
+.create_view form p label[for='company_logo-clear_id'],
+.create_view form p label[for='skill_badge-clear_id'] {
     display: none;
 }
 
@@ -448,11 +452,13 @@ body {
 .update_view form p label[for='id_platformIcon'] + a,
 .update_view form p label[for='id_university_logo'] + a,
 .update_view form p label[for='id_company_logo'] + a,
+.update_view form p label[for='id_skill_badge'] + a,
 .create_view form p label[for='id_video_resume'] + a,
 .create_view form p label[for='id_resume'] + a,
 .create_view form p label[for='id_platformIcon'] + a,
 .create_view form p label[for='id_university_logo'] + a,
-.create_view form p label[for='id_company_logo'] + a {
+.create_view form p label[for='id_company_logo'] + a,
+.create_view form p label[for='id_skill_badge'] + a {
     background: var(--clr-main-2);
     padding: 0.5em;
     font-size: 0.8rem;
@@ -848,8 +854,40 @@ i.bxs-edit:hover > .tooltip {
     background-color: var(--clr-main-3);
     color: var(--clr-text);
     font-size: 0.8rem;
-    text-align: center;
     width: calc(100% - 54%);
+}
+.skills .skills_items .skills_details.list_view {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+}
+.skills .skills_info_upload_form {
+    padding: 1em 10%;
+}
+.skills .skills_info_upload_form p {
+    margin-bottom: 0.5em;
+}
+.skills .skills_info_upload_form label {
+    font-family: 'Times New Roman', Times, serif;
+    line-height: 2em;
+    display: block;
+}
+.skills .skills_info_upload_form select,
+.skills .skills_info_upload_form textarea,
+.skills .skills_info_upload_form input {
+    font-family: 'Times New Roman', Times, serif;
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--clr-hex);
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #fffffffc;
+}
+.skills .skills_info_upload_form label[for='id_featured'],
+.skills .skills_info_upload_form label[for='id_skill_badge'],
+.skills .skills_info_upload_form input[id='id_featured'] {
+    display: inline;
+    width: 10%;
 }
 
 .projects {

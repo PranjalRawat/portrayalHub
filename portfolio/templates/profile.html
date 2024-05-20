@@ -361,18 +361,46 @@
               <div class='skills' id='skills'>
                 <div class="content_heading">
                   <h1> Skills </h1>
-                  <i class='bx bxs-edit'>
-                    <span class="tooltip">edit</span>
-                  </i>
+                  <a onclick="toggleAddItem('skills_items', 'skills_edit_icon')" id='skills_edit_icon'>
+                    <i class='bx bxs-edit'>
+                      <span class="tooltip">edit</span>
+                    </i>
+                  </a>
                 </div>
                 <div class="skills_items">
                   {% for skills in SkillsInfo %}
-                    <div class="skills_details">
-                      {{skills.skill}}
+                    <div class="skills_details list_view">
+                      <a onclick="toggleUpdateForm('skills_items', {{skills.id}})">
+                        {{skills.skill}}
+                      </a>
+                      <div class="remove_item">
+                        <a href = "{% url 'deleteSkillsInfoView' skills.id %}">
+                          <i class='bx bx-x'></i>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="update_view" id="instance-{{skills.id}}">
+                      {% url 'updateSkillsInfoView' skills.id as update_skills_info_action_url %}
+                      {% with skills_info_form|set_skill_instance:skills.id as updated_skills_instance_form %}
+                        {% include 'profile/update_form.html' with form=updated_skills_instance_form form_action_url=update_skills_info_action_url form_class='skills_info_upload_form'%}
+                      {% endwith %}
                     </div>
                   {% endfor %}
+                  <div class="skills_details add_item">
+                    <a onclick="toggleCreateView('skills_items')">
+                      <i class='bx bx-plus-medical'>
+                        <span class="tooltip">Add a new Skill</span>
+                      </i>
+                    </a>
+                  </div>
+                </div>
+                <div class="skills_items">
+                  <div class="create_view">
+                    {% include 'profile/update_form.html' with form=skills_info_form  form_action_url=create_skill_info_action_url form_class='skills_info_upload_form'%}
+                  </div>
                 </div>
               </div>
+
               <div class='projects' id='projects'>
                 <div class="content_heading">
                   <h1> Projects </h1>
