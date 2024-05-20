@@ -75,11 +75,6 @@ class ExperienceInfoModelForm(forms.ModelForm):
             instance.save()
         return instance
 
-class CertificateInfoModelForm(forms.ModelForm):
-    class Meta:
-        model = CertificateInfoModel
-        fields = ['course_name', 'issuing_organization', 'issue_date', 'expiration_date', 'credential_url', 'course_badge', 'featured']
-
 class SkillsInfoModelForm(forms.ModelForm):
     class Meta:
         model = SkillsInfoModel
@@ -100,3 +95,19 @@ class MajorProjectsInfoModelForm(forms.ModelForm):
     class Meta:
         model = MajorProjectsInfoModel
         fields = ['project_name', 'company_name', 'description', 'start_date', 'end_date', 'currently_working', 'project_url', 'project_logo', 'featured']
+
+    def __init__(self, *args, **kwargs):
+        self.user_profile = kwargs.pop('user_profile', None)
+        super().__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.user_profile = self.user_profile
+        if commit:
+            instance.save()
+        return instance
+
+class CertificateInfoModelForm(forms.ModelForm):
+    class Meta:
+        model = CertificateInfoModel
+        fields = ['course_name', 'issuing_organization', 'issue_date', 'expiration_date', 'credential_url', 'course_badge', 'featured']

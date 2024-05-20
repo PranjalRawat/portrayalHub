@@ -1,6 +1,6 @@
 # custom_filters.py
 from django import template
-from portfolioApi.models import EducationInfoModel, SocialPlatformsModel, ExperienceInfoModel, SkillsInfoModel
+from portfolioApi.models import EducationInfoModel, SocialPlatformsModel, ExperienceInfoModel, SkillsInfoModel, MajorProjectsInfoModel
 
 register = template.Library()
 
@@ -26,4 +26,10 @@ def set_experience_instance(form, experience_id):
 def set_skill_instance(form, skill_id):
     skill_info_instance = SkillsInfoModel.objects.get(id=skill_id)
     updated_form = form.__class__(instance=skill_info_instance)
+    return updated_form
+
+@register.filter
+def set_project_instance(form, project_id):
+    project_info_instance = MajorProjectsInfoModel.objects.get(id=project_id)
+    updated_form = form.__class__(instance=project_info_instance)
     return updated_form

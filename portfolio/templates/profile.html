@@ -389,7 +389,7 @@
                   <div class="skills_details add_item">
                     <a onclick="toggleCreateView('skills_items')">
                       <i class='bx bx-plus-medical'>
-                        <span class="tooltip">Add a new Skill</span>
+                        <span class="tooltip">Add a new skill</span>
                       </i>
                     </a>
                   </div>
@@ -404,20 +404,48 @@
               <div class='projects' id='projects'>
                 <div class="content_heading">
                   <h1> Projects </h1>
-                  <i class='bx bxs-edit'>
-                    <span class="tooltip">edit</span>
-                  </i>
+                  <a onclick="toggleAddItem('projects_items', 'projects_edit_icon')" id='projects_edit_icon'>
+                    <i class='bx bxs-edit'>
+                      <span class="tooltip">edit</span>
+                    </i>
+                  </a>
                 </div>
                 <div class="projects_items">
                   {% for projects in MajorProjectsInfo %}
-                    <div class="projects_details">
-                      <div class="projects_name">{{ projects.project_name }}</div>
-                      <div class="projects_url">{{ projects.project_url }}</div>
-                      <div class="projects_year">{{ projects.start_date }} - {{ projects.end_date }}</div>
+                    <div class="projects_details list_view">
+                      <a onclick="toggleUpdateForm('projects_items', {{projects.id}})">
+                        <div class="projects_name">{{ projects.project_name }}</div>
+                        <div class="projects_url">{{ projects.project_url }}</div>
+                        <div class="projects_year">{{ projects.start_date }} - {{ projects.end_date }}</div>
+                      </a>
+                      <div class="remove_item">
+                        <a href = "{% url 'deleteMajorProjectsInfoView' projects.id %}">
+                          <i class='bx bx-x'></i>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="update_view" id="instance-{{projects.id}}">
+                      {% url 'updateMajorProjectsInfoView' projects.id as update_projects_info_action_url %}
+                      {% with major_projects_info_form|set_project_instance:projects.id as updated_projects_instance_form %}
+                        {% include 'profile/update_form.html' with form=updated_projects_instance_form form_action_url=update_projects_info_action_url form_class='projects_info_upload_form'%}
+                      {% endwith %}
                     </div>
                   {% endfor %}
+                  <div class="projects_details add_item">
+                    <a onclick="toggleCreateView('projects_items')">
+                      <i class='bx bx-plus-medical'>
+                        <span class="tooltip">Add a new project</span>
+                      </i>
+                    </a>
+                  </div>
+                </div>
+                <div class="projects_items">
+                  <div class="create_view">
+                    {% include 'profile/update_form.html' with form=major_projects_info_form  form_action_url=create_major_project_info_action_url form_class='projects_info_upload_form'%}
+                  </div>
                 </div>
               </div>
+
               <div class='certificates' id='certificates'>
                 <div class="content_heading">
                   <h1> Certificates </h1>

@@ -27,6 +27,10 @@ urlpatterns = [
     path('profile/skill/create/', views.CreateSkillsInfoView.as_view(), name='createSkillsInfoView'),
     path('profile/skill/delete/<int:pk>', views.DeleteSkillsInfoView.as_view(), name='deleteSkillsInfoView'),
     path('profile/skill/update/<int:pk>/', views.UpdateSkillsInfoView.as_view(), name='updateSkillsInfoView'),
+
+    path('profile/projects/create/', views.CreateMajorProjectsInfoView.as_view(), name='createMajorProjectsInfoView'),
+    path('profile/projects/delete/<int:pk>', views.DeleteMajorProjectsInfoView.as_view(), name='deleteMajorProjectsInfoView'),
+    path('profile/projects/update/<int:pk>/', views.UpdateMajorProjectsInfoView.as_view(), name='updateMajorProjectsInfoView'),
 ]
 
 # Add a catch-all pattern for page not found errors
