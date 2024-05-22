@@ -442,4 +442,4 @@ class UpdateCertificateInfoView(UpdateView):
         return kwargs
 
     form_class = CertificateInfoModelForm
-    success_url = '/profile#certificatescertificates'
+    success_url = '/profile#certificates'
