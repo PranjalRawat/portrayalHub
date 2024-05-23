@@ -25,7 +25,7 @@ class SkillsInfoModelTest(TestCase):
             'gender': fake.random_element(elements = ('M', 'F', 'O')),
             'address': fake.address(),
             'email': fake.email(),
-            'phone_number': fake.phone_number(),
+            'phone_number': '123456789',
         }
         self.userProfileInstance = UserProfileModel.objects.create(**self.user_profile)
 
@@ -37,10 +37,10 @@ class SkillsInfoModelTest(TestCase):
             'skill_badge': fake.image_url(),
             'featured': fake.boolean(),
         }
-        SkillsInfoModel.objects.create(**self.skillsInfo)
+        self.skillsInfoInstance = SkillsInfoModel.objects.create(**self.skillsInfo)
 
     def test_skills_info_str_method(self):
-        skills_info = SkillsInfoModel.objects.get(id=1)
+        skills_info = SkillsInfoModel.objects.get(id=self.skillsInfoInstance.id)
         self.assertEqual(str(skills_info), f"{skills_info.skill} - {skills_info.years_of_exp}")
 
     def test_skills_info_multiple_instances(self):
@@ -61,7 +61,7 @@ class SkillsInfoModelTest(TestCase):
         self.assertEqual(SkillsInfoModel.objects.filter(user_profile=skills_info.user_profile).count(), 10)
 
     def test_skills_info_fields_update(self):
-        skills_info = SkillsInfoModel.objects.get(id=1)
+        skills_info = SkillsInfoModel.objects.get(id=self.skillsInfoInstance.id)
         old_skills_info_field_data = self.skillsInfo
         new_skills_info_field_data = {
             'skill': fake.word(),
@@ -76,7 +76,7 @@ class SkillsInfoModelTest(TestCase):
         skills_info.featured = new_skills_info_field_data['featured']
 
         skills_info.save()
-        updated_skills_info = SkillsInfoModel.objects.get(id=1)
+        updated_skills_info = SkillsInfoModel.objects.get(id=self.skillsInfoInstance.id)
 
         self.assertEqual(str(updated_skills_info), f"{new_skills_info_field_data['skill']} - {new_skills_info_field_data['years_of_exp']}")
         self.assertNotEqual(str(updated_skills_info), f"{old_skills_info_field_data['skill']} - {old_skills_info_field_data['years_of_exp']}")
@@ -87,10 +87,10 @@ class SkillsInfoModelTest(TestCase):
         self.assertFalse(SkillsInfoModel.objects.filter(id=3).exists())
 
     def test_skills_info_deletion_with_direct_delete(self):
-        skills_info = SkillsInfoModel.objects.get(id=1)
-        self.assertTrue(SkillsInfoModel.objects.filter(id=1).exists())
+        skills_info = SkillsInfoModel.objects.get(id=self.skillsInfoInstance.id)
+        self.assertTrue(SkillsInfoModel.objects.filter(id=self.skillsInfoInstance.id).exists())
         skills_info.delete()
-        self.assertFalse(SkillsInfoModel.objects.filter(id=1).exists())
+        self.assertFalse(SkillsInfoModel.objects.filter(id=self.skillsInfoInstance.id).exists())
 
     def test_skills_info_deletion_with_user(self):
         self.assertTrue(SkillsInfoModel.objects.filter(user_profile=self.userProfileInstance).exists())

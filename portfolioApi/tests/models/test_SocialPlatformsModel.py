@@ -25,7 +25,7 @@ class SocialPlatformModelTest(TestCase):
             'gender': fake.random_element(elements = ('M', 'F', 'O')),
             'address': fake.address(),
             'email': fake.email(),
-            'phone_number': fake.phone_number(),
+            'phone_number': '123456789',
         }
         self.userProfileInstance = UserProfileModel.objects.create(**self.user_profile)
 
@@ -37,10 +37,10 @@ class SocialPlatformModelTest(TestCase):
             'featured': fake.boolean()
         }
 
-        SocialPlatformsModel.objects.create(**self.socialPlatform)
+        self.socialPlatformInstance = SocialPlatformsModel.objects.create(**self.socialPlatform)
 
     def test_social_platform_str_method(self):
-        social_platform = SocialPlatformsModel.objects.get(id=1)
+        social_platform = SocialPlatformsModel.objects.get(id=self.socialPlatformInstance.id)
         self.assertEqual(str(social_platform), f"{social_platform.platformName} : {social_platform.profileUrl}")
 
     def test_social_platform_multiple_instances(self):
@@ -61,7 +61,7 @@ class SocialPlatformModelTest(TestCase):
         self.assertEqual(SocialPlatformsModel.objects.filter(user_profile=social_platform.user_profile).count(), 5)
 
     def test_social_platform_fields_update(self):
-        social_platform = SocialPlatformsModel.objects.get(id=1)
+        social_platform = SocialPlatformsModel.objects.get(id=self.socialPlatformInstance.id)
         old_social_platform_field_data = self.socialPlatform
         new_social_platform_field_data = {
             'platformName': fake.company(),
@@ -75,7 +75,7 @@ class SocialPlatformModelTest(TestCase):
         social_platform.featured = new_social_platform_field_data['featured']
 
         social_platform.save()
-        updated_social_platform = SocialPlatformsModel.objects.get(id=1)
+        updated_social_platform = SocialPlatformsModel.objects.get(id=self.socialPlatformInstance.id)
 
         self.assertEqual(str(updated_social_platform), f"{new_social_platform_field_data['platformName']} : {new_social_platform_field_data['profileUrl']}")
         self.assertNotEqual(str(updated_social_platform), f"{old_social_platform_field_data['platformName']} : {old_social_platform_field_data['profileUrl']}")
@@ -86,10 +86,10 @@ class SocialPlatformModelTest(TestCase):
         self.assertFalse(SocialPlatformsModel.objects.filter(id=3).exists())
 
     def test_social_platform_deletion_with_direct_delete(self):
-        social_platform = SocialPlatformsModel.objects.get(id=1)
-        self.assertTrue(SocialPlatformsModel.objects.filter(id=1).exists())
+        social_platform = SocialPlatformsModel.objects.get(id=self.socialPlatformInstance.id)
+        self.assertTrue(SocialPlatformsModel.objects.filter(id=self.socialPlatformInstance.id).exists())
         social_platform.delete()
-        self.assertFalse(SocialPlatformsModel.objects.filter(id=1).exists())
+        self.assertFalse(SocialPlatformsModel.objects.filter(id=self.socialPlatformInstance.id).exists())
 
     def test_social_platform_deletion_with_user(self):
         self.assertTrue(SocialPlatformsModel.objects.filter(user_profile=self.userProfileInstance).exists())

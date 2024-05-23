@@ -25,7 +25,7 @@ class ResumeUploadModelTest(TestCase):
             'gender': fake.random_element(elements = ('M', 'F', 'O')),
             'address': fake.address(),
             'email': fake.email(),
-            'phone_number': fake.phone_number(),
+            'phone_number': '123456789',
         }
         self.userProfileInstance = UserProfileModel.objects.create(**self.user_profile)
 
@@ -40,7 +40,7 @@ class ResumeUploadModelTest(TestCase):
         self.userResumeInstance = ResumeUploadModel.objects.create(**self.user_resume_data)
 
     def test_user_resume_str_method(self):
-        user_profile_resume = ResumeUploadModel.objects.get(id=1)
+        user_profile_resume = ResumeUploadModel.objects.get(id=self.userResumeInstance.id)
         self.assertEqual(str(user_profile_resume), f"{self.userProfileInstance.user.username}'s Profile Resume")
 
     def test_user_single_profile_resume_instance(self):
@@ -61,17 +61,17 @@ class ResumeUploadModelTest(TestCase):
         self.assertFalse(ResumeUploadModel.objects.filter(user_profile=self.userProfileInstance).exists())
 
     def test_user_profile_resume_deletion_with_direct_delete(self):
-        user_profile_resume = ResumeUploadModel.objects.get(id=1)
+        user_profile_resume = ResumeUploadModel.objects.get(id=self.userResumeInstance.id)
         self.assertTrue(ResumeUploadModel.objects.filter(user_profile=self.userProfileInstance).exists())
         user_profile_resume.delete()
         self.assertFalse(ResumeUploadModel.objects.filter(user_profile=self.userProfileInstance).exists())
 
     def test_user_profile_resume_document_resume_validity(self):
-        user_profile_resume = ResumeUploadModel.objects.get(id=1)
+        user_profile_resume = ResumeUploadModel.objects.get(id=self.userResumeInstance.id)
         self.assertTrue(user_profile_resume.resume == self.user_resume_data['resume'])
         self.assertTrue(user_profile_resume.resume.url.endswith('.pdf'))
 
     def test_user_profile_resume_video_resume_validity(self):
-        user_profile_resume = ResumeUploadModel.objects.get(id=1)
+        user_profile_resume = ResumeUploadModel.objects.get(id=self.userResumeInstance.id)
         self.assertTrue(user_profile_resume.video_resume == self.user_resume_data['video_resume'])
         self.assertTrue(user_profile_resume.video_resume.url.endswith('.mp4'))

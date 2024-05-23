@@ -25,7 +25,7 @@ class CertificateInfoModelTest(TestCase):
             'gender': fake.random_element(elements = ('M', 'F', 'O')),
             'address': fake.address(),
             'email': fake.email(),
-            'phone_number': fake.phone_number(),
+            'phone_number': '123456789',
         }
         self.userProfileInstance = UserProfileModel.objects.create(**self.user_profile)
 
@@ -39,10 +39,10 @@ class CertificateInfoModelTest(TestCase):
             'course_badge': fake.image_url(),
             'featured': fake.boolean(),
         }
-        CertificateInfoModel.objects.create(**self.certificateInfo)
+        self.certificateInfoInstance = CertificateInfoModel.objects.create(**self.certificateInfo)
 
     def test_certificate_info_str_method(self):
-        certificate_info = CertificateInfoModel.objects.get(id=1)
+        certificate_info = CertificateInfoModel.objects.get(id=self.certificateInfoInstance.id)
         self.assertEqual(str(certificate_info), f"{certificate_info.course_name} - {certificate_info.issuing_organization}")
 
     def test_certificate_info_multiple_instances(self):
@@ -65,7 +65,7 @@ class CertificateInfoModelTest(TestCase):
         self.assertEqual(CertificateInfoModel.objects.filter(user_profile=certificate_info.user_profile).count(), 3)
 
     def test_certificate_info_fields_update(self):
-        certificate_info = CertificateInfoModel.objects.get(id=1)
+        certificate_info = CertificateInfoModel.objects.get(id=self.certificateInfoInstance.id)
         old_certificate_info_field_data = self.certificateInfo
         new_certificate_info_field_data = {
             'course_name': fake.word(),
@@ -79,7 +79,7 @@ class CertificateInfoModelTest(TestCase):
         certificate_info.course_badge = new_certificate_info_field_data['course_badge']
 
         certificate_info.save()
-        updated_certificate_info = CertificateInfoModel.objects.get(id=1)
+        updated_certificate_info = CertificateInfoModel.objects.get(id=self.certificateInfoInstance.id)
 
         self.assertEqual(str(updated_certificate_info), f"{new_certificate_info_field_data['course_name']} - {new_certificate_info_field_data['issuing_organization']}")
         self.assertNotEqual(str(updated_certificate_info), f"{old_certificate_info_field_data['course_name']} - {old_certificate_info_field_data['issuing_organization']}")
@@ -90,10 +90,10 @@ class CertificateInfoModelTest(TestCase):
         self.assertFalse(CertificateInfoModel.objects.filter(id=3).exists())
 
     def test_certificate_info_deletion_with_direct_delete(self):
-        certificate_info = CertificateInfoModel.objects.get(id=1)
-        self.assertTrue(CertificateInfoModel.objects.filter(id=1).exists())
+        certificate_info = CertificateInfoModel.objects.get(id=self.certificateInfoInstance.id)
+        self.assertTrue(CertificateInfoModel.objects.filter(id=self.certificateInfoInstance.id).exists())
         certificate_info.delete()
-        self.assertFalse(CertificateInfoModel.objects.filter(id=1).exists())
+        self.assertFalse(CertificateInfoModel.objects.filter(id=self.certificateInfoInstance.id).exists())
 
     def test_certificate_info_deletion_with_user(self):
         self.assertTrue(CertificateInfoModel.objects.filter(user_profile=self.userProfileInstance).exists())

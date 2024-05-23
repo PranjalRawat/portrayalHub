@@ -26,33 +26,33 @@ class UserProfileModelTest(TestCase):
             'gender': fake.random_element(elements = ('M', 'F', 'O')),
             'address': fake.address(),
             'email': fake.email(),
-            'phone_number': fake.phone_number(),
+            'phone_number': '123456789',
         }
-        UserProfileModel.objects.create(**self.profile_data)
+        self.userProfileInstance = UserProfileModel.objects.create(**self.profile_data)
 
     def test_user_profile_str_method(self):
-        user_profile = UserProfileModel.objects.get(id=1)
+        user_profile = UserProfileModel.objects.get(id=self.userProfileInstance.id)
         self.assertEqual(str(user_profile), f"{user_profile.user.username}'s Profile")
 
     def test_user_profile_has_user(self):
-        user_profile = UserProfileModel.objects.get(id=1)
+        user_profile = UserProfileModel.objects.get(id=self.userProfileInstance.id)
         self.assertIsInstance(user_profile.user, User)
 
     def test_user_profile_first_name_validity(self):
-        user_profile = UserProfileModel.objects.get(id=1)
+        user_profile = UserProfileModel.objects.get(id=self.userProfileInstance.id)
         self.assertTrue(user_profile.first_name == self.profile_data['first_name'])
 
     def test_user_profile_last_name_validity(self):
-        user_profile = UserProfileModel.objects.get(id=1)
+        user_profile = UserProfileModel.objects.get(id=self.userProfileInstance.id)
         self.assertTrue(user_profile.last_name == self.profile_data['last_name'])
 
     def test_user_profile_date_of_birth_validity(self):
-        user_profile = UserProfileModel.objects.get(id=1)
+        user_profile = UserProfileModel.objects.get(id=self.userProfileInstance.id)
         self.assertTrue(user_profile.date_of_birth == self.profile_data['date_of_birth'])
         self.assertTrue(user_profile.date_of_birth <= date.today())
 
     def test_user_profile_email_format(self):
-        user_profile = UserProfileModel.objects.get(id=1)
+        user_profile = UserProfileModel.objects.get(id=self.userProfileInstance.id)
         self.assertTrue('@' in user_profile.email)
 
     def test_user_profile_email_unique(self):
@@ -66,31 +66,31 @@ class UserProfileModelTest(TestCase):
                 gender = fake.random_element(elements=('M', 'F', 'O')),
                 address = fake.address(),
                 email = self.profile_data['email'],  # Use the same email as the first user profile
-                phone_number = fake.phone_number(),
+                phone_number = '123456789',
             )
             self.assertTrue('unique constraint' in str(context.exception))
 
     def test_user_profile_address_not_empty(self):
-        user_profile = UserProfileModel.objects.get(id=1)
+        user_profile = UserProfileModel.objects.get(id=self.userProfileInstance.id)
         self.assertTrue(user_profile.address != '')
 
     def test_user_profile_gender_choices(self):
-        user_profile = UserProfileModel.objects.get(id=1)
+        user_profile = UserProfileModel.objects.get(id=self.userProfileInstance.id)
         valid_genders = [choice[0] for choice in UserProfileModel.GENDER_CHOICES]
         self.assertIn(user_profile.gender, valid_genders)
 
     def test_user_profile_update(self):
-        user_profile = UserProfileModel.objects.get(id=1)
+        user_profile = UserProfileModel.objects.get(id=self.userProfileInstance.id)
         old_first_name = user_profile.first_name
         new_first_name = fake.first_name()
         user_profile.first_name = new_first_name
         user_profile.save()
-        updated_user_profile = UserProfileModel.objects.get(id=1)
+        updated_user_profile = UserProfileModel.objects.get(id=self.userProfileInstance.id)
         self.assertEqual(updated_user_profile.first_name, new_first_name)
         self.assertNotEqual(updated_user_profile.first_name, old_first_name)
 
     def test_user_profile_deletion_cascade(self):
-        user_profile = UserProfileModel.objects.get(id=1)
+        user_profile = UserProfileModel.objects.get(id=self.userProfileInstance.id)
         user_profile.user.delete()
         with self.assertRaises(UserProfileModel.DoesNotExist):
             UserProfileModel.objects.get(user=self.user)
@@ -106,6 +106,6 @@ class UserProfileModelTest(TestCase):
                 gender = fake.random_element(elements=('M', 'F', 'O')),
                 address = fake.address(),
                 email = fake.email(),
-                phone_number = fake.phone_number(),
+                phone_number = '123456789',
             )
             self.assertTrue('unique constraint' in str(context.exception))

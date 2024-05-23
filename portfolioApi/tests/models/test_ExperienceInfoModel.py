@@ -25,7 +25,7 @@ class ExperienceInfoModelTest(TestCase):
             'gender': fake.random_element(elements = ('M', 'F', 'O')),
             'address': fake.address(),
             'email': fake.email(),
-            'phone_number': fake.phone_number(),
+            'phone_number': '123456789',
         }
         self.userProfileInstance = UserProfileModel.objects.create(**self.user_profile)
 
@@ -41,10 +41,10 @@ class ExperienceInfoModelTest(TestCase):
             'featured': fake.boolean(),
             'description': fake.text(),
         }
-        ExperienceInfoModel.objects.create(**self.experienceInfo)
+        self.experienceInfoInstance = ExperienceInfoModel.objects.create(**self.experienceInfo)
 
     def test_experience_info_str_method(self):
-        experience_info = ExperienceInfoModel.objects.get(id=1)
+        experience_info = ExperienceInfoModel.objects.get(id=self.experienceInfoInstance.id)
         self.assertEqual(str(experience_info), f"{experience_info.company_name} - {experience_info.designation}")
 
     def test_experience_info_multiple_instances(self):
@@ -68,7 +68,7 @@ class ExperienceInfoModelTest(TestCase):
         self.assertEqual(ExperienceInfoModel.objects.filter(user_profile=experience_info.user_profile).count(), 2)
 
     def test_experience_info_fields_update(self):
-        experience_info = ExperienceInfoModel.objects.get(id=1)
+        experience_info = ExperienceInfoModel.objects.get(id=self.experienceInfoInstance.id)
         old_experience_info_field_data = self.experienceInfo
         new_experience_info_field_data = {
             'designation': fake.word(),
@@ -78,7 +78,7 @@ class ExperienceInfoModelTest(TestCase):
         experience_info.company_name = new_experience_info_field_data['company_name']
 
         experience_info.save()
-        updated_experience_info = ExperienceInfoModel.objects.get(id=1)
+        updated_experience_info = ExperienceInfoModel.objects.get(id=self.experienceInfoInstance.id)
 
         self.assertEqual(str(updated_experience_info), f"{new_experience_info_field_data['company_name']} - {new_experience_info_field_data['designation']}")
         self.assertNotEqual(str(updated_experience_info), f"{old_experience_info_field_data['company_name']} - {old_experience_info_field_data['designation']}")
@@ -89,10 +89,10 @@ class ExperienceInfoModelTest(TestCase):
         self.assertFalse(ExperienceInfoModel.objects.filter(id=3).exists())
 
     def test_experience_info_deletion_with_direct_delete(self):
-        experience_info = ExperienceInfoModel.objects.get(id=1)
-        self.assertTrue(ExperienceInfoModel.objects.filter(id=1).exists())
+        experience_info = ExperienceInfoModel.objects.get(id=self.experienceInfoInstance.id)
+        self.assertTrue(ExperienceInfoModel.objects.filter(id=self.experienceInfoInstance.id).exists())
         experience_info.delete()
-        self.assertFalse(ExperienceInfoModel.objects.filter(id=1).exists())
+        self.assertFalse(ExperienceInfoModel.objects.filter(id=self.experienceInfoInstance.id).exists())
 
     def test_experience_info_deletion_with_user(self):
         self.assertTrue(ExperienceInfoModel.objects.filter(user_profile=self.userProfileInstance).exists())

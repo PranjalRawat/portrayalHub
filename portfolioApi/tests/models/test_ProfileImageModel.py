@@ -25,7 +25,7 @@ class ProfileImageModelTest(TestCase):
             'gender': fake.random_element(elements = ('M', 'F', 'O')),
             'address': fake.address(),
             'email': fake.email(),
-            'phone_number': fake.phone_number(),
+            'phone_number': '123456789',
         }
         self.userProfileInstance = UserProfileModel.objects.create(**self.user_profile)
 
@@ -33,10 +33,10 @@ class ProfileImageModelTest(TestCase):
             'user_profile': self.userProfileInstance,
             'image': fake.image_url(),
         }
-        ProfileImageModel.objects.create(**self.profile_image)
+        self.profileImageInstance = ProfileImageModel.objects.create(**self.profile_image)
 
     def test_profile_image_str_method(self):
-        user_profile_image = ProfileImageModel.objects.get(id=1)
+        user_profile_image = ProfileImageModel.objects.get(id=self.profileImageInstance.id)
         self.assertEqual(str(user_profile_image), f"{self.userProfileInstance.user.username}'s Profile Image")
 
     def test_user_single_profile_image_instance(self):
@@ -54,17 +54,17 @@ class ProfileImageModelTest(TestCase):
         self.assertFalse(ProfileImageModel.objects.filter(user_profile=self.userProfileInstance).exists())
 
     def test_user_profile_image_deletion_with_direct_delete(self):
-        user_profile_image = ProfileImageModel.objects.get(id=1)
+        user_profile_image = ProfileImageModel.objects.get(id=self.profileImageInstance.id)
         self.assertTrue(ProfileImageModel.objects.filter(user_profile=self.userProfileInstance).exists())
         user_profile_image.delete()
         self.assertFalse(ProfileImageModel.objects.filter(user_profile=self.userProfileInstance).exists())
 
     def test_user_profile_image_update(self):
-        user_profile_image = ProfileImageModel.objects.get(id=1)
+        user_profile_image = ProfileImageModel.objects.get(id=self.profileImageInstance.id)
         old_image = user_profile_image.image
         new_image = fake.image_url()
         user_profile_image.image = new_image
         user_profile_image.save()
-        updated_user_profile_image = ProfileImageModel.objects.get(id=1)
+        updated_user_profile_image = ProfileImageModel.objects.get(id=self.profileImageInstance.id)
         self.assertEqual(updated_user_profile_image.image, new_image)
         self.assertNotEqual(updated_user_profile_image.image, old_image)
