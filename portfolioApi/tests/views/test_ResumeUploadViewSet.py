@@ -16,12 +16,15 @@ fake = Faker()
 # Test Execution Command :::>>>  python3 manage.py test portfolioApi.tests.views.test_ResumeUploadViewSet
 class ResumeUploadViewSetTest(APITestCase):
 
+    def setUpUrl(self):
+        self.client.login(**self.user_data)
+        self.pk = self.client.get(self.list_url).data[0]['id']
+        self.detail_url = reverse('userprofileResume-detail', kwargs={'pk': self.pk})
+
     def setUp(self):
         self.client = APIClient()
         self.media_fields = ['resume', 'video_resume']
         self.list_url = reverse('userprofileResume-list')
-        self.pk = 1
-        self.detail_url = reverse('userprofileResume-detail', kwargs={'pk': self.pk})
 
         # Create a fake image using PIL
         pdf = Image.new('RGB', (100, 100))  # You can specify the size of the image as needed
@@ -49,7 +52,7 @@ class ResumeUploadViewSetTest(APITestCase):
             'gender': fake.random_element(elements = ('M', 'F', 'O')),
             'address': fake.address(),
             'email': fake.email(),
-            'phone_number': fake.phone_number(),
+            'phone_number': '123456789',
         }
         self.userProfileInstance = UserProfileModel.objects.create(**self.user_profile)
 
@@ -61,6 +64,8 @@ class ResumeUploadViewSetTest(APITestCase):
             'designation': fake.company(),
         }
         ResumeUploadModel.objects.create(**self.user_resume_data)
+
+        self.setUpUrl()
 
     def tearDown(self):
         super().tearDown()

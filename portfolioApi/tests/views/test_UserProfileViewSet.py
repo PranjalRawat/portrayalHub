@@ -11,11 +11,14 @@ fake = Faker()
 # Test Execution Command :::>>>  python3 manage.py test portfolioApi.tests.views.test_UserProfileViewSet
 class UserProfileViewSetTest(APITestCase):
 
+    def setUpUrl(self):
+        self.client.login(**self.user_data)
+        self.pk = self.client.get(self.list_url).data[0]['id']
+        self.detail_url = reverse('userprofileInfo-detail', kwargs={'pk': self.pk})
+
     def setUp(self):
         self.client = APIClient()
         self.list_url = reverse('userprofileInfo-list')
-        self.pk = 1
-        self.detail_url = reverse('userprofileInfo-detail', kwargs={'pk': self.pk})
 
         self.user_data = {
             'username': fake.user_name(),
@@ -32,9 +35,11 @@ class UserProfileViewSetTest(APITestCase):
             'gender': fake.random_element(elements = ('M', 'F', 'O')),
             'address': fake.address(),
             'email': fake.email(),
-            'phone_number': fake.phone_number(),
+            'phone_number': '123456789',
         }
         self.userProfileInstance = UserProfileModel.objects.create(**self.user_profile)
+
+        self.setUpUrl()
 
     def test_user_profile_list_view(self):
         self.client.login(**self.user_data)

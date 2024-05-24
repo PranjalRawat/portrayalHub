@@ -16,12 +16,16 @@ fake = Faker()
 # Test Execution Command :::>>>  python3 manage.py test portfolioApi.tests.views.test_EducationInfoViewSet
 class EducationInfoViewSetTest(APITestCase):
 
+    def setUpUrl(self):
+        self.client.login(**self.user_data)
+        self.pk = self.client.get(self.list_url).data[0]['id']
+        self.detail_url = reverse('educationInfo-detail', kwargs={'pk': self.pk})
+
     def setUp(self):
         self.client = APIClient()
         self.media_fields = ['university_logo']
         self.list_url = reverse('educationInfo-list')
         self.pk = 1
-        self.detail_url = reverse('educationInfo-detail', kwargs={'pk': self.pk})
 
         # Create a fake image using PIL
         image = Image.new('RGB', (100, 100))  # You can specify the size of the image as needed
@@ -49,7 +53,7 @@ class EducationInfoViewSetTest(APITestCase):
             'gender': fake.random_element(elements = ('M', 'F', 'O')),
             'address': fake.address(),
             'email': fake.email(),
-            'phone_number': fake.phone_number(),
+            'phone_number': '123456789',
         }
         self.userProfileInstance = UserProfileModel.objects.create(**self.user_profile)
 
@@ -61,9 +65,10 @@ class EducationInfoViewSetTest(APITestCase):
                 'start_date': fake.date(),
                 'end_date': fake.date_between_dates().strftime('%Y-%m-%d'),
                 'university_logo': fake.image_url(),
-                'cgpa': float(fake.pydecimal(left_digits=1, right_digits=2, positive=False, min_value=0, max_value=9.99)),
+                'cgpa': float(fake.pydecimal(left_digits=1, right_digits=1, positive=False, min_value=0, max_value=9)),
                 'featured': fake.boolean()
             })
+        self.setUpUrl()
 
     def tearDown(self):
         super().tearDown()

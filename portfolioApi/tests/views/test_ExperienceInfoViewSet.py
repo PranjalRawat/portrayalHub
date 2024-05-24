@@ -16,12 +16,15 @@ fake = Faker()
 # Test Execution Command :::>>>  python3 manage.py test portfolioApi.tests.views.test_ExperienceInfoViewSet
 class ExperienceInfoViewSetTest(APITestCase):
 
+    def setUpUrl(self):
+        self.client.login(**self.user_data)
+        self.pk = self.client.get(self.list_url).data[0]['id']
+        self.detail_url = reverse('experienceInfo-detail', kwargs={'pk': self.pk})
+
     def setUp(self):
         self.client = APIClient()
         self.media_fields = ['company_logo']
         self.list_url = reverse('experienceInfo-list')
-        self.pk = 1
-        self.detail_url = reverse('experienceInfo-detail', kwargs={'pk': self.pk})
 
         # Create a fake image using PIL
         image = Image.new('RGB', (100, 100))  # You can specify the size of the image as needed
@@ -49,7 +52,7 @@ class ExperienceInfoViewSetTest(APITestCase):
             'gender': fake.random_element(elements = ('M', 'F', 'O')),
             'address': fake.address(),
             'email': fake.email(),
-            'phone_number': fake.phone_number(),
+            'phone_number': '123456789',
         }
         self.userProfileInstance = UserProfileModel.objects.create(**self.user_profile)
 
@@ -66,6 +69,7 @@ class ExperienceInfoViewSetTest(APITestCase):
                 'featured': fake.boolean(),
                 'description': fake.text(),
             })
+        self.setUpUrl()
 
     def tearDown(self):
         super().tearDown()
