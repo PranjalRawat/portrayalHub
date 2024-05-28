@@ -139,6 +139,22 @@ header {
 .logo {
     margin: 0;
 }
+.logo a {
+    text-decoration: none;
+    color: var(--clr-text);
+}
+
+.log_out {
+    position: absolute;
+    top: 17px;
+    right: 30px;
+    margin-right: 1em;
+    font-size: 2.3em;
+}
+.log_out a {
+    text-decoration: none;
+    color: var(--clr-main-2);
+}
 
 .nav {
     background: var(--nav-bg-clr);
