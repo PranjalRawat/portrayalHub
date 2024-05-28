@@ -13,17 +13,6 @@ jobs:
             matrix:
                 python-version: [3.9]
 
-        services:
-            postgres:
-                image: postgres:latest
-                env:
-                    POSTGRES_USER: ${{ secrets.USER }}
-                    POSTGRES_PASSWORD: ${{ secrets.PASSWORD }}
-                    POSTGRES_DB: ${{ secrets.NAME }}
-                ports:
-                    - 5432:5432
-                options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-
         steps:
             - uses: actions/checkout@v3
             - name: Set up Python ${{ matrix.python-version }}
@@ -47,10 +36,3 @@ jobs:
                   AWS_SES_REGION_ENDPOINT: ${{ secrets.AWS_SES_REGION_ENDPOINT }}
                   Email_from: ${{ secrets.Email_from }}
                   Email_to: ${{ secrets.Email_to }}
-                  ENGINE: ${{ secrets.ENGINE}}
-                  NAME: ${{ secrets.NAME }}
-                  USER: ${{ secrets.USER }}
-                  PASSWORD: ${{ secrets.PASSWORD }}
-                  HOST: ${{ secrets.HOST }}
-                  PORT: ${{ secrets.PORT }}
-                  DATABASE_URL: postgres://postgres:${{ secrets.PASSWORD }}@${{ secrets.HOST }}:${{ secrets.PORT }}/${{ secrets.NAME }}
