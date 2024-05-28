@@ -1,3 +1,4 @@
+from datetime import datetime
 import json
 from django.db.models.base import Model as Model
 from django.urls import reverse_lazy
@@ -86,6 +87,19 @@ class ProfileEditView(TemplateView):
     user_not_authenticated_template = 'user_not_authenticated.html'
     context_object_name = 'data'
 
+    def create_first_time_user_profile_model_data(self, user):
+        profile_data = {
+            'user' : user,
+            'first_name' : 'Enter your first name',
+            'last_name': 'Enter your last name',
+            'date_of_birth': datetime.now().date(),
+            'gender': '',
+            'address': 'landmark, city, state (pin), country',
+            'email': user.email,
+            'phone_number': '',
+        }
+        userProfileInstance = UserProfileModel.objects.create(**profile_data)
+
     def get_object(self):
         if self.request.user.is_authenticated:
             return User.objects.get(username=self.request.user)
@@ -97,8 +111,13 @@ class ProfileEditView(TemplateView):
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
         user = self.get_object()
+        context = super().get_context_data(**kwargs)
+        all_objects = UserProfileModel.objects.all()
+        id_list = [obj.id for obj in all_objects]
+        if (user.id not in id_list):
+            self.create_first_time_user_profile_model_data(user)
+
         user_profile = UserProfileModel.objects.get(user=user)
         context['UserProfile'] = UserProfileModel.objects.filter(user=user)
         context['ProfileImage'] = ProfileImageModel.objects.filter(user_profile=user_profile)
@@ -113,8 +132,8 @@ class ProfileEditView(TemplateView):
         # Populate forms with data from the first instance for each model
         context['user_profile_form'] = UserProfileModelForm(instance=user_profile)
         context['profile_image_form'] = ProfileImageModelForm(instance=context['ProfileImage'].first())
-        context['resume_upload_form'] = ResumeUploadModelForm(instance=ResumeUploadModel.objects.first())
-        context['resume_upload_update_form'] = ResumeUploadUpdateModelForm(instance=ResumeUploadModel.objects.first())
+        context['resume_upload_form'] = ResumeUploadModelForm(instance=context['ResumeUpload'].first())
+        context['resume_upload_update_form'] = ResumeUploadUpdateModelForm(instance=context['ResumeUpload'].first())
         context['social_platforms_form'] = SocialPlatformsModelForm(user_profile = user_profile)
         context['education_info_form'] = EducationInfoModelForm(user_profile = user_profile)
         context['experience_info_form'] = ExperienceInfoModelForm(user_profile = user_profile)

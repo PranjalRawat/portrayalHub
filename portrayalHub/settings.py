@@ -193,5 +193,5 @@ Email_from = os.getenv('Email_from')
 Email_to = os.getenv('Email_to')
 
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/profile'
 X_FRAME_OPTIONS = 'ALLOWALL'

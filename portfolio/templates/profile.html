@@ -165,12 +165,16 @@
                       <span class="tooltip">edit</span>
                     </i>
                   </a>
-                  {% for user in ProfileImage %}
-                    <img src="{{ user.image.url }}" alt="My Image" />
-                  {% endfor %}
+                  {% if ProfileImage %}
+                    {% for user in ProfileImage %}
+                      <img src="{{ user.image.url }}" alt="My Image" />
+                    {% endfor %}
+                  {% else %}
+                    <img src="{% static 'image/sample_user_image.png' %}" alt="My Image" />
+                  {% endif %}
                   <div class="list_view"></div>
                   <div class="update_view">
-                    {% include 'profile/update_form.html' with form=profile_image_form  form_action_url=user_profile_image_action_url %}
+                    {% include 'profile/update_form.html' with form=profile_image_form  form_action_url=user_profile_image_action_url form_class='user-profile-form' %}
                   </div>
                 </div>
                 <div class="profile_details">
