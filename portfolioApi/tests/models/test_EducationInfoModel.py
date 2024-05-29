@@ -36,7 +36,7 @@ class EducationInfoModelTest(TestCase):
             'start_date': fake.date(),
             'end_date': fake.date_between_dates().strftime('%Y-%m-%d'),
             'university_logo': fake.image_url(),
-            'cgpa': float(fake.pydecimal(left_digits=1, right_digits=1, positive=False, min_value=0, max_value=9)),
+            'cgpa': float(7.18),
             'featured': fake.boolean()
         }
         self.educationInfoInstance = EducationInfoModel.objects.create(**self.educationInfo)
@@ -55,7 +55,7 @@ class EducationInfoModelTest(TestCase):
                 'start_date': fake.date(),
                 'end_date': fake.date_between_dates().strftime('%Y-%m-%d'),
                 'university_logo': fake.image_url(),
-                'cgpa': float(fake.pydecimal(left_digits=1, right_digits=2, positive=False, min_value=0, max_value=9.99)),
+                'cgpa': float(6.59),
                 'featured': fake.boolean()
             }
             EducationInfoModel.objects.create(**educationInfo)
@@ -71,7 +71,7 @@ class EducationInfoModelTest(TestCase):
             'degree': fake.word(),
             'university': fake.company(),
             'university_logo': fake.image_url(),
-            'cgpa': float(fake.pydecimal(left_digits=1, right_digits=2, positive=False, min_value=0, max_value=9.99)),
+            'cgpa': float(8.78),
         }
         education_info.degree = new_education_info_field_data['degree']
         education_info.university = new_education_info_field_data['university']

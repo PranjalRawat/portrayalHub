@@ -123,7 +123,7 @@ class ResumeUploadViewSetTest(APITestCase):
         }
 
         response = self.client.put(self.detail_url, user_resume_data)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_authorized_user_can_put_data(self):
         self.client.login(**self.user_data)
@@ -149,7 +149,7 @@ class ResumeUploadViewSetTest(APITestCase):
         }
 
         response = self.client.patch(self.detail_url, user_resume_data)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_authorized_user_can_patch_data(self):
         self.client.login(**self.user_data)
@@ -168,7 +168,7 @@ class ResumeUploadViewSetTest(APITestCase):
     def test_unauthorized_user_cannot_delete_data(self):
         self.client.logout()
         response = self.client.delete(self.detail_url)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_authorized_user_can_delete_data(self):
         self.client.login(**self.user_data)

@@ -80,24 +80,24 @@ WSGI_APPLICATION = 'portrayalHub.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-if os.getenv('GITHUB_WORKFLOW'):
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'test_db.sqlite3',
-        }
+# if os.getenv('GITHUB_WORKFLOW'):
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': os.getenv('ENGINE'),
-            'NAME': os.getenv('NAME'),
-            'USER': os.getenv('USER'),
-            'PASSWORD': os.getenv('PASSWORD'),
-            'HOST': os.getenv('HOST'),
-            'PORT': os.getenv('PORT'),
-        }
-    }
+}
+# else:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': os.getenv('ENGINE'),
+#             'NAME': os.getenv('NAME'),
+#             'USER': os.getenv('USER'),
+#             'PASSWORD': os.getenv('PASSWORD'),
+#             'HOST': os.getenv('HOST'),
+#             'PORT': os.getenv('PORT'),
+#         }
+#     }
 
 
 # Password validation
@@ -156,7 +156,7 @@ REST_FRAMEWORK = {
         'rest_framework.filters.SearchFilter',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 30,
+    # 'PAGE_SIZE': 30,
 
     'DEFAULT_THROTTLE_CLASSES': [
         'rest_framework.throttling.AnonRateThrottle',
@@ -171,8 +171,8 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.DjangoModelPermissions",
     ],
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '200/minute',
-        'user': '100/minute',
+        'anon': '20000/minute',
+        'user': '10000/minute',
     },
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
